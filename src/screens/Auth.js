@@ -3,12 +3,13 @@ import { TouchableOpacity, View, Text, Image, TextInput } from "react-native";
 import React from "react";
 import * as Animatable from "react-native-animatable";
 import { styles } from "../styles/auth_design";
+import { useFonts } from "@expo-google-fonts/poppins";
 const logo = require("./logo.svg");
 const Auth = () => {
-  const { fontLoaded } = useFonts({
-    medium: Poppins_500Medium,
-    semibold: Poppins_600SemiBold,
-  });
+  // const { fontLoaded } = useFonts({
+  //   medium: Poppins_500Medium,
+  //   semibold: Poppins_600SemiBold,
+  // });
   return (
     <View style={styles.container}>
       <Animatable.View
