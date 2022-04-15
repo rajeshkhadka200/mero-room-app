@@ -1,7 +1,26 @@
+import {
+  View,
+  Image,
+  StyleSheet,
+  StatusBar,
+  Text,
+  TextInput,
+} from "react-native";
 import React from "react";
+import { TextInput } from "react-native-web";
 
-const App = () => {
-  return <div>App</div>;
-};
+export default function App() {
+  return (
+    <View style={style.container}>
+      <TextInput></TextInput>
+      <StatusBar backgroundColor="blue"></StatusBar>
+    </View>
+  );
+}
 
-export default App;
+const style = StyleSheet.create({
+  container: {
+    height: "100%",
+    backgroundColor: "white",
+  },
+});
