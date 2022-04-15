@@ -33,7 +33,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-      <Text>rajesh khada</Text>
+
       <StatusBar backgroundColor={"blue"} />
     </>
   );
