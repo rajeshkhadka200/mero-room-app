@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#fff",
   },
   text: {
     color: "#000",
@@ -51,8 +52,6 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingLeft: 30,
     width: 600,
-    borderWidth: 1,
-    borderColor: "red",
     borderRadius: 30,
     marginTop: 40,
     fontSize: 20,
