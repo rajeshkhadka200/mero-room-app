@@ -1,11 +1,12 @@
 // login OR register page
-import { Dimensions, TouchableOpacity } from "react-native";
+import { Dimensions, TouchableOpacity,SafeAreaView, ScrollView } from "react-native";
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import React from "react";
 import * as Animatable from 'react-native-animatable';
 const logo =  require('./logo.svg')
 const Auth = () => {
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Animatable.View animation="zoomIn" duration={1000} style={styles.logoContainer}>
         <View style={styles.logo}><Image style={styles.img} source={logo}/></View>
@@ -22,6 +23,8 @@ const Auth = () => {
         </View>
       </Animatable.View>
     </View>
+    </ScrollView>
+
   );
 };
 const styles = StyleSheet.create({
