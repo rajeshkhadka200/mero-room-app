@@ -1,4 +1,5 @@
 // login OR register page
+import {Dimensions} from 'react-native';
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import React from "react";
 // import logo from '.../assets/logo.svg'
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#EFEFEF',
     paddingVertical:30,
     paddingLeft:30,
-    width:600,
+    width:Dimensions.get('window').width / 100 * 80,
     borderRadius:30,
     marginTop:40,
     fontSize:20,
