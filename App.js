@@ -1,26 +1,18 @@
-import {
-  View,
-  Image,
-  StyleSheet,
-  StatusBar,
-  Text,
-  TextInput,
-} from "react-native";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from "react";
-import { TextInput } from "react-native-web";
+import Auth from './src/screens/Auth.js'
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={style.container}>
-      <TextInput></TextInput>
-      <StatusBar backgroundColor="blue"></StatusBar>
-    </View>
-  );
+   <NavigationContainer>
+     <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen options={{headerShown:false}} name="Login" component={Auth}/>
+     </Stack.Navigator>
+   </NavigationContainer>
+  )
 }
 
-const style = StyleSheet.create({
-  container: {
-    height: "100%",
-    backgroundColor: "white",
-  },
-});
