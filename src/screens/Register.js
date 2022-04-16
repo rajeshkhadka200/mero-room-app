@@ -27,7 +27,7 @@ const Auth = () => {
             <View style={styles.logo}>
               <Svg
                 style={styles.svg}
-                width={135}
+                width={wp('30%')}
                 height={128}
                 viewBox="0 0 107 96"
                 fill="none"
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     width: (Dimensions.get("window").width / 100) * 80,
     borderRadius: 30,
     paddingRight: 30,
-    marginTop: 30,
+    marginTop: 20,
     fontSize: hp("2%"),
   },
   button: {
