@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword } from "firebase/auth"; // actual firebase skd
+import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth"; // actual firebase skd
 import { auth, db } from "../../config/firebase"; //local
-import { collection, addDoc } from "firebase/firestore";
+// import { collection, addDoc } from "firebase/firestore";
 import {
   View,
   Text,
@@ -14,7 +14,7 @@ import * as Animatable from "react-native-animatable";
 import { styles } from "../styles/auth_design";
 import { useFonts } from "@expo-google-fonts/poppins";
 
-const logo = require("./logo.svg");
+// const logo = require("./logo.svg");
 const Register = () => {
   // const { fontLoaded } = useFonts({
   //   medium: Poppins_500Medium,
@@ -25,37 +25,21 @@ const Register = () => {
     password: "",
     name: "",
   });
-  const { email, password, name } = credentails;
+  const { phone, password, name } = credentails;
   const handleChange = (name, value) => {
     setCredentails({ ...credentails, [name]: value });
   };
+
   const Register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      // generate code
-      // store code in local storage
-      // paste === localstorage code === user code
-      // user verified ---
-      if (user) {
-        try {
-          const docRef = await addDoc(collection(db, "users"), {
-            name,
-            email,
-            password,
-          });
-          setCredentails({
-            email: "",
-            password: "",
-            name: "",
-          });
-          console.log("Document written with ID: ", docRef.id);
-        } catch (error) {
-          console.log("error while storing in firestore", error);
-        }
-      }
-    } catch (error) {
-      console.log("error while auth", error);
-    }
+    //use firebase to send the verification code to the user using react native
+    const phoneNumber = "+977" + phone;
+    const appVerifier = new RecaptchaVerifier("recaptcha-container");
+    const confirmationResult = await signInWithPhoneNumber(
+      phoneNumber,
+      appVerifier
+    );
+    const verificationId = confirmationResult.verificationId;
+    console.log(verificationId);
   };
   return (
     <ScrollView>
@@ -66,7 +50,7 @@ const Register = () => {
           style={styles.logoContainer}
         >
           <View style={styles.logo}>
-            <Image style={styles.img} source={logo} />
+            {/* <Image style={styles.img} source={logo} /> */}
           </View>
           <Text style={styles.logoText}>Mero Room</Text>
         </Animatable.View>
