@@ -5,24 +5,24 @@ import Register from "./src/screens/Register";
 import { StatusBar } from "react-native";
 import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Setting a timer"]);
-import {
-  Poppins_300Light,
-  Poppins_400Regular,
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-  Poppins_700Bold,
-  useFonts,
-} from "@expo-google-fonts/poppins";
-import { AppLoading } from "expo";
+// import {
+//   Poppins_300Light,
+//   Poppins_400Regular,
+//   Poppins_500Medium,
+//   Poppins_600SemiBold,
+//   Poppins_700Bold,
+//   useFonts,
+// } from "@expo-google-fonts/poppins";
+// import { AppLoading } from "expo";
 export default function App() {
   const Stack = createNativeStackNavigator();
-  const { fontLoaded } = useFonts({
-    bold: Poppins_300Light,
-    regular: Poppins_400Regular,
-    medium: Poppins_500Medium,
-    semibold: Poppins_600SemiBold,
-    bold: Poppins_700Bold,
-  });
+  // const { fontLoaded } = useFonts({
+  //   bold: Poppins_300Light,
+  //   regular: Poppins_400Regular,
+  //   medium: Poppins_500Medium,
+  //   semibold: Poppins_600SemiBold,
+  //   bold: Poppins_700Bold,
+  // });
 
   return (
     <>
