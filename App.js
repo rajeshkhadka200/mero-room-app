@@ -1,8 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import Auth from "./src/screens/Auth.js";
+import Register from "./src/screens/Register";
 import { StatusBar } from "react-native";
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Setting a timer"]);
 import {
   Poppins_300Light,
   Poppins_400Regular,
@@ -25,11 +27,11 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Register">
           <Stack.Screen
             options={{ headerShown: false }}
-            name="Login"
-            component={Auth}
+            name="Register"
+            component={Register}
           />
         </Stack.Navigator>
       </NavigationContainer>
