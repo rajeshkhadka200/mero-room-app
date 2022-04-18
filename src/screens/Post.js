@@ -1,10 +1,10 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
 
-const Detail = () => {
+const Post = () => {
   return (
     <View style={styles.container}>
-      <Text>Detail</Text>
+      <Text>Post</Text>
     </View>
   )
 }
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
         alignItems:"center"
     }
 })
-export default Detail
+export default Post
