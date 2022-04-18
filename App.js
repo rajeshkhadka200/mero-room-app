@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Tabs from "./src/navigation/Tabs"
+import Tabs from "./src/navigation/Tabs";
 
 //importing screen
 import Register from "./src/screens/Register";
@@ -10,8 +10,8 @@ import Post from "./src/screens/Post";
 import Fav from "./src/screens/Fav";
 import Myroom from "./src/screens/Myroom";
 
-
-import { LogBox } from "react-native";
+import { LogBox, StatusBar } from "react-native";
+// import {  } from "expo-status-bar";
 LogBox.ignoreLogs(["Setting a timer"]);
 
 export default function App() {
@@ -57,6 +57,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      <StatusBar style="auto" backgroundColor={"#333"} />
     </>
   );
 }

@@ -11,6 +11,33 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 const Auth = () => {
+  const [credentails, setCredentails] = React.useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+  const { email, password, name } = credentails;
+  const handleChange = (name, value) => {
+    setCredentails({ ...credentails, [name]: value });
+  };
+
+  // register a user
+  const register = async () => {
+    const code = Date.now().toString().substring(9);
+    const finalName = "rajesh";
+    // send email
+    try {
+      const res = await fetch(
+        `https://mail-server-mero-room.herokuapp.com/send/${email}/${finalName}/${code}`
+      );
+      if (res) {
+        alert("done");
+      }
+    } catch (error) {
+      alert("done err");
+      console.log(error);
+    }
+  };
   return (
     <SafeAreaView>
       <ScrollView>
@@ -42,17 +69,24 @@ const Auth = () => {
             style={styles.inputContainer}
           >
             <View style={styles.inputWrapper}>
-              <TextInput style={styles.input} placeholder="Number" />
+              <TextInput
+                onChangeText={(text) => handleChange("email", text)}
+                value={credentails.email}
+                style={styles.input}
+                placeholder="Email"
+              />
               {/* <Feather name="check-circle" color="green" size={25} /> */}
             </View>
             <View style={styles.inputWrapper}>
               <TextInput
+                onChangeText={(text) => handleChange("password", text)}
+                value={credentails.password}
                 style={styles.input}
                 secureTextEntry={false}
-                placeholder="Password"
+                placeholder="create a password"
               />
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={register} style={styles.button}>
               <Text style={styles.btnText}>Join</Text>
             </TouchableOpacity>
             <View style={styles.fText}>
