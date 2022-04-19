@@ -6,11 +6,28 @@ import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
 import Svg, { Path } from "react-native-svg";
 import { styles } from "../styles/auth_design.js";
+import { HOST_NAME } from "@env";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import axios from "axios";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../../config/firebase";
+
 const Auth = () => {
+  const storeCode = async (code) => {
+    await setDoc(doc(db, "code", "LA"), {
+      code: code,
+    });
+  };
   const [credentails, setCredentails] = React.useState({
     email: "",
     password: "",
@@ -23,19 +40,29 @@ const Auth = () => {
 
   // register a user
   const register = async () => {
+    let array = [];
+    //check if the email is already registered
+    const q = query(collection(db, "user"), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      array.push(doc.data());
+    });
+    if (array.length > 0) {
+      return alert("Account allready registered !");
+    }
+
     const code = Date.now().toString().substring(9);
-    const finalName = "rajesh";
+    const finalName = name.split(" ")[0];
     // send email
     try {
-      const res = await fetch(
-        `https://mail-server-mero-room.herokuapp.com/send/${email}/${finalName}/${code}`
-      );
-      if (res) {
-        alert("done");
+      const res = await axios.get(`${HOST_NAME}/${email}/${finalName}/${code}`);
+      if (res.status === 200) {
+        // first store the code in db
+        storeCode(code);
+        // redirect to otp page
       }
     } catch (error) {
-      alert("done err");
-      console.log(error);
+      console.log("Something went wrong !", error);
     }
   };
   return (
@@ -70,8 +97,17 @@ const Auth = () => {
           >
             <View style={styles.inputWrapper}>
               <TextInput
+                onChangeText={(text) => handleChange("name", text)}
+                value={name}
+                style={styles.input}
+                placeholder="Display Name"
+              />
+              {/* <Feather name="check-circle" color="green" size={25} /> */}
+            </View>
+            <View style={styles.inputWrapper}>
+              <TextInput
                 onChangeText={(text) => handleChange("email", text)}
-                value={credentails.email}
+                value={email}
                 style={styles.input}
                 placeholder="Email"
               />
@@ -80,7 +116,7 @@ const Auth = () => {
             <View style={styles.inputWrapper}>
               <TextInput
                 onChangeText={(text) => handleChange("password", text)}
-                value={credentails.password}
+                value={password}
                 style={styles.input}
                 secureTextEntry={false}
                 placeholder="create a password"
