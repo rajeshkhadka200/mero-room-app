@@ -5,18 +5,17 @@ import {
   ScrollView,
   RefreshControl,
   Button,
+  AsyncStorage,
 } from "react-native";
 import { View, Text, TextInput } from "react-native";
 import React from "react";
 import * as Animatable from "react-native-animatable";
 import Svg, { Path } from "react-native-svg";
 import { styles } from "../styles/auth_design.js";
-import { HOST_NAME } from "@env";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import axios from "axios";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { middleware } from "../../config/Check";
@@ -25,41 +24,28 @@ const Auth = ({ navigation }) => {
   const [credentails, setCredentails] = React.useState({
     email: "",
     password: "",
-    name: "",
   });
 
-  const { email, password, name } = credentails;
+  const { email, password } = credentails;
   const handleChange = (name, value) => {
     setCredentails({ ...credentails, [name]: value });
   };
-
   // register a user
-  const register = async () => {
-    let array = [];
-    // check if the email is already registered
+  const login = async () => {
+    let user = [];
     const q = query(collection(db, "users"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      array.push(doc.data());
+      user.push(doc.data());
+      console.log(user);
     });
-    if (array.length > 0) {
-      return alert("Account allready registered !");
-    }
-    const code = Date.now().toString().substring(9);
-    const finalName = name.split(" ")[0];
-
-    navigation.navigate("Otp", {
-      name,
-      email,
-      password,
-      code,
+    const check = user.find((data) => {
+      return data.password === password;
     });
-    // send email
-    try {
-      const res = await axios.get(`${HOST_NAME}/${email}/${finalName}/${code}`);
-    } catch (error) {
-      console.log("Something went wrong !", error);
+    if (user.length == 0 || check === undefined) {
+      return alert("Password or Email incorrect");
     }
+    await AsyncStorage.setItem("auth_details", user[0].user_id);
   };
 
   return (
@@ -85,7 +71,7 @@ const Auth = ({ navigation }) => {
                 />
               </Svg>
             </View>
-            <Text style={styles.logoText}>Mero Room</Text>
+            <Text style={styles.logoText}>Welcome Back</Text>
           </Animatable.View>
           <Animatable.View
             animation="fadeInUpBig"
@@ -94,21 +80,11 @@ const Auth = ({ navigation }) => {
           >
             <View style={styles.inputWrapper}>
               <TextInput
-                onChangeText={(text) => handleChange("name", text)}
-                value={name}
-                style={styles.input}
-                placeholder="Display Name"
-              />
-              {/* <Feather name="check-circle" color="green" size={25} /> */}
-            </View>
-            <View style={styles.inputWrapper}>
-              <TextInput
                 onChangeText={(text) => handleChange("email", text)}
                 value={email}
                 style={styles.input}
                 placeholder="Email"
               />
-              {/* <Feather name="check-circle" color="green" size={25} /> */}
             </View>
             <View style={styles.inputWrapper}>
               <TextInput
@@ -116,22 +92,22 @@ const Auth = ({ navigation }) => {
                 value={password}
                 style={styles.input}
                 secureTextEntry={false}
-                placeholder="create a password"
+                placeholder="your password"
               />
             </View>
-            <TouchableOpacity onPress={register} style={styles.button}>
-              <Text style={styles.btnText}>Join</Text>
+            <TouchableOpacity onPress={login} style={styles.button}>
+              <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
             <View style={styles.fText}>
-              <Text style={{ fontSize: hp("2%") }}>Forgot Password?</Text>
               <Text
                 onPress={() => {
-                  navigation.navigate("Login");
+                  navigation.navigate("Register");
                 }}
                 style={{ fontSize: hp("2%") }}
               >
-                Login
+                Create account
               </Text>
+              <Text style={{ fontSize: hp("2%") }}>Forgot Password?</Text>
             </View>
           </Animatable.View>
         </View>
