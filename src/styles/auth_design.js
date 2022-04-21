@@ -69,9 +69,11 @@ export const styles = StyleSheet.create({
     fontSize: hp("2.5%"),
   },
   fText: {
-    marginTop: 5,
+    width: "80%",
+    marginTop: 15,
     flex: 1,
     flexDirection: "row",
+    justifyContent: "space-between",
   },
   inputWrapper: {
     flexDirection: "row",
