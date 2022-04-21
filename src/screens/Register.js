@@ -23,48 +23,48 @@ import {
 import { db } from "../../config/firebase";
 
 const Auth = () => {
-  const storeCode = async (code) => {
-    await setDoc(doc(db, "code", "LA"), {
-      code: code,
-    });
-  };
-  const [credentails, setCredentails] = React.useState({
-    email: "",
-    password: "",
-    name: "",
-  });
-  const { email, password, name } = credentails;
-  const handleChange = (name, value) => {
-    setCredentails({ ...credentails, [name]: value });
-  };
+  // const storeCode = async (code) => {
+  //   await setDoc(doc(db, "code", "LA"), {
+  //     code: code,
+  //   });
+  // };
+  // const [credentails, setCredentails] = React.useState({
+  //   email: "",
+  //   password: "",
+  //   name: "",
+  // });
+  // const { email, password, name } = credentails;
+  // const handleChange = (name, value) => {
+  //   setCredentails({ ...credentails, [name]: value });
+  // };
 
-  // register a user
-  const register = async () => {
-    let array = [];
-    //check if the email is already registered
-    const q = query(collection(db, "user"), where("email", "==", email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      array.push(doc.data());
-    });
-    if (array.length > 0) {
-      return alert("Account allready registered !");
-    }
+  // // register a user
+  // const register = async () => {
+  //   let array = [];
+  //   //check if the email is already registered
+  //   const q = query(collection(db, "user"), where("email", "==", email));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     array.push(doc.data());
+  //   });
+  //   if (array.length > 0) {
+  //     return alert("Account allready registered !");
+  //   }
 
-    const code = Date.now().toString().substring(9);
-    const finalName = name.split(" ")[0];
-    // send email
-    try {
-      const res = await axios.get(`${HOST_NAME}/${email}/${finalName}/${code}`);
-      if (res.status === 200) {
-        // first store the code in db
-        storeCode(code);
-        // redirect to otp page
-      }
-    } catch (error) {
-      console.log("Something went wrong !", error);
-    }
-  };
+  //   const code = Date.now().toString().substring(9);
+  //   const finalName = name.split(" ")[0];
+  //   // send email
+  //   try {
+  //     const res = await axios.get(`${HOST_NAME}/${email}/${finalName}/${code}`);
+  //     if (res.status === 200) {
+  //       // first store the code in db
+  //       storeCode(code);
+  //       // redirect to otp page
+  //     }
+  //   } catch (error) {
+  //     console.log("Something went wrong !", error);
+  //   }
+  // };
   return (
     <SafeAreaView>
       <ScrollView>

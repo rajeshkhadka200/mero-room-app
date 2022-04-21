@@ -20,7 +20,7 @@ export default function App() {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Tabs">
           <Stack.Screen
             options={{ headerShown: false }}
             name="Otp"

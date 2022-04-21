@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import React from "react";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
-
 const Otp = () => {
   const email = "utsavbhattarai007@gmail.com";
   return (
@@ -13,6 +12,7 @@ const Otp = () => {
         </Text>
       </View>
       <OTPInputView
+        autoFocusOnLoad={false}
         pinCount={4}
         style={styles.otpView}
         codeInputFieldStyle={styles.underlineStyleBase}
