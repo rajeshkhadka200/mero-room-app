@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     width: (Dimensions.get("window").width / 100) * 80,
     borderRadius: 30,
     paddingRight: 30,
-    marginTop: 20,
+    marginTop: 25,
     fontSize: hp("2%"),
   },
   button: {

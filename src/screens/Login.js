@@ -46,6 +46,7 @@ const Auth = ({ navigation }) => {
       return alert("Password or Email incorrect");
     }
     await AsyncStorage.setItem("auth_details", user[0].user_id);
+    navigation.navigate("Tabs");
   };
 
   return (
@@ -60,7 +61,7 @@ const Auth = ({ navigation }) => {
             <View style={styles.logo}>
               <Svg
                 style={styles.svg}
-                width={wp("30%")}
+                width={120}
                 height={128}
                 viewBox="0 0 107 96"
                 fill="none"
@@ -91,7 +92,7 @@ const Auth = ({ navigation }) => {
                 onChangeText={(text) => handleChange("password", text)}
                 value={password}
                 style={styles.input}
-                secureTextEntry={false}
+                secureTextEntry={true}
                 placeholder="your password"
               />
             </View>
