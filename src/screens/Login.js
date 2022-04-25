@@ -11,7 +11,7 @@ import { View, Text, TextInput } from "react-native";
 import React from "react";
 import * as Animatable from "react-native-animatable";
 import Svg, { Path } from "react-native-svg";
-import { styles } from "../styles/auth_design.js";
+import { styles } from "../styles/auth/auth_design.js";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

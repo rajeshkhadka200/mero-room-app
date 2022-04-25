@@ -10,7 +10,7 @@ import { View, Text, TextInput } from "react-native";
 import React from "react";
 import * as Animatable from "react-native-animatable";
 import Svg, { Path } from "react-native-svg";
-import { styles } from "../styles/auth_design.js";
+import { styles } from "../styles/auth/auth_design";
 import { HOST_NAME } from "@env";
 import {
   widthPercentageToDP as wp,
@@ -20,6 +20,7 @@ import axios from "axios";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { middleware } from "../../config/Check";
+import { Entypo } from "@expo/vector-icons";
 const Auth = ({ navigation }) => {
   middleware.checkLogin(navigation);
   const [credentails, setCredentails] = React.useState({

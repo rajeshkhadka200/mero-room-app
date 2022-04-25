@@ -1,35 +1,29 @@
-import { View, Text, StyleSheet, Button, AsyncStorage } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  AsyncStorage,
+} from "react-native";
 import React from "react";
 import { ContexStore } from "../context/Context";
+import HomeHeader from "../components/home/HomeHeader";
+import { styles } from "../styles/home/home_header_design";
 
 const Home = ({ navigation }) => {
-  const context = React.useContext(ContexStore);
-  const { user } = context.userData;
-  const clear = async () => {
-    try {
-      await AsyncStorage.removeItem("auth_details");
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
-    <View style={styles.container}>
-      <Button
-        title="Login"
-        onPress={() => {
-          navigation.navigate("Register");
-        }}
-      />
-      <Button title="clear" onPress={clear} />
-      <Button title="Detail" onPress={() => navigation.navigate("Detail")} />
-    </View>
+    <>
+      <ScrollView style={mainDesign.wrapper}>
+        <HomeHeader />
+      </ScrollView>
+    </>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+const mainDesign = StyleSheet.create({
+  wrapper: {
+    paddingHorizontal: 15,
+    paddingVertical: 15,
   },
 });
 export default Home;
