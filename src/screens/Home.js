@@ -21,6 +21,7 @@ const Home = ({ navigation }) => {
         }}
       />
       <Button title="clear" onPress={clear} />
+      <Button title="Detail" onPress={() => navigation.navigate("Detail")} />
     </View>
   );
 };

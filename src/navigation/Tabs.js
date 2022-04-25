@@ -3,35 +3,37 @@ import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Post from "../screens/Post";
 import Fav from "../screens/Fav";
+import Detail from "../screens/Detail";
 import Myroom from "../screens/Myroom";
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { styles } from "../styles/bottomNav_design";
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
 import { Text, View, Image, TouchableOpacity } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Tab = createBottomTabNavigator();
-const CustomTabBarButton = ({ children, onPress }) => {
+const Stack = createNativeStackNavigator();
+
+const DetailsStack = () =>{
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        top: 0,
-        justifyContent: "center",
-        alignItems: "center",
-        ...styles.shadow,
-        paddingHorizontal:20
-      }}
-    >
-      <View
-        style={{
-          width: 50,
-          height: 50,
-          borderRadius: 27.5,
-          backgroundColor: "#5B628F",
-        }}
-      >
-        {children}
-      </View>
-    </TouchableOpacity>
-  );
-};
+    <Stack.Navigator>
+       <Stack.Screen
+              options={{ headerShown: false }}
+              name="Home"
+              component={Home}
+            />
+       <Stack.Screen
+              options={{ headerShown: false }}
+              name="Details"
+              component={Detail}
+            />
+    </Stack.Navigator>
+  )
+
+}
+
 const Tabs = () => {
   return (
     <Tab.Navigator
@@ -40,12 +42,12 @@ const Tabs = () => {
         tabBarStyle: {
           flex:1,
           position: "absolute",
-          bottom: 15,
-          left: 20,
-          right: 20,
+          // bottom: 15,
+          // left: 20,
+          // right: 20,
           elevation: 0,
           backgroundColor: "white",
-          borderRadius: 15,
+          // borderRadius: 15,
           height: 75,
           ...styles.shadow,
         },
@@ -54,18 +56,9 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           headerShown: false,
-          tabBarActiveTintColor: "#5B628F",
           tabBarLabel: "Home",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icon/home.png")}
-              name="home"
-              color="#5B628F"
-              resizeMode="contain"
-              style={{
-                tintColor: focused ? "#5B628F" : "#748c94",
-              }}
-            />
+        <Ionicons name={focused ?"md-home": "ios-home-outline" } size={24} color={focused ? "#5B628F" : "#929191" } />
           ),
         }}
         name="Home"
@@ -75,14 +68,7 @@ const Tabs = () => {
         options={{
           tabBarLabel: "Favourite",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icon/fav.png")}
-              name="room"
-              color="#5B628F"
-              style={{
-                tintColor: focused ? "#5B628F" : "#748c94",
-              }}
-            />
+            <MaterialIcons name={focused ? "favorite":  "favorite-border"} size={30} color={focused ? "#5B628F" : "#929191" } />
           ),
         }}
         name="Fav"
@@ -93,19 +79,9 @@ const Tabs = () => {
         options={{
           tabBarLabel: "Post",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icon/add.png")}
-              name="add"
-              color="#5B628F"
-              style={{
-                tintColor: "#fff",
-              }}
-            />
+            <AntDesign name={focused ? "pluscircle":"pluscircleo"} size={45} color={focused ? "#5B628F" : "#929191"} />
           ),
-          tabBarButton: (props) => {
-            return <CustomTabBarButton {...props} />;
-             
-          },
+
         }}
         name="Post"
         component={Post}
@@ -114,14 +90,7 @@ const Tabs = () => {
         options={{
           tabBarLabel: "My room",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icon/room.png")}
-              name="room"
-              color="#5B628F"
-              style={{
-                tintColor: focused ? "#5B628F" : "#748c94",
-              }}
-            />
+            focused ? <MaterialCommunityIcons name="bed" size={30} color="#5B628F" /> : <MaterialCommunityIcons name="bed-outline" size={30} color="#929191" />
           ),
         }}
         name="Myroom"
@@ -131,14 +100,7 @@ const Tabs = () => {
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icon/profile.png")}
-              name="profile"
-              color="#5B628F"
-              style={{
-                tintColor: focused ? "#5B628F" : "#748c94",
-              }}
-            />
+            <FontAwesome name={focused ? "user" :"user-o"} size={focused ? 27 : 24} color={focused ? "#5B628F" : "#929191" } />
           ),
         }}
         name="Profile"

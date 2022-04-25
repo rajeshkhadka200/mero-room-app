@@ -10,6 +10,7 @@ import Post from "./src/screens/Post";
 import Fav from "./src/screens/Fav";
 import Myroom from "./src/screens/Myroom";
 import Otp from "./src/screens/Otp";
+import Detail from "./src/screens/Detail";
 
 import { LogBox, StatusBar, ScrollView } from "react-native";
 
@@ -20,50 +21,6 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <>
-      {/* <NavigationContainer>
-        <Stack.Navigator initialRouteName="Tabs">
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Otp"
-            component={Otp}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Tabs"
-            component={Tabs}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Register"
-            component={Register}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Home"
-            component={Home}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Profile"
-            component={Profile}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Post"
-            component={Post}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Fav"
-            component={Fav}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Myroom"
-            component={Myroom}
-          />
-        </Stack.Navigator>
-      </NavigationContainer> */}
       <Context>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Tabs">
@@ -111,6 +68,10 @@ export default function App() {
               options={{ headerShown: false }}
               name="Myroom"
               component={Myroom}
+            />
+            <Stack.Screen
+              name="Detail"
+              component={Detail}
             />
           </Stack.Navigator>
         </NavigationContainer>

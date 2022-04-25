@@ -36,8 +36,8 @@ export const styles = StyleSheet.create({
   inputContainer: {
     paddingTop: hp("2%"),
     marginTop: 70,
-    borderTopLeftRadius: 70,
-    borderTopRightRadius: 70,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     backgroundColor: "grey",
     flex: 2,
     width: (Dimensions.get("window").width / 100) * 100,
