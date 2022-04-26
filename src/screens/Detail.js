@@ -1,13 +1,16 @@
 import { ScrollView, View, Text, StyleSheet } from "react-native";
 import React from "react";
 import Detail_header from "../components/details/Detail_header";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // main detail page
 const Detail = (navigation) => {
   return (
-    <ScrollView>
-      <Detail_header navigation={navigation} />
-    </ScrollView>
+    <SafeAreaView>
+      <ScrollView>
+        <Detail_header navigation={navigation} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

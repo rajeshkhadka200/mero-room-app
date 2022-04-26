@@ -100,7 +100,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </Context>
-      <StatusBar style="auto" backgroundColor={"#333"} />
+      <StatusBar backgroundColor={"#333"} />
     </>
   );
 }

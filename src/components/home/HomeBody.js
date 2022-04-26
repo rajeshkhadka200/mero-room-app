@@ -10,10 +10,7 @@ import { styles } from "../../styles/home/home_body_design";
 import React from "react";
 import { cardData } from "../../../config/api";
 import Card from "../Global/Card";
-const HomeBody = () => {
-  const seperator = () => {
-    return <View style={styles.divider}></View>;
-  };
+const HomeBody = ({ navigation }) => {
   const renderCard = ({ item }) => {
     //for the new rooms
     return <Card data={item} />;
@@ -35,7 +32,6 @@ const HomeBody = () => {
             horizontal
             keyExtractor={(index) => index.id}
             style={styles.card_wrapper}
-            ItemSeparatorComponent={seperator}
           />
         </View>
         <View
@@ -52,7 +48,6 @@ const HomeBody = () => {
             horizontal
             keyExtractor={(index) => index.id}
             style={styles.card_wrapper}
-            ItemSeparatorComponent={seperator}
           />
         </View>
       </View>

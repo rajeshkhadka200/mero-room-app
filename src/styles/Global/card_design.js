@@ -6,7 +6,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   actual_card_con: {
     width: wp("90%"),
-    height: 200,
+    height: 210,
+    marginRight: 10,
   },
   img: {
     height: "100%",
