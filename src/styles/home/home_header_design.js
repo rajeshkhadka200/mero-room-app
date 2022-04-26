@@ -12,23 +12,22 @@ export const styles = StyleSheet.create({
   headerIcon: {
     alignItems: "center",
     justifyContent: "center",
-    width: 60,
-    height: 60,
     backgroundColor: "#DFDFDF",
     opacity: 20,
     borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   searchCon: {
     flex: 1,
     justifyContent: "space-between",
     marginTop: 20,
     maxWidth: "100%",
-    // borderWidth:1
   },
   searchText: {
     fontSize: 20,
-    fontWeight: "600",
     marginLeft: 3,
+    fontFamily: "400",
   },
   searchWrapper: {
     marginTop: 10,
@@ -41,14 +40,15 @@ export const styles = StyleSheet.create({
     flex: 2,
     maxWidth: "85%",
     backgroundColor: "#E5E5E5",
-    paddingVertical: 15,
+    paddingVertical: 10,
     paddingHorizontal: 15,
     borderTopLeftRadius: 17,
     borderBottomLeftRadius: 17,
-    fontSize: 17,
+    fontSize: 15,
+    fontFamily: "300",
   },
   searchBtn: {
-    height: 55,
+    height: 49,
     maxWidth: "15%",
     backgroundColor: "#5B628F",
     flex: 1,
@@ -63,13 +63,14 @@ export const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 17,
-    fontWeight: "600",
+    fontFamily: "400",
+    color: "rgba(0, 0, 0, 1)",
   },
   district: {
     marginTop: 10,
     maxWidth: "auto",
     minWidth: 150,
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 10,
     backgroundColor: "#E4E4E4",
     alignItems: "center",
@@ -77,8 +78,8 @@ export const styles = StyleSheet.create({
     marginRight: 10,
   },
   disText: {
-    fontSize: 18,
-    fontWeight: "200",
+    fontSize: 14,
+    fontFamily: "300",
   },
   disWrapper: {
     flexDirection: "row",

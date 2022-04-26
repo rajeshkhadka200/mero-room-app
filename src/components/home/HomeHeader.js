@@ -15,16 +15,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { District } from "../../../config/api.js";
 
+// from notif icons to filter
 const HomeHeader = () => {
   return (
     <>
       <View style={styles.headerWrapper}>
         <View style={styles.headerCon}>
           <TouchableOpacity style={styles.headerIcon}>
-            <Ionicons name="notifications-outline" size={30} color="#828282" />
+            <Ionicons name="notifications-outline" size={24} color="#828282" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.headerIcon}>
-            <FontAwesome name="user-o" size={29} color="#828282" />
+            <FontAwesome name="user-o" size={24} color="#828282" />
           </TouchableOpacity>
         </View>
         <View style={styles.searchCon}>

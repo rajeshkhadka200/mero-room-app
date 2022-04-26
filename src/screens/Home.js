@@ -17,7 +17,9 @@ const Home = ({ navigation }) => {
     <>
       <SafeAreaView>
         <ScrollView>
+          {/* from notif to filter = Home Header */}
           <HomeHeader />
+          {/* frombelow filter */}
           <HomeBody />
         </ScrollView>
       </SafeAreaView>
