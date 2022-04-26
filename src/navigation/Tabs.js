@@ -40,6 +40,8 @@ const Tabs = () => {
         tabBarStyle: {
           flex: 1,
           position: "absolute",
+          bottom: 0,
+          left: 0,
           backgroundColor: "white",
           height: 60,
           ...styles.shadow,

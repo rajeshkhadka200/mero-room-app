@@ -1,18 +1,15 @@
-import { View, Text,StyleSheet } from 'react-native'
-import React from 'react'
+import { ScrollView, View, Text, StyleSheet } from "react-native";
+import React from "react";
+import Detail_header from "../components/details/Detail_header";
 
-const Detail = () => {
+// main detail page
+const Detail = (navigation) => {
   return (
-    <View style={styles.container}>
-      <Text>Detail</Text>
-    </View>
-  )
-}
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:"center",
-        alignItems:"center"
-    }
-})
-export default Detail
+    <ScrollView>
+      <Detail_header navigation={navigation} />
+    </ScrollView>
+  );
+};
+
+const mainDesign = StyleSheet.create({});
+export default Detail;

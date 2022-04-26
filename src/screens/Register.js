@@ -12,15 +12,10 @@ import * as Animatable from "react-native-animatable";
 import Svg, { Path } from "react-native-svg";
 import { styles } from "../styles/auth/auth_design";
 import { HOST_NAME } from "@env";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import axios from "axios";
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { middleware } from "../../config/Check";
-import { Entypo } from "@expo/vector-icons";
 const Auth = ({ navigation }) => {
   middleware.checkLogin(navigation);
   const [credentails, setCredentails] = React.useState({
@@ -44,7 +39,7 @@ const Auth = ({ navigation }) => {
       array.push(doc.data());
     });
     if (array.length > 0) {
-      return alert("Account allready registered !");
+      return alert("The email is already taken ");
     }
     const code = Date.now().toString().substring(9);
     const finalName = name.split(" ")[0];
@@ -58,6 +53,7 @@ const Auth = ({ navigation }) => {
     // send email
     try {
       const res = await axios.get(`${HOST_NAME}/${email}/${finalName}/${code}`);
+      console.log(res);
     } catch (error) {
       console.log("Something went wrong !", error);
     }
@@ -93,25 +89,19 @@ const Auth = ({ navigation }) => {
             duration={1000}
             style={styles.inputContainer}
           >
-            <View style={styles.inputWrapper}>
+            <View>
               <TextInput
                 onChangeText={(text) => handleChange("name", text)}
                 value={name}
                 style={styles.input}
                 placeholder="Display Name"
               />
-              {/* <Feather name="check-circle" color="green" size={25} /> */}
-            </View>
-            <View style={styles.inputWrapper}>
               <TextInput
                 onChangeText={(text) => handleChange("email", text)}
                 value={email}
                 style={styles.input}
                 placeholder="Email"
               />
-              {/* <Feather name="check-circle" color="green" size={25} /> */}
-            </View>
-            <View style={styles.inputWrapper}>
               <TextInput
                 onChangeText={(text) => handleChange("password", text)}
                 value={password}
@@ -120,19 +110,26 @@ const Auth = ({ navigation }) => {
                 placeholder="create a password"
               />
             </View>
-            <TouchableOpacity onPress={register} style={styles.button}>
-              <Text style={styles.btnText}>Join</Text>
-            </TouchableOpacity>
-            <View style={styles.fText}>
-              <Text style={{ fontSize: hp("2%") }}>Forgot Password?</Text>
-              <Text
-                onPress={() => {
-                  navigation.navigate("Login");
-                }}
-                style={{ fontSize: hp("2%") }}
-              >
-                Login
-              </Text>
+            <View>
+              <TouchableOpacity onPress={register} style={styles.button}>
+                <Text style={styles.btnText}>Join</Text>
+              </TouchableOpacity>
+              <View style={styles.fText}>
+                <Text style={styles.login_btn_text}>
+                  Already have an account ? &nbsp;
+                  <Text
+                    style={{
+                      color: "#5B628F",
+                      fontFamily: "500",
+                    }}
+                    onPress={() => {
+                      navigation.navigate("Login");
+                    }}
+                  >
+                    Login
+                  </Text>
+                </Text>
+              </View>
             </View>
           </Animatable.View>
         </View>

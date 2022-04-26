@@ -12,10 +12,7 @@ import React from "react";
 import * as Animatable from "react-native-animatable";
 import Svg, { Path } from "react-native-svg";
 import { styles } from "../styles/auth/auth_design.js";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+
 import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { middleware } from "../../config/Check";
@@ -72,7 +69,7 @@ const Auth = ({ navigation }) => {
                 />
               </Svg>
             </View>
-            <Text style={styles.logoText}>Welcome Back</Text>
+            <Text style={styles.logoText}>Login Here</Text>
           </Animatable.View>
           <Animatable.View
             animation="fadeInUpBig"
@@ -99,16 +96,23 @@ const Auth = ({ navigation }) => {
             <TouchableOpacity onPress={login} style={styles.button}>
               <Text style={styles.btnText}>Login</Text>
             </TouchableOpacity>
+            {/* <Text>OR</Text> */}
             <View style={styles.fText}>
-              <Text
-                onPress={() => {
-                  navigation.navigate("Register");
-                }}
-                style={{ fontSize: hp("2%") }}
-              >
-                Create account
+              {/* <Text style={styles.forgot_pass_text}>Reset Password?</Text> */}
+              <Text style={styles.login_btn_text}>
+                Don't have an account ? &nbsp;
+                <Text
+                  style={{
+                    color: "#5B628F",
+                    fontFamily: "500",
+                  }}
+                  onPress={() => {
+                    navigation.navigate("Register");
+                  }}
+                >
+                  Sign up
+                </Text>
               </Text>
-              <Text style={{ fontSize: hp("2%") }}>Forgot Password?</Text>
             </View>
           </Animatable.View>
         </View>
