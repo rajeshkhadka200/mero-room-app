@@ -36,9 +36,11 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard:true,
         tabBarShowLabel: false,
         tabBarStyle: {
           flex: 1,
+          bottom:0,
           position: "absolute",
           bottom: 0,
           left: 0,
