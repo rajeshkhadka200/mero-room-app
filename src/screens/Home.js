@@ -5,25 +5,25 @@ import {
   StyleSheet,
   Button,
   AsyncStorage,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import { ContexStore } from "../context/Context";
 import HomeHeader from "../components/home/HomeHeader";
-import { styles } from "../styles/home/home_header_design";
+import HomeBody from "../components/home/HomeBody";
 
 const Home = ({ navigation }) => {
   return (
     <>
-      <ScrollView style={mainDesign.wrapper}>
-        <HomeHeader />
-      </ScrollView>
+      <SafeAreaView>
+        <ScrollView>
+          <HomeHeader/>
+          <HomeBody/>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };
 const mainDesign = StyleSheet.create({
-  wrapper: {
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-  },
 });
 export default Home;

@@ -1,4 +1,4 @@
-export  const District = [
+export const District = [
   "Bhojpur",
   "Dhankuta",
   "Ilam",
@@ -77,3 +77,24 @@ export  const District = [
   "Kailali",
   "Kanchanpur",
 ];
+
+export const cardData = [
+  {
+      id:"1",
+      image:require("../assets/img/room.jpg"),
+      address:"Devinagar-13,Butwal",
+      price:"10000",
+  },
+  {
+    id:"2",
+      image:require("../assets/img/room1.jpg"),
+      address:"Kalikanagar-12,Butwal",
+      price:"10000",
+  },
+  {
+     id:"3",
+      image:require("../assets/img/room2.jpg"),
+      address:"Sukhanagar-10,Butwal",
+      price:"10000",
+  },
+]
