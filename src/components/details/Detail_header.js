@@ -4,6 +4,7 @@ import { styles } from "../../styles/details/Detail_Header_design.js"; //header 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native"
 
 const WhiteIcon = ({ text }) => {
   return (
@@ -22,14 +23,16 @@ const WhiteIcon = ({ text }) => {
   );
 };
 
-const Detail_header = (navigation) => {
+const Detail_header = () => {
+  const navigation = useNavigation()
+
   return (
     <>
       <View>
         <Text style={styles.arrow}>
           <AntDesign
             onPress={() => {
-              navigation.navigate("Tabs");
+              navigation.goBack("Tabs");
             }}
             name="arrowleft"
             size={24}

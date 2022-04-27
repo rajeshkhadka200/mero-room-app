@@ -11,9 +11,6 @@ import React from "react";
 import { cardData } from "../../../config/api";
 import Card from "../Global/Card";
 const HomeBody = () => {
-  const seperator = () => {
-    return <View style={styles.divider}></View>;
-  };
   const renderCard = ({ item }) => {
     //for the new rooms
     return <Card data={item} />;
@@ -29,13 +26,25 @@ const HomeBody = () => {
         >
           <Text style={styles.new_text}>New Room</Text>
           <FlatList
+            legacyImplementation={false}
             data={cardData}
             renderItem={renderCard}
             showsHorizontalScrollIndicator={false}
             horizontal
             keyExtractor={(index) => index.id}
             style={styles.card_wrapper}
-            ItemSeparatorComponent={seperator}
+          />
+        </View>
+        <View>
+          <Text style={styles.new_text}>Popular Rooms</Text>
+          <FlatList
+            legacyImplementation={false}
+            data={cardData}
+            renderItem={renderCard}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            keyExtractor={(index) => index.id}
+            style={styles.card_wrapper}
           />
         </View>
         <View
@@ -44,15 +53,15 @@ const HomeBody = () => {
             marginVertical: 20 + 60,
           }}
         >
-          <Text style={styles.new_text}>Popular Rooms</Text>
+          <Text style={styles.new_text}>Other Rooms</Text>
           <FlatList
+            legacyImplementation={false}
             data={cardData}
             renderItem={renderCard}
             showsHorizontalScrollIndicator={false}
             horizontal
             keyExtractor={(index) => index.id}
             style={styles.card_wrapper}
-            ItemSeparatorComponent={seperator}
           />
         </View>
       </View>

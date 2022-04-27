@@ -4,9 +4,7 @@ export const styles = StyleSheet.create({
   body_wrapper: {
     marginLeft: 20,
   },
-  divider: {
-    width: 10,
-  },
+  
   new_section_new_card: {
     marginVertical: 40,
   },
@@ -18,6 +16,4 @@ export const styles = StyleSheet.create({
   card_wrapper: {
     marginTop: 10,
   },
-
-  //image card css
 });

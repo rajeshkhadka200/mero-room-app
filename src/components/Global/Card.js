@@ -1,16 +1,20 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableWithoutFeedback,TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "../../styles/Global/card_design";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Card({ data }) {
+export default function Card({ data}) {
+  const navigation = useNavigation();
   const [tap, setTap] = useState(false);
   const { address, image, price } = data;
 
   return (
     <>
       <View style={styles.actual_card_con}>
-        <Image source={image} style={styles.img} />
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Detail')}>
+          <Image source={image} style={styles.img} />
+        </TouchableWithoutFeedback>
         <View style={styles.img_des}>
           <View style={styles.left}>
             <View style={styles.avatar_con}>

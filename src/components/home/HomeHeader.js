@@ -44,6 +44,7 @@ const HomeHeader = () => {
           <Text style={styles.filterText}>Filter by District</Text>
           <View style={styles.disWrapper}>
             <ScrollView
+            pagingEnabled={true}
               horizontal
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}

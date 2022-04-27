@@ -5,8 +5,10 @@ import {
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   actual_card_con: {
-    width: wp("90%"),
+    width: wp("75%"),
     height: 200,
+    marginRight:25
+
   },
   img: {
     height: "100%",
@@ -27,21 +29,21 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   dec_address: {
     color: "white",
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: "500",
   },
   dec_price: {
     color: "rgba(255, 165, 0, 1)",
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: "500",
   },
   avatar: {
-    width: 45,
-    height: 45,
+    width: 40,
+    height: 40,
     borderRadius: 22.5,
   },
   left: {

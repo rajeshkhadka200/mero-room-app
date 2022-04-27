@@ -113,6 +113,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         options={{
+          
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <FontAwesome
