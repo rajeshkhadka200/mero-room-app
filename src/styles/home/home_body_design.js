@@ -4,10 +4,6 @@ export const styles = StyleSheet.create({
   body_wrapper: {
     marginLeft: 20,
   },
-  
-  new_section_new_card: {
-    marginVertical: 40,
-  },
   new_text: {
     color: "rgba(0, 0, 0, 1)",
     fontSize: 22,
@@ -15,5 +11,5 @@ export const styles = StyleSheet.create({
   },
   card_wrapper: {
     marginTop: 10,
-  },
+  }
 });

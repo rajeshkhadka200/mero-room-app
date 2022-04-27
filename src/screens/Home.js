@@ -15,7 +15,11 @@ import HomeBody from "../components/home/HomeBody";
 const Home = ({ navigation }) => {
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView
+        style={{
+          marginTop: 10,
+        }}
+      >
         <ScrollView>
           {/* from notif to filter = Home Header */}
           <HomeHeader />
