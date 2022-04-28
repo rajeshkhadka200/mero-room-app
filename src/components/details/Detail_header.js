@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { styles } from "../../styles/details/Detail_Header_design.js"; //header css
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
+import Modal from "../../components/details/Model";
+import { ContexStore } from "../../context/Context.js";
+import Comment from "./Comment.js";
 
 const WhiteIcon = ({ text }) => {
   return (
@@ -23,21 +26,22 @@ const WhiteIcon = ({ text }) => {
   );
 };
 
-const Detail_header = () => {
-  const navigation = useNavigation()
+const Detail_header = ({ route }) => {
+  // const {room_id} = route.params
+  const room_id = 5;
+  const contextData = useContext(ContexStore);
+  const { isModel, setisModel } = contextData;
+
+  const navigation = useNavigation();
+  const handleModel = () => {
+    setisModel(!isModel);
+  };
 
   return (
     <>
       <View>
         <Text style={styles.arrow}>
-          <AntDesign
-            onPress={() => {
-              navigation.goBack("Tabs");
-            }}
-            name="arrowleft"
-            size={24}
-            color="white"
-          />
+          <AntDesign name="arrowleft" size={24} color="white" />
         </Text>
         <Image
           style={{ width: "100%", height: 250 }}
@@ -81,6 +85,7 @@ const Detail_header = () => {
               along with the room. The facility of water and sanitary is
               amazing.
             </Text>
+            {/* render map here */}
             <View style={styles.btn_wrapper}>
               <TouchableOpacity style={styles.btn_apply}>
                 <Text
@@ -93,13 +98,15 @@ const Detail_header = () => {
                   Apply
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btn_left}>
+              <TouchableOpacity onPress={handleModel} style={styles.btn_left}>
                 <FontAwesome5 name="user-friends" size={24} color="#5B628F" />
               </TouchableOpacity>
             </View>
           </View>
         </View>
+        <Comment room_id={room_id} />
       </View>
+      {isModel ? <Modal /> : null}
     </>
   );
 };

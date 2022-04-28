@@ -1,10 +1,11 @@
+import axios from "axios";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { middleware } from "../../config/Check";
 import { db } from "../../config/firebase";
-export const ContexStore = React.createContext();
+export const ContexStore = createContext();
 const Context = ({ children }) => {
-  const [user, setUser] = useState({}); // setup the logedin user
+  const [user, setUser] = useState([]); // setup the logedin user
   const [token, setToken] = useState(""); // set token
   middleware.getAuthToken().then((key) => {
     setToken(key);
@@ -28,10 +29,16 @@ const Context = ({ children }) => {
       console.log(error);
     }
   };
+
+  // state for the details header page
+  const [isModel, setisModel] = useState(false);
   return (
     <ContexStore.Provider
       value={{
-        userData: { user, setUser },
+        user,
+        setUser,
+        isModel,
+        setisModel,
       }}
     >
       {children}
