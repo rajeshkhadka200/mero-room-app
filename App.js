@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LogBox, StatusBar, ScrollView } from "react-native";
+import { LogBox, StatusBar, ScrollView, Text, Image } from "react-native";
 import Tabs from "./src/navigation/Tabs";
 
 //importing screen
@@ -43,6 +43,19 @@ export default function App() {
     return <AppLoading />;
   }
   const Stack = createNativeStackNavigator();
+  const Rajesh = () => {
+    return (
+      <Image
+        style={{
+          height: 20,
+          width: 20,
+        }}
+        source={{
+          uri: "https://media-exp1.licdn.com/dms/image/C5603AQHYUU33PyoIGw/profile-displayphoto-shrink_200_200/0/1639665364147?e=1655942400&v=beta&t=7ULEw1Ev8iIl-Rxhuy99vu21yUIInq63NSvKcFAgz1w",
+        }}
+      ></Image>
+    );
+  };
   return (
     <>
       <Context>
@@ -79,6 +92,16 @@ export default function App() {
             <Stack.Screen
               name="Search"
               component={Search}
+              options={{
+                headerStyle: {
+                  elevation: 0,
+                },
+                headerTitleStyle: {
+                  fontFamily: "500",
+                  color: "rgba(0, 0, 0, 1)",
+                  fontSize: 15,
+                },
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>

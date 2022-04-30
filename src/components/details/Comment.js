@@ -26,19 +26,19 @@ const Comment = ({ room_id }) => {
   };
 
   // get the comments
-  useEffect(async () => {
-    const colRef = collection(db, "comments");
-    const q = query(
-      colRef,
-      query(collection(db, "comments"), where("room_id", "==", room_id)),
-      orderBy("createdAt")
-    );
-    onSnapshot(q, (snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        console.log(doc.data());
-      });
-    });
-  }, []);
+  // useEffect(async () => {
+  //   const colRef = collection(db, "comments");
+  //   const q = query(
+  //     colRef,
+  //     query(collection(db, "comments"), where("room_id", "==", room_id)),
+  //     orderBy("createdAt")
+  //   );
+  //   onSnapshot(q, (snapshot) => {
+  //     snapshot.docs.forEach((doc) => {
+  //       console.log(doc.data());
+  //     });
+  //   });
+  // }, []);
   console.log(comment);
   return (
     <View style={styles.cmt_wrapper}>

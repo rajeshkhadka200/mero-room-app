@@ -32,19 +32,7 @@ const DetailsStack = () => {
     </Stack.Navigator>
   );
 };
-const Rajesh = () => {
-  return (
-    <>
-      <Text
-        styles={{
-          color: "red",
-        }}
-      >
-        Hello
-      </Text>
-    </>
-  );
-};
+
 const Tabs = () => {
   return (
     <Tab.Navigator
