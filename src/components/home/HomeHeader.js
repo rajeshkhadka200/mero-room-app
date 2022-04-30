@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import { styles } from "../../styles/home/home_header_design";
@@ -19,46 +20,60 @@ import { District } from "../../../config/api.js";
 const HomeHeader = () => {
   return (
     <>
-      <View style={styles.headerWrapper}>
-        <View style={styles.headerCon}>
-          <TouchableOpacity style={styles.headerIcon}>
-            <Ionicons name="notifications-outline" size={24} color="#828282" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerIcon}>
-            <FontAwesome name="user-o" size={24} color="#828282" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.searchCon}>
-          <Text style={styles.searchText}>Find the best places</Text>
-          <View style={styles.searchWrapper}>
-            <TextInput
-              style={styles.searchBar}
-              placeholder="Start entering the address"
-            />
-            <TouchableOpacity style={styles.searchBtn}>
-              <Feather name="search" size={30} color="white" />
+      <SafeAreaView>
+        <View style={styles.headerWrapper}>
+          <View style={styles.headerCon}>
+            <Text style={styles.logo}>Mero Room</Text>
+            <TouchableOpacity style={styles.headerIcon}>
+              <Ionicons
+                name="notifications-outline"
+                size={24}
+                color="#828282"
+              />
             </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.filterCon}>
-          <Text style={styles.filterText}>Filter by District</Text>
-          <View style={styles.disWrapper}>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-            >
-              {District.slice(0, 10).map((data) => {
-                return (
-                  <TouchableOpacity style={styles.district}>
-                    <Text style={styles.disText}>{data}</Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </ScrollView>
+          <View style={styles.searchWrapper}>
+            <View style={styles.actual_search}>
+              <TextInput
+                style={styles.searchBar}
+                placeholder="Start entering the address"
+              />
+              <TouchableOpacity style={styles.searchBtn}>
+                <Feather name="search" size={24} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* <View style={styles.header_text}>
+            <View style={styles.header_bold_text}>
+              <Text style={styles.upper_bold_text}>Room in</Text>
+              <Text style={styles.lower_bolder_text}>Rent</Text>
+            </View>
+            <Text style={styles.lower_text_small}>
+              Find the best room for the comfortable lifestyle. Experience the
+              Lifestyle.
+            </Text>
+          </View> */}
+
+          <View style={styles.filterCon}>
+            <Text style={styles.filterText}>Filter by District</Text>
+            <View style={styles.disWrapper}>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+              >
+                {District.slice(0, 10).map((data) => {
+                  return (
+                    <TouchableOpacity style={styles.district}>
+                      <Text style={styles.disText}>{data}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </ScrollView>
+            </View>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </>
   );
 };

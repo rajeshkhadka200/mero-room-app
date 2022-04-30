@@ -2,7 +2,7 @@ import { View, Text, TextInput, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import { styles } from "../../styles/details/comment_design";
 import { Ionicons } from "@expo/vector-icons";
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { collection, query, where, orderBy } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 
 const Comment = ({ room_id }) => {
@@ -13,9 +13,9 @@ const Comment = ({ room_id }) => {
       const res = await addDoc(collection(db, "comments"), {
         room_id: 5,
         user_id: 1,
-        user_name: "rajesh khadka",
+        user_name: "utsav bhattarai",
         comment,
-        user_profile: "pic",
+        user_profile: "user is live",
         createdAt: Date.now(),
       });
       alert("Thanks for feedback");
@@ -27,15 +27,19 @@ const Comment = ({ room_id }) => {
 
   // get the comments
   useEffect(async () => {
+    const colRef = collection(db, "comments");
     const q = query(
-      collection(db, "comments"),
-      where("room_id", "==", room_id)
+      colRef,
+      query(collection(db, "comments"), where("room_id", "==", room_id)),
+      orderBy("createdAt")
     );
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      setComment([...comment, doc.data()]);
+    onSnapshot(q, (snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        console.log(doc.data());
+      });
     });
   }, []);
+  console.log(comment);
   return (
     <View style={styles.cmt_wrapper}>
       <Text style={styles.cmt_header_text}>Leave a feedback</Text>

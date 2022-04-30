@@ -12,6 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Text } from "react-native";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -31,28 +32,47 @@ const DetailsStack = () => {
     </Stack.Navigator>
   );
 };
-
+const Rajesh = () => {
+  return (
+    <>
+      <Text
+        styles={{
+          color: "red",
+        }}
+      >
+        Hello
+      </Text>
+    </>
+  );
+};
 const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarHideOnKeyboard:true,
+        tabBarHideOnKeyboard: true,
         tabBarShowLabel: false,
         tabBarStyle: {
           flex: 1,
-          bottom:0,
+          bottom: 0,
           position: "absolute",
           bottom: 0,
           left: 0,
           backgroundColor: "white",
           height: 60,
-          ...styles.shadow,
         },
       }}
     >
       <Tab.Screen
         options={{
-          headerShown: false,
+          headerStyle: {
+            elevation: 0,
+          },
+          headerTitleStyle: {
+            fontFamily: "500",
+            color: "rgba(0, 0, 0, 1)",
+            fontSize: 15,
+          },
+          headerShown: true,
           tabBarLabel: "Home",
           tabBarIcon: ({ focused }) => (
             <Ionicons
@@ -62,7 +82,7 @@ const Tabs = () => {
             />
           ),
         }}
-        name="Home"
+        name="Mero Room"
         component={Home}
       />
       <Tab.Screen
@@ -113,7 +133,6 @@ const Tabs = () => {
       />
       <Tab.Screen
         options={{
-          
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <FontAwesome

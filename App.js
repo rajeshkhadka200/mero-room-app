@@ -57,41 +57,19 @@ export default function App() {
               name="Tabs"
               component={Tabs}
             />
+
             <Stack.Screen
               options={{ headerShown: false }}
               name="Register"
               component={Register}
             />
+
             <Stack.Screen
               options={{ headerShown: false }}
               name="Login"
               component={Login}
             />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Home"
-              component={Home}
-            />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Profile"
-              component={Profile}
-            />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Post"
-              component={Post}
-            />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Fav"
-              component={Fav}
-            />
-            <Stack.Screen
-              options={{ headerShown: false }}
-              name="Myroom"
-              component={Myroom}
-            />
+
             <Stack.Screen
               options={{ headerShown: false }}
               name="Detail"

@@ -5,42 +5,52 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   headerCon: {
+    alignItems: "center",
+    marginLeft: 3,
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  headerIcon: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#DFDFDF",
-    opacity: 20,
-    borderRadius: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+  logo: {
+    color: "rgba(0, 0, 0, 1)",
+    fontFamily: "500",
   },
-  searchCon: {
-    flex: 1,
-    justifyContent: "space-between",
-    marginTop: 20,
-    maxWidth: "100%",
-  },
-  searchText: {
-    fontSize: 20,
+  header_text: {
     marginLeft: 3,
+  },
+  header_bold_text: {
+    marginTop: 10,
+  },
+  upper_bold_text: {
+    fontSize: 40,
+    fontFamily: "600",
+  },
+  lower_bolder_text: {
+    fontSize: 40,
+    fontFamily: "600",
+    marginTop: -20,
+  },
+  lower_text_small: {
     fontFamily: "400",
+    color: "rgba(0, 0, 0, 0.63)",
   },
   searchWrapper: {
-    marginTop: 10,
+    marginTop: 25,
     flex: 1,
+    flexDirection: "column",
+  },
+  actual_search: {
+    alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    alignItems: "center",
   },
+
   searchBar: {
     flex: 2,
+    borderWidth: 1,
+    borderColor: "rgba(0, 0, 0, 0.54)",
     maxWidth: "85%",
-    backgroundColor: "#E5E5E5",
-    paddingVertical: 10,
+    paddingVertical: 9.5,
     paddingHorizontal: 15,
     borderTopLeftRadius: 17,
     borderBottomLeftRadius: 17,
