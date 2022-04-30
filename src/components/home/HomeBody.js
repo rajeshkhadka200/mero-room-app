@@ -13,7 +13,7 @@ import Card from "../Global/Card";
 const HomeBody = () => {
   const renderCard = ({ item }) => {
     //for the new rooms
-    return <Card data={item}/>;
+    return <Card data={item} />;
   };
 
   return (

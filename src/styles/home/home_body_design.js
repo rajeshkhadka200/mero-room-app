@@ -11,5 +11,5 @@ export const styles = StyleSheet.create({
   },
   card_wrapper: {
     marginTop: 10,
-  }
+  },
 });

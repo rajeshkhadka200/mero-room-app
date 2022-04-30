@@ -22,9 +22,9 @@ export default function Card({ data, check }) {
     <>
       <View
         style={{
-          width:check ? wp("85%") : wp("75%"),
+          width: check ? wp("90%") : wp("80%"),
           height: 210,
-          marginRight: 25,
+          marginRight: check ? 0 : 25,
           marginVertical: 10,
         }}
       >

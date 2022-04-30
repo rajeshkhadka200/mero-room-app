@@ -5,36 +5,27 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { styles } from "../../styles/home/home_header_design";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { District } from "../../../config/api.js";
-import {useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 // from notif icons to filter
 const HomeHeader = () => {
-
-  const [search,setSearch] = useState("")
+  const [search, setSearch] = useState("");
   const navigation = useNavigation();
-  const Search = () =>{
-    navigation.navigate("Search",{
-      search
-    })
+  const Search = () => {
+    navigation.navigate("Search", {
+      search,
+    });
     setSearch("");
-  }
+  };
   return (
     <>
       <View style={styles.headerWrapper}>
-        <View style={styles.headerCon}>
-          <TouchableOpacity style={styles.headerIcon}>
-            <Ionicons name="notifications-outline" size={24} color="#828282" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerIcon}>
-            <FontAwesome name="user-o" size={24} color="#828282" />
-          </TouchableOpacity>
-        </View>
         <View style={styles.searchCon}>
           <Text style={styles.searchText}>Find the best place</Text>
           <View style={styles.searchWrapper}>
@@ -60,7 +51,16 @@ const HomeHeader = () => {
               {District.slice(0, 10).map((data) => {
                 return (
                   <TouchableOpacity style={styles.district}>
-                    <Text style={styles.disText}>{data}</Text>
+                    <Text
+                      onPress={() => {
+                        navigation.navigate("Search", {
+                          data,
+                        });
+                      }}
+                      style={styles.disText}
+                    >
+                      {data}
+                    </Text>
                   </TouchableOpacity>
                 );
               })}

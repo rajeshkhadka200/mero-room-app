@@ -86,6 +86,7 @@ export const cardData = [
     price: "10000",
     avatar:
       "https://scontent.fbwa3-1.fna.fbcdn.net/v/t39.30808-6/270849698_636049147586954_6512254458201320833_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=rcWYT47xgcYAX9TO0RR&tn=UF65uT2GC-C7e0x7&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT8bhvimMQdT-VQjKrSZDu5Xrb7xuELaXVLvq1AqEzTkbg&oe=626DBB6D",
+    district: "palpa",
   },
   {
     id: "2",
@@ -93,7 +94,8 @@ export const cardData = [
     address: "Kalikanagar-12,Butwal",
     price: "10000",
     avatar:
-    "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Ot9HVfkZVGwAX9xLUma&_nc_ht=scontent.fktm6-1.fna&oh=00_AT_v0dTwwh4HtTfeI2B5GJzDoS7q220ZeoG-npsD63D3gQ&oe=626C9C19",
+      "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Ot9HVfkZVGwAX9xLUma&_nc_ht=scontent.fktm6-1.fna&oh=00_AT_v0dTwwh4HtTfeI2B5GJzDoS7q220ZeoG-npsD63D3gQ&oe=626C9C19",
+    district: "palpa",
   },
   {
     id: "3",
@@ -102,6 +104,7 @@ export const cardData = [
     price: "10000",
     avatar:
       "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Ot9HVfkZVGwAX9xLUma&_nc_ht=scontent.fktm6-1.fna&oh=00_AT_v0dTwwh4HtTfeI2B5GJzDoS7q220ZeoG-npsD63D3gQ&oe=626C9C19",
+    district: "gulmi",
   },
 ];
 export const userWhoApplied = [

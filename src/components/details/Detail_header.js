@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useContext, useRef, useState } from "react";
+import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
 import { styles } from "../../styles/details/Detail_Header_design.js"; //header css
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -8,7 +8,10 @@ import { useNavigation } from "@react-navigation/native";
 import Modal from "../../components/details/Model";
 import { ContexStore } from "../../context/Context.js";
 import Comment from "./Comment.js";
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 const WhiteIcon = ({ text }) => {
   return (
     <>
@@ -37,18 +40,58 @@ const Detail_header = ({ route }) => {
     setisModel(!isModel);
   };
 
+  const imgs = [
+    "https://thumbs.dreamstime.com/b/hotel-room-13225019.jpg",
+    "https://static.toiimg.com/thumb/msid-75589870,width-1200,height-900,resizemode-4/.jpg",
+    "https://cdn.loewshotels.com/loewshotels.com-2466770763/cms/cache/v2/5f5a6e0d12749.jpg/1920x1080/fit/80/86e685af18659ee9ecca35c465603812.jpg",
+    "https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1207490255-e1615485559611.jpg",
+  ];
+  const renderImgs = (data) => {
+    return (
+      <Image
+        style={{ width: wp("100%"), height: 250 }}
+        source={{
+          uri: data.item,
+        }}
+      ></Image>
+    );
+  };
+  const [index, setindex] = useState();
+  const onViewableItemsChanged = useRef((item) => {
+    setindex(item.viewableItems[0].index);
+  });
+  // const viewabilityConfig = useRef({
+  //   itemVisiblePercentThreshold: 50,
+  // });
+
   return (
     <>
       <View>
         <Text style={styles.arrow}>
           <AntDesign onPress={() =>navigation.navigate("Tabs")} name="arrowleft" size={24} color="white" />
         </Text>
-        <Image
-          style={{ width: "100%", height: 250 }}
-          source={{
-            uri: "https://thumbs.dreamstime.com/b/hotel-room-13225019.jpg",
-          }}
-        ></Image>
+        <View style={styles.indi_wrapper}>
+          {imgs.map((itm, i) => {
+            return (
+              <View
+                style={{
+                  backgroundColor: i == index ? "#1394e8" : "#eeeeee",
+                  ...styles.indicator,
+                }}
+              ></View>
+            );
+          })}
+        </View>
+        <FlatList
+          // viewabilityConfig={viewabilityConfig.current}
+          onViewableItemsChanged={onViewableItemsChanged.current}
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          horizontal
+          data={imgs}
+          renderItem={renderImgs}
+        />
+
         <View style={styles.lower_wrapper}>
           <View style={styles.small_info_flex}>
             <View>
