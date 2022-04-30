@@ -33,6 +33,9 @@ const DetailsStack = () => {
   );
 };
 
+//notification indicator
+const notif = true;
+
 const Tabs = () => {
   return (
     <Tab.Navigator
@@ -57,19 +60,24 @@ const Tabs = () => {
                 <Ionicons
                   name="notifications-outline"
                   size={27}
-                  color="#828282"
+                  color="#fff"
                 />
-                <View style={header.dot}>
-                </View>
+               { notif ? <View style={header.dot}>
+                </View> : null}
               </TouchableOpacity>
           ),
           headerStyle: {
             elevation: 0,
+            backgroundColor:"#5B628F",
+            height:60,
+            
+
+            
           },
           headerTitleStyle: {
             fontFamily: "500",
-            color: "rgba(0, 0, 0, 1)",
-            fontSize: 15,
+            color: "#fff",
+            fontSize: 20,
           },
           headerShown: true,
           tabBarLabel: "Home",

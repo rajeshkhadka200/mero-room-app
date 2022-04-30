@@ -50,17 +50,15 @@ const HomeHeader = () => {
             >
               {District.slice(0, 10).map((data) => {
                 return (
-                  <TouchableOpacity style={styles.district}>
-                    <Text
-                      onPress={() => {
-                        navigation.navigate("Search", {
-                          data,
-                        });
-                      }}
-                      style={styles.disText}
-                    >
-                      {data}
-                    </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Search", {
+                        data,
+                      });
+                    }}
+                    style={styles.district}
+                  >
+                    <Text style={styles.disText}>{data}</Text>
                   </TouchableOpacity>
                 );
               })}
