@@ -2,8 +2,9 @@ import { View, Text, TextInput, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import { styles } from "../../styles/details/comment_design";
 import { Ionicons } from "@expo/vector-icons";
-import { collection, query, where, orderBy } from "firebase/firestore";
+import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
+import SingleComment from "./SingleComment";
 
 const Comment = ({ room_id }) => {
   //post the comments
@@ -60,6 +61,7 @@ const Comment = ({ room_id }) => {
           color="#fff"
         />
       </View>
+      <SingleComment />
     </View>
   );
 };
