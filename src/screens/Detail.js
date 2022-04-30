@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import Detail_header from "../components/details/Detail_header";
 import { ContexStore } from "../context/Context";
 import Comment from "../components/details/Comment";
+import Modal from "../components/details/Model";
 
 // main detail page
 const Detail = () => {
@@ -15,7 +16,6 @@ const Detail = () => {
         {/* this includes picture, others and others info */}
         <Detail_header />
         {/* Comment */}
-        {/* <Comment  /> */}
       </ScrollView>
     </SafeAreaView>
   );
