@@ -8,6 +8,7 @@ import {
   Image,
   FlatList,
   BackHandler,
+  LogBox
 } from "react-native";
 import { styles } from "../../styles/details/model_design";
 import { ContexStore } from "../../context/Context";
@@ -15,6 +16,13 @@ import { Entypo } from "@expo/vector-icons";
 import { userWhoApplied } from "../../../config/api";
 
 const Model = () => {
+
+  //false warning configured
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"])
+  }, [])
+
+
   const contextData = useContext(ContexStore);
   const { isModel, setisModel } = contextData;
   const clodeModel = () => {

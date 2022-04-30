@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
   actual_card_con: {
     width: wp("75%"),
     height: 200,
-    marginRight:25
+    marginRight:25,
+    marginVertical:10
 
   },
   img: {

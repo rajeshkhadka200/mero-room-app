@@ -1,16 +1,33 @@
-import { View, Text, Image, TouchableWithoutFeedback,TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "../../styles/Global/card_design";
 import { useNavigation } from "@react-navigation/native";
-export default function Card({ data }) {
+export default function Card({ data, check }) {
   const navigation = useNavigation();
   const [tap, setTap] = useState(false);
   const { address, image, price, avatar } = data;
-
   return (
     <>
-      <View style={styles.actual_card_con}>
+      <View
+        style={{
+          width:check ? wp("90%") : wp("75%"),
+          height: 210,
+          marginRight: 25,
+          marginVertical: 10,
+        }}
+      >
         <TouchableWithoutFeedback
           onPress={() => {
             navigation.navigate("Detail");
