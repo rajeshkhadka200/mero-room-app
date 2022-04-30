@@ -20,7 +20,7 @@ const Home = ({ navigation }) => {
           marginTop: 10,
         }}
       >
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {/* from notif to filter = Home Header */}
           <HomeHeader />
           {/* frombelow filter */}

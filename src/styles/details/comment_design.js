@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 export const styles = StyleSheet.create({
   cmt_wrapper: {
     paddingBottom: 20,
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
     width: "15%",
     // marginLeft: 5,
     backgroundColor: "#5B628F",
-    paddingVertical: 10.5,
+    paddingVertical: 10.1,
     borderBottomRightRadius: 5,
     borderTopRightRadius: 5,
   },

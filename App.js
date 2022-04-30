@@ -28,6 +28,7 @@ import {
 } from "@expo-google-fonts/poppins";
 // import app loading
 import AppLoading from "expo-app-loading";
+import Search from "./src/screens/Search";
 export default function App() {
   // use the fonts
   let [fontsLoaded] = useFonts({
@@ -74,6 +75,10 @@ export default function App() {
               options={{ headerShown: false }}
               name="Detail"
               component={Detail}
+            />
+            <Stack.Screen
+              name="Search"
+              component={Search}
             />
           </Stack.Navigator>
         </NavigationContainer>
