@@ -41,7 +41,7 @@ const Detail_header = ({ route }) => {
     <>
       <View>
         <Text style={styles.arrow}>
-          <AntDesign name="arrowleft" size={24} color="white" />
+          <AntDesign onPress={() =>navigation.navigate("Tabs")} name="arrowleft" size={24} color="white" />
         </Text>
         <Image
           style={{ width: "100%", height: 250 }}
