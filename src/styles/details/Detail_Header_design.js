@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     zIndex: 100,
-    top: 205,
+    top: 215,
     alignSelf: "center",
   },
   indicator: {

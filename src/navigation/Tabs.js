@@ -5,14 +5,14 @@ import Post from "../screens/Post";
 import Fav from "../screens/Fav";
 import Detail from "../screens/Detail";
 import Myroom from "../screens/Myroom";
-import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "../styles/nav/bottomNav_design";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Text } from "react-native";
+import { View,TouchableOpacity,StyleSheet } from "react-native";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +33,9 @@ const DetailsStack = () => {
   );
 };
 
+//notification indicator
+const notif = true;
+
 const Tabs = () => {
   return (
     <Tab.Navigator
@@ -52,13 +55,29 @@ const Tabs = () => {
     >
       <Tab.Screen
         options={{
+          headerRight: () => (
+              <TouchableOpacity style={header.headerIcon}>
+                <Ionicons
+                  name="notifications-outline"
+                  size={27}
+                  color="#fff"
+                />
+               { notif ? <View style={header.dot}>
+                </View> : null}
+              </TouchableOpacity>
+          ),
           headerStyle: {
             elevation: 0,
+            backgroundColor:"#5B628F",
+            height:60,
+            
+
+            
           },
           headerTitleStyle: {
             fontFamily: "500",
-            color: "rgba(0, 0, 0, 1)",
-            fontSize: 15,
+            color: "#fff",
+            fontSize: 20,
           },
           headerShown: true,
           tabBarLabel: "Home",
@@ -136,5 +155,21 @@ const Tabs = () => {
     </Tab.Navigator>
   );
 };
+const header=StyleSheet.create({
+  headerIcon: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    marginRight:15
+  },
+  dot:{
+    padding:3.2,
+    backgroundColor:"#FF7700",
+    borderRadius:500,
+    position:"absolute",
+    right:6,
+    top:3
+  }
+})
 
 export default Tabs;

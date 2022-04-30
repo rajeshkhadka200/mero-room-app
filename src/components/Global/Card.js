@@ -25,7 +25,7 @@ export default function Card({ data, check }) {
           width: check ? wp("90%") : wp("80%"),
           height: 210,
           marginRight: check ? 0 : 25,
-          marginVertical: 10,
+          marginVertical: check ? 10 : 0,
         }}
       >
         <TouchableWithoutFeedback

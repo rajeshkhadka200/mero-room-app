@@ -26,14 +26,6 @@ const HomeHeader = () => {
   return (
     <>
       <View style={styles.headerWrapper}>
-        <View style={styles.headerCon}>
-          <TouchableOpacity style={styles.headerIcon}>
-            <Ionicons name="notifications-outline" size={24} color="#828282" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerIcon}>
-            <FontAwesome name="user-o" size={24} color="#828282" />
-          </TouchableOpacity>
-        </View>
         <View style={styles.searchCon}>
           <Text style={styles.searchText}>Find the best place</Text>
           <View style={styles.searchWrapper}>
@@ -58,17 +50,15 @@ const HomeHeader = () => {
             >
               {District.slice(0, 10).map((data) => {
                 return (
-                  <TouchableOpacity style={styles.district}>
-                    <Text
-                      onPress={() => {
-                        navigation.navigate("Search", {
-                          data,
-                        });
-                      }}
-                      style={styles.disText}
-                    >
-                      {data}
-                    </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Search", {
+                        data,
+                      });
+                    }}
+                    style={styles.district}
+                  >
+                    <Text style={styles.disText}>{data}</Text>
                   </TouchableOpacity>
                 );
               })}

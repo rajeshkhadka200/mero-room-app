@@ -2,26 +2,26 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   headerWrapper: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingBottom: 20,
   },
-  headerCon: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  headerIcon: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#DFDFDF",
-    opacity: 20,
-    borderRadius: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-  },
+  // headerCon: {
+  //   flex: 1,
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  // },
+  // headerIcon: {
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   backgroundColor: "#DFDFDF",
+  //   opacity: 20,
+  //   borderRadius: 15,
+  //   paddingHorizontal: 10,
+  //   paddingVertical: 10,
+  // },
   searchCon: {
     flex: 1,
     justifyContent: "space-between",
-    marginTop: 20,
+    marginTop: 10,
     maxWidth: "100%",
   },
   searchText: {
