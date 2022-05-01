@@ -14,12 +14,9 @@ import { styles } from "../../styles/details/model_design";
 import { ContexStore } from "../../context/Context";
 import { Entypo } from "@expo/vector-icons";
 import { userWhoApplied } from "../../../config/api";
-
+import Modal from "react-native-modal";
 const Model = () => {
   //false warning configured
-  useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
-  }, []);
 
   const contextData = useContext(ContexStore);
   const { isModel, setisModel } = contextData;
@@ -43,45 +40,35 @@ const Model = () => {
     );
   };
 
-  useEffect(() => {
-    const backAction = () => {
-      setisModel(!isModel);
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
   return (
     <>
-      <TouchableWithoutFeedback onPress={clodeModel}>
-        <View style={styles.black_screen}></View>
-      </TouchableWithoutFeedback>
-      <Animatable.View
-        duration={900}
-        animation="bounceInUp"
-        style={styles.white_box}
+      <Modal
+        animationOut="slideOutDown"
+        onBackButtonPress={() => {
+          clodeModel(!isModel);
+        }}
+        onBackdropPress={clodeModel}
+        isVisible={isModel}
       >
-        {/* Model header */}
-        <View style={styles.model_header}>
-          <Text style={styles.header_text}>People Who applied</Text>
-          <Entypo
-            onPress={clodeModel}
-            style={styles.cross_icon}
-            name="cross"
-            size={20}
-            color="rgba(0, 0, 0, 0.8)"
-          />
+        <View style={styles.white_box}>
+          {/* Model header */}
+          <View style={styles.model_header}>
+            <Text style={styles.header_text}>People Who applied</Text>
+            <Entypo
+              onPress={clodeModel}
+              style={styles.cross_icon}
+              name="cross"
+              size={20}
+              color="rgba(0, 0, 0, 0.8)"
+            />
+          </View>
+          <FlatList
+            keyExtractor={(index) => index.id}
+            data={userWhoApplied}
+            renderItem={renderAppliedUser}
+          ></FlatList>
         </View>
-        <FlatList
-          keyExtractor={(index) => index.id}
-          data={userWhoApplied}
-          renderItem={renderAppliedUser}
-        ></FlatList>
-      </Animatable.View>
+      </Modal>
     </>
   );
 };

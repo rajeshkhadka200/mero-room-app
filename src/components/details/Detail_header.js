@@ -12,6 +12,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
 const WhiteIcon = ({ text }) => {
   return (
     <>
@@ -68,7 +69,12 @@ const Detail_header = ({ route }) => {
     <>
       <View>
         <Text style={styles.arrow}>
-          <AntDesign onPress={() =>navigation.navigate("Tabs")} name="arrowleft" size={24} color="white" />
+          <AntDesign
+            onPress={() => navigation.navigate("Tabs")}
+            name="arrowleft"
+            size={24}
+            color="white"
+          />
         </Text>
         <View style={styles.indi_wrapper}>
           {imgs.map((itm, i) => {
@@ -149,6 +155,7 @@ const Detail_header = ({ route }) => {
         </View>
         <Comment room_id={room_id} />
       </View>
+
       {isModel ? <Modal /> : null}
     </>
   );

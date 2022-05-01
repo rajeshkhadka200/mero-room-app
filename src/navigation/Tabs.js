@@ -12,7 +12,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View,TouchableOpacity,StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Text,
+} from "react-native";
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -56,23 +63,15 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           headerRight: () => (
-              <TouchableOpacity style={header.headerIcon}>
-                <Ionicons
-                  name="notifications-outline"
-                  size={27}
-                  color="#fff"
-                />
-               { notif ? <View style={header.dot}>
-                </View> : null}
-              </TouchableOpacity>
+            <TouchableOpacity style={header.headerIcon}>
+              <Ionicons name="notifications-outline" size={27} color="#fff" />
+              {notif ? <View style={header.dot}></View> : null}
+            </TouchableOpacity>
           ),
           headerStyle: {
             elevation: 0,
-            backgroundColor:"#5B628F",
-            height:60,
-            
-
-            
+            backgroundColor: "#5B628F",
+            height: 60,
           },
           headerTitleStyle: {
             fontFamily: "500",
@@ -109,6 +108,21 @@ const Tabs = () => {
 
       <Tab.Screen
         options={{
+          headerRight: () => (
+            <TouchableWithoutFeedback>
+              <Text style={header.btn_post}>Post</Text>
+            </TouchableWithoutFeedback>
+          ),
+          headerStyle: {
+            backgroundColor: "#5B628F",
+            height: 60,
+            elevation: 0,
+          },
+          headerTitleStyle: {
+            fontFamily: "500",
+            color: "#fff",
+            fontSize: 18,
+          },
           tabBarLabel: "Post",
           tabBarIcon: ({ focused }) => (
             <AntDesign
@@ -118,7 +132,7 @@ const Tabs = () => {
             />
           ),
         }}
-        name="Post"
+        name="New Room"
         component={Post}
       />
       <Tab.Screen
@@ -155,21 +169,32 @@ const Tabs = () => {
     </Tab.Navigator>
   );
 };
-const header=StyleSheet.create({
+const header = StyleSheet.create({
   headerIcon: {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
-    marginRight:15
+    marginRight: 15,
   },
-  dot:{
-    padding:3.2,
-    backgroundColor:"#FF7700",
-    borderRadius:500,
-    position:"absolute",
-    right:6,
-    top:3
-  }
-})
+  dot: {
+    padding: 3.2,
+    backgroundColor: "#FF7700",
+    borderRadius: 500,
+    position: "absolute",
+    right: 6,
+    top: 3,
+  },
+  btn_post: {
+    marginRight: 15,
+    backgroundColor: "#fff",
+    paddingHorizontal: 15,
+    paddingVertical: 7,
+
+    width: 60,
+    borderRadius: 5,
+    fontFamily: "500",
+    color: "#5B628F",
+  },
+});
 
 export default Tabs;

@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LogBox, StatusBar, ScrollView, Text, Image } from "react-native";
@@ -30,6 +32,9 @@ import {
 import AppLoading from "expo-app-loading";
 import Search from "./src/screens/Search";
 export default function App() {
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
   // use the fonts
   let [fontsLoaded] = useFonts({
     200: Poppins_200ExtraLight,
@@ -47,7 +52,7 @@ export default function App() {
     <>
       <Context>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login">
+          <Stack.Navigator initialRouteName="Tabs">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Otp"
@@ -93,6 +98,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </Context>
+      <StatusBar backgroundColor={"#333"} />
     </>
   );
 }

@@ -1,20 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 export const styles = StyleSheet.create({
-  black_screen: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    height: "100%",
-    width: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-    zIndex: 100,
-  },
   white_box: {
-    width: "90%",
+    width: "100%",
     height: 300,
     position: "absolute",
     bottom: 15,
