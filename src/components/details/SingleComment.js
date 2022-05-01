@@ -1,52 +1,72 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, Pressable, FlatList } from "react-native";
-
+import React, { useEffect, useState, useContext } from "react";
+import { View, Text, Image, Pressable, FlatList, Alert } from "react-native";
 import { db } from "../../../config/firebase";
 import { styles } from "../../styles/details/single_comment";
-import { collection, query, onSnapshot, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  where,
+  deleteDoc,
+  doc,
+  orderBy,
+} from "firebase/firestore";
+import { ContexStore } from "../../context/Context";
+import { Entypo } from "@expo/vector-icons";
 const SingleComment = ({ room_id }) => {
-  const comment = [
-    {
-      id: 15,
-      username: "Rajesh khadka",
-      user_profile:
-        "https://scontent.fbwa3-1.fna.fbcdn.net/v/t39.30808-6/270849698_636049147586954_6512254458201320833_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=rcWYT47xgcYAX9TO0RR&tn=UF65uT2GC-C7e0x7&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT8bhvimMQdT-VQjKrSZDu5Xrb7xuELaXVLvq1AqEzTkbg&oe=626DBB6D",
-      comment:
-        "The room is very pretty, and I recommonded you guys to stay there.",
-    },
-    {
-      id: 16,
-      username: "Utsav Bhattarai",
-      user_profile:
-        "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=eRDg9Hqum5gAX8i69h8&_nc_ht=scontent.fktm6-1.fna&oh=00_AT_gYHZDRrC1HvOkB0Scs51QXVg0I1pBnB4bMDeVAQH8EQ&oe=62728AD9",
-      comment: "Recommanded !! Nice Room and Good App  ",
-    },
-  ];
-
-  const [comments, setcomments] = useState([]);
+  const [comment, setcomment] = useState([]);
+  const { user } = useContext(ContexStore);
+  console.log(user.user_id);
   useEffect(() => {
     const getData = () => {
       const colRef = collection(db, "comments");
-      const q = query(colRef, where("room_id", "==", room_id));
+      const q = query(
+        colRef,
+        where("room_id", "==", room_id),
+        orderBy("createdAt")
+      );
       onSnapshot(q, (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           ...doc.data(),
           _id: doc.id,
         }));
-        setcomments(data);
+        setcomment(data);
       });
     };
     getData();
   }, []);
+  const filteredcmt = comment.sort((a, b) => {
+    return b.createdAt - a.createdAt;
+  });
 
   const deleteComment = (id) => {
-    alert(id);
+    Alert.alert(
+      "Want to delete a comment ?",
+      "After delating, you won't be able to recover it !!",
+      [
+        {
+          text: "NO",
+          onPress: () => console.warn("NO Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "YES",
+          onPress: () => {
+            // delete a comment
+            const docRef = doc(db, "comments", id);
+            deleteDoc(docRef).then(() => {
+              console.warn("deleted");
+            });
+          },
+        },
+      ]
+    );
   };
   const renderComment = ({ item }) => {
     return (
       <Pressable
         onLongPress={() => {
-          deleteComment(item.id);
+          item.user_id === user.user_id ? deleteComment(item.comment_id) : null;
         }}
         style={styles.flex_cmt}
       >
@@ -57,7 +77,24 @@ const SingleComment = ({ room_id }) => {
           }}
         ></Image>
         <View style={styles.right_side}>
-          <Text style={styles.username}>{item.username}</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={styles.username}>{item.user_name}</Text>
+            {user.user_id === item.user_id ? (
+              <Entypo
+                onPress={() => {
+                  deleteComment(item._id);
+                }}
+                name="dots-three-vertical"
+                size={18}
+                color="black"
+              />
+            ) : null}
+          </View>
           <Text style={styles.cmt_txt}>{item.comment}</Text>
         </View>
       </Pressable>
@@ -66,10 +103,10 @@ const SingleComment = ({ room_id }) => {
   return (
     <>
       <View style={styles.single_cmt_wrapper_outer}>
-        <Text style={styles.header_text}>All comments ({comments.length})</Text>
+        <Text style={styles.header_text}>All comments ({comment.length})</Text>
         {/* comment */}
         <FlatList
-          data={comment}
+          data={filteredcmt}
           keyExtractor={(i) => {
             i.id;
           }}

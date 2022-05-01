@@ -32,13 +32,15 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
   },
 
-  send_btn: {
-    alignSelf: "center",
-    textAlign: "center",
+  send_btn_con: {
+    justifyContent:"center",
     width: "15%",
     backgroundColor: "#5B628F",
     height: 45,
     borderBottomRightRadius: 5,
     borderTopRightRadius: 5,
   },
+  send_btn:{
+    alignSelf:"center",
+  }
 });
