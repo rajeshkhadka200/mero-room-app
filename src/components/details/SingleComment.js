@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, Pressable, FlatList } from "react-native";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { db } from "../../../config/firebase";
 
+import { db } from "../../../config/firebase";
 import { styles } from "../../styles/details/single_comment";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
 const SingleComment = ({ room_id }) => {
   const comment = [
     {
@@ -22,17 +22,21 @@ const SingleComment = ({ room_id }) => {
       comment: "Recommanded !! Nice Room and Good App  ",
     },
   ];
+
   const [comments, setcomments] = useState([]);
-  useEffect(async () => {
-    const q = query(
-      collection(db, "comments"),
-      where("room_id", "==", room_id)
-    );
-    onSnapshot(q, (querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        setcomments({ ...doc.data(), doc_id: doc.id });
+  useEffect(() => {
+    const getData = () => {
+      const colRef = collection(db, "comments");
+      const q = query(colRef, where("room_id", "==", room_id));
+      onSnapshot(q, (snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setcomments(data);
       });
-    });
+    };
+    getData();
   }, []);
 
   const deleteComment = (id) => {
@@ -62,9 +66,15 @@ const SingleComment = ({ room_id }) => {
   return (
     <>
       <View style={styles.single_cmt_wrapper_outer}>
-        <Text style={styles.header_text}>All comments ({comment.length})</Text>
+        <Text style={styles.header_text}>All comments ({comments.length})</Text>
         {/* comment */}
-        <FlatList data={comment} renderItem={renderComment} />
+        <FlatList
+          data={comment}
+          keyExtractor={(i) => {
+            i.id;
+          }}
+          renderItem={renderComment}
+        />
       </View>
     </>
   );
