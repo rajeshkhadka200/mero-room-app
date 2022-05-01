@@ -7,11 +7,7 @@ import Tabs from "./src/navigation/Tabs";
 
 //importing screen
 import Register from "./src/screens/Register";
-import Home from "./src/screens/Home";
-import Profile from "./src/screens/Profile";
-import Post from "./src/screens/Post";
-import Fav from "./src/screens/Fav";
-import Myroom from "./src/screens/Myroom";
+
 import Otp from "./src/screens/Otp";
 import Detail from "./src/screens/Detail";
 LogBox.ignoreLogs(["Setting a timer"]);
@@ -52,7 +48,7 @@ export default function App() {
     <>
       <Context>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Tabs">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Otp"

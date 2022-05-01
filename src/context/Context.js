@@ -12,9 +12,6 @@ const Context = ({ children }) => {
   });
   useEffect(() => {
     getData();
-    return () => {
-      setUser({});
-    };
   }, []);
 
   const getData = async () => {
@@ -26,7 +23,7 @@ const Context = ({ children }) => {
         });
       });
     } catch (error) {
-      console.log(error);
+      console.log("err while geting data", error);
     }
   };
 
