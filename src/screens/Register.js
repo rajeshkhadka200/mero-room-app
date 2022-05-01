@@ -60,9 +60,11 @@ const Auth = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
+    
       <ScrollView>
-        <View style={styles.container}>
+        <View style={{
+        }}>
+        <View style={styles.headerContainer}>
           <Animatable.View
             animation="zoomIn"
             duration={1000}
@@ -84,24 +86,29 @@ const Auth = ({ navigation }) => {
             </View>
             <Text style={styles.logoText}>Mero Room</Text>
           </Animatable.View>
+          </View>
           <Animatable.View
             animation="fadeInUpBig"
             duration={1000}
             style={styles.inputContainer}
           >
-            <View>
+            <View style={styles.inputWrapper}>
               <TextInput
                 onChangeText={(text) => handleChange("name", text)}
                 value={name}
                 style={styles.input}
                 placeholder="Display Name"
               />
+              </View>
+              <View style={styles.inputWrapper}>
               <TextInput
                 onChangeText={(text) => handleChange("email", text)}
                 value={email}
                 style={styles.input}
                 placeholder="Email"
               />
+              </View>
+               <View style={styles.inputWrapper}>
               <TextInput
                 onChangeText={(text) => handleChange("password", text)}
                 value={password}
@@ -110,7 +117,6 @@ const Auth = ({ navigation }) => {
                 placeholder="create a password"
               />
             </View>
-            <View>
               <TouchableOpacity onPress={register} style={styles.button}>
                 <Text style={styles.btnText}>Join</Text>
               </TouchableOpacity>
@@ -130,11 +136,9 @@ const Auth = ({ navigation }) => {
                   </Text>
                 </Text>
               </View>
-            </View>
           </Animatable.View>
         </View>
       </ScrollView>
-    </SafeAreaView>
   );
 };
 

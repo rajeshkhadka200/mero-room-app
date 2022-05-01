@@ -43,24 +43,11 @@ export default function App() {
     return <AppLoading />;
   }
   const Stack = createNativeStackNavigator();
-  const Rajesh = () => {
-    return (
-      <Image
-        style={{
-          height: 20,
-          width: 20,
-        }}
-        source={{
-          uri: "https://media-exp1.licdn.com/dms/image/C5603AQHYUU33PyoIGw/profile-displayphoto-shrink_200_200/0/1639665364147?e=1655942400&v=beta&t=7ULEw1Ev8iIl-Rxhuy99vu21yUIInq63NSvKcFAgz1w",
-        }}
-      ></Image>
-    );
-  };
   return (
     <>
       <Context>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Tabs">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Otp"
@@ -106,7 +93,6 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </Context>
-      <StatusBar backgroundColor={"#5B628F"} />
     </>
   );
 }
