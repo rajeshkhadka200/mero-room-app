@@ -21,6 +21,12 @@ const Home = ({ navigation }) => {
         }}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Button
+            onPress={() => {
+              navigation.navigate("Auth");
+            }}
+            title="Auth"
+          />
           {/* from notif to filter = Home Header */}
           <HomeHeader />
           {/* frombelow filter */}

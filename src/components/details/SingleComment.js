@@ -16,24 +16,21 @@ import { Entypo } from "@expo/vector-icons";
 const SingleComment = ({ room_id }) => {
   const [comment, setcomment] = useState([]);
   const { user } = useContext(ContexStore);
-  console.log(user.user_id);
+
   useEffect(() => {
-    const getData = () => {
-      const colRef = collection(db, "comments");
-      const q = query(
-        colRef,
-        where("room_id", "==", room_id),
-        orderBy("createdAt")
-      );
-      onSnapshot(q, (snapshot) => {
-        const data = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          _id: doc.id,
-        }));
-        setcomment(data);
-      });
-    };
-    getData();
+    const colRef = collection(db, "comments");
+    const q = query(
+      colRef,
+      where("room_id", "==", room_id),
+      orderBy("createdAt")
+    );
+    onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        _id: doc.id,
+      }));
+      setcomment(data);
+    });
   }, []);
   const filteredcmt = comment.sort((a, b) => {
     return b.createdAt - a.createdAt;
@@ -64,12 +61,7 @@ const SingleComment = ({ room_id }) => {
   };
   const renderComment = ({ item }) => {
     return (
-      <Pressable
-        onLongPress={() => {
-          item.user_id === user.user_id ? deleteComment(item.comment_id) : null;
-        }}
-        style={styles.flex_cmt}
-      >
+      <Pressable style={styles.flex_cmt}>
         <Image
           style={styles.avatar}
           source={{
