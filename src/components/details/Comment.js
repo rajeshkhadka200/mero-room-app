@@ -12,14 +12,11 @@ import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import SingleComment from "./SingleComment";
 import { Feather } from "@expo/vector-icons";
-import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 const Comment = ({ room_id }) => {
   //post the comments
   const [comment, setComment] = useState("");
-  const [msg,setMsg] = useState("")
-  const [alert,setAlert] = useState(false)
   const [isLoading, setisLoading] = useState(false);
 
   const postComment = async () => {
