@@ -3,8 +3,6 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
-  RefreshControl,
-  Button,
   AsyncStorage,
 } from "react-native";
 import { View, Text, TextInput } from "react-native";
@@ -13,7 +11,7 @@ import * as Animatable from "react-native-animatable";
 import Svg, { Path } from "react-native-svg";
 import { styles } from "../styles/auth/auth_design.js";
 
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { middleware } from "../../config/Check";
 const Auth = ({ navigation }) => {
@@ -71,8 +69,8 @@ const Auth = ({ navigation }) => {
             </View>
             <Text style={styles.logoText}>Login Here</Text>
           </Animatable.View>
-          </View>
-          <View>
+        </View>
+        <View>
           <Animatable.View
             animation="fadeInUpBig"
             duration={1000}
