@@ -48,7 +48,6 @@ export default function App() {
     return <AppLoading />;
   }
   const Stack = createNativeStackNavigator();
-
   return (
     <>
       <Context>

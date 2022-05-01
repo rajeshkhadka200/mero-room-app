@@ -4,10 +4,9 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  headerContainer: {
     alignItems: "center",
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#f3f3f3",
     paddingTop: hp("10%"),
   },
   text: {
@@ -15,7 +14,6 @@ export const styles = StyleSheet.create({
     fontSize: 30,
   },
   logoContainer: {
-    flex: 1,
     alignItems: "center",
   },
   logo: {
@@ -23,32 +21,29 @@ export const styles = StyleSheet.create({
     width: 180,
     height: 180,
     borderRadius: 5000,
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   logoText: {
-    marginTop: 10,
-    fontSize: hp("6%"),
+    marginTop: 15,
+    fontSize: hp("5%"),
     color: "#5B628F",
     fontFamily: "600",
   },
   inputContainer: {
     paddingTop: hp("2%"),
-    paddingBottom: hp("5%"),
-    marginTop: 50,
+    paddingBottom: hp("3%"),
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    flex: 1,
+    marginTop:50,
     width: "100%",
-    width: (Dimensions.get("window").width / 100) * 100,
     alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "#ffff",
-    height: (Dimensions.get("window").width / 100) * 110,
+    backgroundColor: "#f3f3f3",
+    height: "auto",
+    position:"relative",
   },
   input: {
-    backgroundColor: "#EFEFEF",
+    backgroundColor: "#fff",
     paddingVertical: hp("2%"),
     paddingLeft: 20,
     width: (Dimensions.get("window").width / 100) * 80,
@@ -63,7 +58,7 @@ export const styles = StyleSheet.create({
     width: (Dimensions.get("window").width / 100) * 80,
     backgroundColor: "#5B628F",
     borderRadius: 10,
-    paddingVertical: hp("2%"),
+    paddingVertical: hp("1.2%"),
     maxWidth: "100%",
     marginTop: 25,
   },

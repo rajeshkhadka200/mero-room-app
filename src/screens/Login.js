@@ -49,7 +49,7 @@ const Auth = ({ navigation }) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={styles.container}>
+        <View style={styles.headerContainer}>
           <Animatable.View
             animation="zoomIn"
             duration={1000}
@@ -71,6 +71,8 @@ const Auth = ({ navigation }) => {
             </View>
             <Text style={styles.logoText}>Login Here</Text>
           </Animatable.View>
+          </View>
+          <View>
           <Animatable.View
             animation="fadeInUpBig"
             duration={1000}
