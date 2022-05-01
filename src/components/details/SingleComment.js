@@ -18,8 +18,8 @@ const SingleComment = ({ room_id }) => {
       id: 16,
       username: "Utsav Bhattarai",
       user_profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD2G_od8h_c-hgwhMJxqedPigu_l0YHGatbg&usqp=CAU",
-      comment: "Recommanded !! The room is perfect for couple!  ",
+        "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=eRDg9Hqum5gAX8i69h8&_nc_ht=scontent.fktm6-1.fna&oh=00_AT_gYHZDRrC1HvOkB0Scs51QXVg0I1pBnB4bMDeVAQH8EQ&oe=62728AD9",
+      comment: "Recommanded !! Nice Room and Good App  ",
     },
   ];
 
