@@ -96,6 +96,9 @@ const Detail_header = ({ route }) => {
           horizontal
           data={imgs}
           renderItem={renderImgs}
+          keyExtractor={() => {
+            Date.now();
+          }}
         />
 
         <View style={styles.lower_wrapper}>

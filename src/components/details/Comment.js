@@ -1,10 +1,10 @@
 import { View, Text, TextInput, TouchableWithoutFeedback } from "react-native";
 import React, { useState, useEffect } from "react";
 import { styles } from "../../styles/details/comment_design";
-import { Ionicons } from "@expo/vector-icons";
 import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import SingleComment from "./SingleComment";
+import { Feather } from "@expo/vector-icons";
 
 const Comment = ({ room_id }) => {
   //post the comments
@@ -47,10 +47,10 @@ const Comment = ({ room_id }) => {
           placeholder="comment goes here"
         ></TextInput>
         <TouchableWithoutFeedback disabled={isLoading}>
-          <Ionicons
+          <Feather
             onPress={postComment}
             style={styles.send_btn}
-            name="send-outline"
+            name="send"
             size={24}
             color="#fff"
           />
