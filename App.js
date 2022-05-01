@@ -52,7 +52,7 @@ export default function App() {
     <>
       <Context>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Tabs">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Otp"

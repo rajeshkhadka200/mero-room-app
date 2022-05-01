@@ -6,14 +6,17 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { styles } from "../../styles/details/comment_design";
 import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import SingleComment from "./SingleComment";
 import { Feather } from "@expo/vector-icons";
-
+import {} from "react/cjs/react.production.min";
+import { ContexStore } from "../../context/Context";
 const Comment = ({ room_id }) => {
+  const { user } = useContext(ContexStore);
+  console.log(user.name);
   //post the comments
   const [comment, setComment] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -27,11 +30,11 @@ const Comment = ({ room_id }) => {
     try {
       setisLoading(true);
       const res = await addDoc(collection(db, "comments"), {
-        room_id: 5,
-        user_id: 1,
-        user_name: "utsav bhattarai",
+        room_id: room_id,
+        user_id: user.id,
+        user_name: user.name,
         comment,
-        user_profile: "user is live",
+        user_profile: user.img,
         createdAt: Date.now(),
       });
       setisLoading(false);

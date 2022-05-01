@@ -31,7 +31,7 @@ const SingleComment = ({ room_id }) => {
       onSnapshot(q, (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           ...doc.data(),
-          id: doc.id,
+          _id: doc.id,
         }));
         setcomments(data);
       });

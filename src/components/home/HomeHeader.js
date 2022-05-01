@@ -5,16 +5,19 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { styles } from "../../styles/home/home_header_design";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { District } from "../../../config/api.js";
 import { useNavigation } from "@react-navigation/native";
+import { ContexStore } from "../../context/Context";
 
 // from notif icons to filter
 const HomeHeader = () => {
+  const { user, setUser } = useContext(ContexStore);
+
   const [search, setSearch] = useState("");
   const navigation = useNavigation();
   const Search = () => {
@@ -27,7 +30,7 @@ const HomeHeader = () => {
     <>
       <View style={styles.headerWrapper}>
         <View style={styles.searchCon}>
-          <Text style={styles.searchText}>Find the best place</Text>
+          <Text style={styles.searchText}>{user.name}</Text>
           <View style={styles.searchWrapper}>
             <TextInput
               value={search}
