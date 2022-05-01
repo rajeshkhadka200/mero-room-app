@@ -1,4 +1,11 @@
-import { View, Text, TextInput, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { styles } from "../../styles/details/comment_design";
 import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
@@ -46,15 +53,10 @@ const Comment = ({ room_id }) => {
           style={styles.input}
           placeholder="comment goes here"
         ></TextInput>
-        <TouchableWithoutFeedback disabled={isLoading}>
-          <Feather
-            onPress={postComment}
-            style={styles.send_btn}
-            name="send"
-            size={24}
-            color="#fff"
-          />
-        </TouchableWithoutFeedback>
+        <TouchableOpacity style={styles.send_btn} disabled={isLoading}>
+          {/* <Feather onPress={postComment} name="send" size={24} color="#fff" /> */}
+          <ActivityIndicator color={"red"} size="large" />
+        </TouchableOpacity>
       </View>
       <SingleComment room_id={room_id} />
     </View>

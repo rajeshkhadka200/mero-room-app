@@ -31,13 +31,13 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 5,
     borderTopLeftRadius: 5,
   },
+
   send_btn: {
     alignSelf: "center",
     textAlign: "center",
     width: "15%",
-    // marginLeft: 5,
     backgroundColor: "#5B628F",
-    paddingVertical: 10.1,
+    height: 45,
     borderBottomRightRadius: 5,
     borderTopRightRadius: 5,
   },
