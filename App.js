@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LogBox, StatusBar, ScrollView, Text, Image } from "react-native";
@@ -30,6 +32,9 @@ import {
 import AppLoading from "expo-app-loading";
 import Search from "./src/screens/Search";
 export default function App() {
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
   // use the fonts
   let [fontsLoaded] = useFonts({
     200: Poppins_200ExtraLight,
@@ -43,19 +48,7 @@ export default function App() {
     return <AppLoading />;
   }
   const Stack = createNativeStackNavigator();
-  const Rajesh = () => {
-    return (
-      <Image
-        style={{
-          height: 20,
-          width: 20,
-        }}
-        source={{
-          uri: "https://media-exp1.licdn.com/dms/image/C5603AQHYUU33PyoIGw/profile-displayphoto-shrink_200_200/0/1639665364147?e=1655942400&v=beta&t=7ULEw1Ev8iIl-Rxhuy99vu21yUIInq63NSvKcFAgz1w",
-        }}
-      ></Image>
-    );
-  };
+
   return (
     <>
       <Context>
@@ -106,7 +99,7 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </Context>
-      <StatusBar backgroundColor={"#5B628F"} />
+      <StatusBar backgroundColor={"#333"} />
     </>
   );
 }

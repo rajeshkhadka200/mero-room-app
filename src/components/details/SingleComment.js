@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, Pressable, FlatList } from "react-native";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../../../config/firebase";
 
 import { styles } from "../../styles/details/single_comment";
-const SingleComment = () => {
+const SingleComment = ({ room_id }) => {
   const comment = [
     {
       id: 15,
@@ -20,6 +22,19 @@ const SingleComment = () => {
       comment: "Recommanded !! The room is perfect for couple!  ",
     },
   ];
+  const [comments, setcomments] = useState([]);
+  useEffect(async () => {
+    const q = query(
+      collection(db, "comments"),
+      where("room_id", "==", room_id)
+    );
+    onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setcomments({ ...doc.data(), doc_id: doc.id });
+      });
+    });
+  }, []);
+
   const deleteComment = (id) => {
     alert(id);
   };

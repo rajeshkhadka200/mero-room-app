@@ -69,7 +69,12 @@ const Detail_header = ({ route }) => {
     <>
       <View>
         <Text style={styles.arrow}>
-          <AntDesign onPress={() =>navigation.navigate("Tabs")} name="arrowleft" size={24} color="white" />
+          <AntDesign
+            onPress={() => navigation.navigate("Tabs")}
+            name="arrowleft"
+            size={24}
+            color="white"
+          />
         </Text>
         <View style={styles.indi_wrapper}>
           {imgs.map((itm, i) => {
