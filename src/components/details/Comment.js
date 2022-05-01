@@ -12,17 +12,23 @@ import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import SingleComment from "./SingleComment";
 import { Feather } from "@expo/vector-icons";
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 
 const Comment = ({ room_id }) => {
   //post the comments
   const [comment, setComment] = useState("");
+  const [msg,setMsg] = useState("")
+  const [alert,setAlert] = useState(false)
   const [isLoading, setisLoading] = useState(false);
 
   const postComment = async () => {
     if (!comment) {
-      return alert("Comment cannot be empty !");
+      return alert("Comment can't be empty")
+      
+      ;
     } else if (comment.length < 3) {
-      return alert("Commnt is to short");
+      return alert("Comment is too short")
     }
     try {
       setisLoading(true);
@@ -35,7 +41,7 @@ const Comment = ({ room_id }) => {
         createdAt: Date.now(),
       });
       setisLoading(false);
-      alert("Thanks for feedback");
+      alert("Thanks for Feedback")
       setComment("");
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -53,9 +59,10 @@ const Comment = ({ room_id }) => {
           style={styles.input}
           placeholder="comment goes here"
         ></TextInput>
-        <TouchableOpacity style={styles.send_btn} disabled={isLoading}>
-          {/* <Feather onPress={postComment} name="send" size={24} color="#fff" /> */}
-          <ActivityIndicator color={"red"} size="large" />
+        <TouchableOpacity onPress={postComment} style={styles.send_btn_con} disabled={isLoading}>
+          {isLoading ? <ActivityIndicator color="#fff" size="large" /> :
+           <Feather style={styles.send_btn} name="send" size={28} color="#fff" /> 
+          }
         </TouchableOpacity>
       </View>
       <SingleComment room_id={room_id} />
