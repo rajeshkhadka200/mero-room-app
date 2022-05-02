@@ -3,14 +3,13 @@ import React from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
 import Constants from "expo-constants";
-// import firebase from "firebase";
 const Auth = () => {
   const googleLogin = async () => {
-    console.log(Constants.manifest.extra.ANDROID_KEY);
+    // set this in google btn (onPress)
     try {
-      await GoogleSignIn.askForPlayServicesAsync();
+      // await GoogleSignIn.askForPlayServicesAsync();
       const result = await Google.logInAsync({
-        androidClientId: Constants.manifest.extra.ANDROIUD_KEY, //From app.json
+        androidClientId: Constants.manifest.extra.ANDROID_KEY, //From app.json
       });
       if (result.type === "success") {
         console.log(result);
