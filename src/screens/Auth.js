@@ -1,8 +1,27 @@
 import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
 import { styles } from "../styles/auth/auth_design";
-
+import * as Google from "expo-google-app-auth";
+import Constants from "expo-constants";
+// import firebase from "firebase";
 const Auth = () => {
+  const googleLogin = async () => {
+    console.log(Constants.manifest.extra.ANDROID_KEY);
+    try {
+      await GoogleSignIn.askForPlayServicesAsync();
+      const result = await Google.logInAsync({
+        androidClientId: Constants.manifest.extra.ANDROIUD_KEY, //From app.json
+      });
+      if (result.type === "success") {
+        console.log(result);
+      } else {
+        console.log("cancel");
+      }
+    } catch ({ message }) {
+      alert("login: Error:" + message);
+    }
+  };
+
   return (
     <>
       <View style={styles.main_ontainer}>
@@ -19,7 +38,7 @@ const Auth = () => {
           <Text style={styles.brand_name}>Mero Room</Text>
         </View>
         <View style={styles.footer_con}>
-          <Pressable style={styles.btn}>
+          <Pressable onPress={googleLogin} style={styles.btn}>
             <Image
               style={styles.btn_img}
               source={require("../../assets/svg/google.png")}

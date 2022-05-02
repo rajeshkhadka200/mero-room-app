@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
   },
   brand_name: {
     textAlign: "center",
-    fontFamily: "500",
-    fontSize: 35,
+    fontFamily: "600",
+    fontSize: 40,
     marginBottom: 25,
+    color: "#5b628f",
   },
   btn: {
     marginBottom: 15,
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
   },
 
   login_text: {
-    marginLeft: 10,
+    marginLeft: 15,
     textAlign: "left",
     fontFamily: "400",
   },
