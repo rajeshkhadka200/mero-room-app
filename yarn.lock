@@ -1077,6 +1077,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@expo-google-fonts/oleo-script-swash-caps@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/oleo-script-swash-caps/-/oleo-script-swash-caps-0.2.2.tgz#cf68e86b7d361257287832dce777ec420febb1e0"
+  integrity sha512-OxNgDi5wkF2Amc62wM+m6dbC3xc77+sNvoK0AZhdg0UL7Elkjg0rKe/fsXHWTEz3LmKjurkD4fJONT3hs3lqSQ==
+
 "@expo-google-fonts/poppins@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/poppins/-/poppins-0.2.2.tgz#d2a343fa69400ffbaf61ae97162791a59e215678"

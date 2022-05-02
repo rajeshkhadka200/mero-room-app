@@ -1,17 +1,51 @@
-import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
-import React from "react";
+import { View, Text, Image, Pressable, AsyncStorage } from "react-native";
+import React, { useState } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
 import * as Facebook from "expo-facebook";
 import { FB_KEY, GOOGLE_KEY } from "@env";
+import { useNavigation } from "@react-navigation/native";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase.js";
+
 const Auth = () => {
+  const navigation = useNavigation();
+  const [userdata, setUserdata] = useState({
+    id: "",
+    name: "",
+    email: "",
+    photoUrl: "",
+  });
+  const { id, email, name, photoUrl } = userdata;
   const googleLogin = async () => {
     try {
       const result = await Google.logInAsync({
         androidClientId: GOOGLE_KEY,
       });
+      let existing = [];
       if (result.type === "success") {
-        console.log(result);
+        setUserdata(result.user);
+        const q = query(collection(db, "users"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          existing.push(doc.data());
+        });
+        console.log(existing.length);
+        await AsyncStorage.setItem("auth_Token", id);
+        if (existing.length > 0) {
+          alert("Logged in");
+          navigation.navigate("Tabs");
+        } else {
+          addDoc(collection(db, "users"), {
+            user_id: id,
+            name,
+            email,
+            photoUrl,
+          });
+          await AsyncStorage.setItem("auth_Token", id);
+          alert("Registered");
+          navigation.navigate("Tabs")
+        }
       } else {
         console.log("cancel");
       }
@@ -35,7 +69,7 @@ const Auth = () => {
         const user = await response.json();
         console.log(user);
       } else {
-        console.log("canceled");
+        console.log("cancel");
       }
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
