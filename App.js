@@ -20,10 +20,16 @@ import {
   Poppins_700Bold,
   useFonts,
 } from "@expo-google-fonts/poppins";
+import {
+  OleoScriptSwashCaps_400Regular,
+  OleoScriptSwashCaps_700Bold,
+} from "@expo-google-fonts/oleo-script-swash-caps";
 // import app loading
 import AppLoading from "expo-app-loading";
 import Search from "./src/screens/Search";
 import Auth from "./src/screens/Auth";
+import Post from "./src/screens/Post";
+import Notification from "./src/screens/Notification";
 export default function App() {
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -36,6 +42,8 @@ export default function App() {
     500: Poppins_500Medium,
     600: Poppins_600SemiBold,
     700: Poppins_700Bold,
+    999: OleoScriptSwashCaps_700Bold,
+    888: OleoScriptSwashCaps_400Regular,
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -59,9 +67,18 @@ export default function App() {
             />
 
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{
+                headerShown: false,
+              }}
               name="Detail"
               component={Detail}
+            />
+            <Stack.Screen
+              options={{
+                headerShown: true,
+              }}
+              name="Notif"
+              component={Notification}
             />
             <Stack.Screen
               name="Search"

@@ -18,32 +18,16 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Text,
+  Image,
 } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const DetailsStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Home"
-        component={Home}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Details"
-        component={Detail}
-      />
-    </Stack.Navigator>
-  );
-};
-
 //notification indicator
 const notif = true;
 
-const Tabs = () => {
+const Tabs = ({ navigation }) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -63,20 +47,41 @@ const Tabs = () => {
       <Tab.Screen
         options={{
           headerRight: () => (
-            <TouchableOpacity style={header.headerIcon}>
-              <Ionicons name="notifications-outline" size={27} color="#fff" />
-              {notif ? <View style={header.dot}></View> : null}
-            </TouchableOpacity>
+            <>
+              <View style={header.wrapper}>
+                <TouchableOpacity style={header.headerIcon}>
+                  <Ionicons
+                    onPress={() => {
+                      navigation.navigate("Notif");
+                    }}
+                    name="notifications-outline"
+                    size={27}
+                    color="#929191"
+                  />
+                  {notif ? <View style={header.dot}></View> : null}
+                </TouchableOpacity>
+                <TouchableOpacity style={header.headerImg}>
+                  <Image
+                    style={header.avatar}
+                    source={{
+                      uri: "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=eRDg9Hqum5gAX_TkVti&_nc_ht=scontent.fktm6-1.fna&oh=00_AT8ELnB6nJ24NbE2PQXmHJSyNlK9Fyx8x6Y-cFFWx62Xow&oe=62748519",
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+            </>
           ),
           headerStyle: {
             elevation: 0,
-            backgroundColor: "#5B628F",
-            height: 60,
+            backgroundColor: "#fff",
+            height: 65,
           },
           headerTitleStyle: {
             fontFamily: "500",
-            color: "#fff",
-            fontSize: 20,
+            color: "rgba(0, 0, 0, 1)",
+            fontSize: 28,
+            marginLeft: 6,
+            fontFamily: "888",
           },
           headerShown: true,
           tabBarLabel: "Home",
@@ -93,6 +98,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         options={{
+          headerTitleAlign: "center",
           tabBarLabel: "Favourite",
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
@@ -114,14 +120,15 @@ const Tabs = () => {
             </TouchableWithoutFeedback>
           ),
           headerStyle: {
-            backgroundColor: "#5B628F",
-            height: 60,
             elevation: 0,
+            borderColor: "dfdfdf",
+            borderWidth: 1,
           },
           headerTitleStyle: {
             fontFamily: "500",
-            color: "#fff",
+            color: "#000",
             fontSize: 18,
+            alignSelf: "center",
           },
           tabBarLabel: "Post",
           tabBarIcon: ({ focused }) => (
@@ -137,7 +144,19 @@ const Tabs = () => {
       />
       <Tab.Screen
         options={{
-          tabBarLabel: "My room",
+          headerStyle: {
+            elevation: 0,
+            borderBottomWidth: 1,
+            borderBottomColor: "#Dfdfdf",
+          },
+          headerTitleStyle: {
+            fontFamily: "500",
+            color: "#000",
+            fontSize: 18,
+          },
+
+          headerTitleAlign: "left",
+          tabBarLabel: "My Room",
           tabBarIcon: ({ focused }) =>
             focused ? (
               <MaterialCommunityIcons name="bed" size={30} color="#5B628F" />
@@ -149,11 +168,12 @@ const Tabs = () => {
               />
             ),
         }}
-        name="Myroom"
+        name="My Room"
         component={Myroom}
       />
       <Tab.Screen
         options={{
+          headerTitleAlign: "center",
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <FontAwesome
@@ -174,7 +194,6 @@ const header = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
-    marginRight: 15,
   },
   dot: {
     padding: 3.2,
@@ -182,18 +201,36 @@ const header = StyleSheet.create({
     borderRadius: 500,
     position: "absolute",
     right: 6,
-    top: 3,
+    top: 6.5,
   },
   btn_post: {
     marginRight: 15,
-    backgroundColor: "#fff",
-    paddingHorizontal: 15,
+    backgroundColor: "#5B628F",
+    paddingHorizontal: 14,
     paddingVertical: 7,
-
     width: 60,
     borderRadius: 5,
     fontFamily: "500",
-    color: "#5B628F",
+    color: "#fff",
+  },
+  wrapper: {
+    flexDirection: "row",
+  },
+  headerImg: {
+    borderColor: "#2374E1",
+    borderWidth: 2,
+    marginRight: 15,
+    marginLeft: 10,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 39,
+    height: 39,
+  },
+  avatar: {
+    width: 34,
+    height: 33,
+    borderRadius: 25.5,
   },
 });
 

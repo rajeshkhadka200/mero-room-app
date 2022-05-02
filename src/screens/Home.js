@@ -27,27 +27,10 @@ const Home = ({ navigation }) => {
     <>
       <SafeAreaView
         style={{
-          marginTop: 10,
+          backgroundColor: "#fff",
         }}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Button
-            onPress={() => {
-              navigation.navigate("Auth");
-            }}
-            title="Auth"
-          />
-          <Text>{id}</Text>
-          <Button
-            onPress={async () => {
-              try {
-                await AsyncStorage.removeItem("auth_token");
-              } catch (error) {
-                console.log("error while setting up in storage REG", error);
-              }
-            }}
-            title="Logout"
-          />
           {/* from notif to filter = Home Header */}
           <HomeHeader />
           {/* frombelow filter */}
