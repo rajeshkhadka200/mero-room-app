@@ -44,7 +44,7 @@ const Auth = () => {
           });
           await AsyncStorage.setItem("auth_Token", id);
           alert("Registered");
-          navigation.navigate("Tabs")
+          navigation.navigate("Tabs");
         }
       } else {
         console.log("cancel");
@@ -99,7 +99,7 @@ const Auth = () => {
             />
             <Text style={styles.login_text}>Continue with Google</Text>
           </Pressable>
-          <Pressable onPress={fbLogin} style={styles.btn}>
+          <Pressable style={styles.btn}>
             <Image
               style={styles.btn_img}
               source={require("../../assets/svg/fb.png")}
