@@ -11,10 +11,6 @@ const Context = ({ children }) => {
     setToken(key);
   });
   useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
     try {
       const q = query(collection(db, "users"), where("user_id", "==", token));
       onSnapshot(q, (snapshot) => {
@@ -25,7 +21,7 @@ const Context = ({ children }) => {
     } catch (error) {
       console.log("err while geting data", error);
     }
-  };
+  }, []);
 
   // state for the details header page
   const [isModel, setisModel] = useState(false);
