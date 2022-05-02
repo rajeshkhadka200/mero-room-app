@@ -2,14 +2,13 @@ import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
-import Constants from "expo-constants";
+import * as Facebook from "expo-facebook";
+import { FB_KEY, GOOGLE_KEY } from "@env";
 const Auth = () => {
   const googleLogin = async () => {
-    // set this in google btn (onPress)
     try {
-      // await GoogleSignIn.askForPlayServicesAsync();
       const result = await Google.logInAsync({
-        androidClientId: Constants.manifest.extra.ANDROID_KEY, //From app.json
+        androidClientId: GOOGLE_KEY,
       });
       if (result.type === "success") {
         console.log(result);
@@ -20,6 +19,28 @@ const Auth = () => {
       alert("login: Error:" + message);
     }
   };
+
+  async function fbLogin() {
+    try {
+      await Facebook.initializeAsync({
+        appId: FB_KEY,
+      });
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ["public_profile"],
+      });
+      if (type === "success") {
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}`
+        );
+        const user = await response.json();
+        console.log(user);
+      } else {
+        console.log("canceled");
+      }
+    } catch ({ message }) {
+      alert(`Facebook Login Error: ${message}`);
+    }
+  }
 
   return (
     <>
@@ -44,7 +65,7 @@ const Auth = () => {
             />
             <Text style={styles.login_text}>Continue with Google</Text>
           </Pressable>
-          <Pressable style={styles.btn}>
+          <Pressable onPress={fbLogin} style={styles.btn}>
             <Image
               style={styles.btn_img}
               source={require("../../assets/svg/fb.png")}

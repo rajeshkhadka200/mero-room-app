@@ -14,20 +14,20 @@ export const styles = StyleSheet.create({
     fontFamily: "600",
     fontSize: 40,
     marginBottom: 25,
-    color: "#5b628f",
+    color:"#000"
   },
   btn: {
     marginBottom: 15,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 30,
+    paddingHorizontal: 15,
     paddingVertical: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
   },
 
   login_text: {
-    marginLeft: 15,
+    marginLeft: 22,
     textAlign: "left",
     fontFamily: "400",
   },
