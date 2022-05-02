@@ -137,8 +137,7 @@ const Tabs = () => {
           headerStyle: {
             elevation: 0,
             borderColor: "dfdfdf",
-            borderWidth: 1,
-            height: 63,
+            borderBottomWidth: 1,
           },
           headerTitleStyle: {
             fontFamily: "500",

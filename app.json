@@ -3,7 +3,7 @@
     "name": "mobile_project",
     "slug": "mobile_project",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
 
     "updates": {
       "fallbackToCacheTimeout": 0
