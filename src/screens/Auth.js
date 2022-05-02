@@ -1,46 +1,83 @@
-import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Pressable,
+  Alert,
+} from "react-native";
+import React, { useState } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
 import * as Facebook from "expo-facebook";
 import { FB_KEY, GOOGLE_KEY } from "@env";
+import { query, where, collection, getDocs, addDoc } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { AsyncStorage } from "react-native";
 const Auth = () => {
+  const [userdata, setUserdata] = useState([]);
+  const { id, email, name, photoUrl } = userdata;
+  const storeDB = async (id) => {
+    try {
+      await addDoc(collection(db, "users"), {
+        email: email,
+        user_id: id,
+        name: name,
+        img: photoUrl,
+      });
+      // await AsyncStorage.setItem("auth_token", id);
+      Alert.alert("Account Alert", "Account registered successfully !");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
   const googleLogin = async () => {
     try {
       const result = await Google.logInAsync({
         androidClientId: GOOGLE_KEY,
       });
+
       if (result.type === "success") {
-        console.log(result);
-      } else {
-        console.log("cancel");
+        let array = [];
+        // check if the email is already registered
+        const q = query(collection(db, "users"), where("user_id", "==", id));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          array.push(doc.data());
+        });
+        if (array.length > 0) {
+          // await AsyncStorage.setItem("auth_token", id);
+          return alert("Account allready registered !");
+        }
+        console.log(array);
+        //push to db
+        storeDB(id);
       }
     } catch ({ message }) {
       alert("login: Error:" + message);
     }
   };
-
-  async function fbLogin() {
-    try {
-      await Facebook.initializeAsync({
-        appId: FB_KEY,
-      });
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ["public_profile"],
-      });
-      if (type === "success") {
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}`
-        );
-        const user = await response.json();
-        console.log(user);
-      } else {
-        console.log("canceled");
-      }
-    } catch ({ message }) {
-      alert(`Facebook Login Error: ${message}`);
-    }
-  }
+  // async function fbLogin() {
+  //   try {
+  //     await Facebook.initializeAsync({
+  //       appId: FB_KEY,
+  //     });
+  //     const { type, token } = await Facebook.logInWithReadPermissionsAsync({
+  //       permissions: ["public_profile"],
+  //     });
+  //     if (type === "success") {
+  //       const response = await fetch(
+  //         `https://graph.facebook.com/me?access_token=${token}`
+  //       );
+  //       const user = await response.json();
+  //       console.log(user);
+  //     } else {
+  //       console.log("canceled");
+  //     }
+  //   } catch ({ message }) {
+  //     alert(`Facebook Login Error: ${message}`);
+  //   }
+  // }
 
   return (
     <>
@@ -65,7 +102,7 @@ const Auth = () => {
             />
             <Text style={styles.login_text}>Continue with Google</Text>
           </Pressable>
-          <Pressable onPress={fbLogin} style={styles.btn}>
+          <Pressable style={styles.btn}>
             <Image
               style={styles.btn_img}
               source={require("../../assets/svg/fb.png")}

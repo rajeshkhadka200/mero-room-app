@@ -59,11 +59,9 @@ const Detail_header = ({ route }) => {
   };
   const [index, setindex] = useState();
   const onViewableItemsChanged = useRef((item) => {
-    setindex(item.viewableItems[0].index);
+    console.log(item);
+    // setindex(item.viewableItems[0].index);
   });
-  // const viewabilityConfig = useRef({
-  //   itemVisiblePercentThreshold: 50,
-  // });
 
   return (
     <>
@@ -76,7 +74,7 @@ const Detail_header = ({ route }) => {
             color="white"
           />
         </Text>
-        <View style={styles.indi_wrapper}>
+        {/* <View style={styles.indi_wrapper}>
           {imgs.map((itm, i) => {
             return (
               <View
@@ -87,7 +85,7 @@ const Detail_header = ({ route }) => {
               ></View>
             );
           })}
-        </View>
+        </View> */}
         <FlatList
           // viewabilityConfig={viewabilityConfig.current}
           onViewableItemsChanged={onViewableItemsChanged.current}
