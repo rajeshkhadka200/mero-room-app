@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
   },
   brand_name: {
     textAlign: "center",
-    fontFamily: "500",
-    fontSize: 35,
+    fontFamily: "600",
+    fontSize: 40,
     marginBottom: 25,
     color:"#000"
   },

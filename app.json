@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "mobile_project",
+    "slug": "mobile_project",
+    "version": "1.0.0",
+    "orientation": "portrait",
+
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "extra": {
+      "ANDROID_KEY": "165027373516-vl3nn4rfenv6s24f666ndle40khha9q2.apps.googleusercontent.com"
+    },
+
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
