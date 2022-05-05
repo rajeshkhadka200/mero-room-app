@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRadius: 10,
   },
-  left_side: {},
+
   avatar: {
     borderColor: "#2374E1",
     borderWidth: 1.5,

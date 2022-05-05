@@ -1,5 +1,5 @@
-import { View, Text, Image, Pressable, AsyncStorage } from "react-native";
-import React, { useState } from "react";
+import { View, Text, Image, Pressable } from "react-native";
+import React, { useEffect } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
 import * as Facebook from "expo-facebook";
@@ -7,50 +7,58 @@ import { FB_KEY, GOOGLE_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Auth = () => {
   const navigation = useNavigation();
-  const [userdata, setUserdata] = useState({
-    id: "",
-    name: "",
-    email: "",
-    photoUrl: "",
-  });
-  const { id, email, name, photoUrl } = userdata;
+  const storeData = async ({ id, email, name, photoUrl }) => {
+    try {
+      let existing = [];
+      //check if user is new or not
+      const q = query(collection(db, "users"), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        existing.push(doc.data());
+      });
+      if (existing.length > 0) {
+        try {
+          await AsyncStorage.setItem("auth_token", id);
+          alert("Loged in successfully");
+          navigation.navigate("Tabs");
+          return;
+        } catch (err) {
+          console.log("err while seting login ", err);
+        }
+      }
+      const docRef = await addDoc(collection(db, "users"), {
+        user_id: id,
+        email,
+        name,
+        photoUrl,
+      });
+      try {
+        await AsyncStorage.setItem("auth_token", id);
+        alert("sign up in successfully");
+        navigation.navigate("Tabs");
+        return;
+      } catch (err) {
+        console.log("err while seting reg", err);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const googleLogin = async () => {
     try {
       const result = await Google.logInAsync({
         androidClientId: GOOGLE_KEY,
       });
-      let existing = [];
-      if (result.type === "success") {
-        setUserdata(result.user);
-        const q = query(collection(db, "users"), where("email", "==", email));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          existing.push(doc.data());
-        });
-        console.log(existing.length);
-        await AsyncStorage.setItem("auth_Token", id);
-        if (existing.length > 0) {
-          alert("Logged in");
-          navigation.navigate("Tabs");
-        } else {
-          addDoc(collection(db, "users"), {
-            user_id: id,
-            name,
-            email,
-            photoUrl,
-          });
-          await AsyncStorage.setItem("auth_Token", id);
-          alert("Registered");
-          navigation.navigate("Tabs");
-        }
-      } else {
-        console.log("cancel");
+      if (result.type == "success") {
+        storeData(result.user);
       }
     } catch ({ message }) {
-      alert("login: Error:" + message);
+      alert("err from google" + message);
     }
   };
 

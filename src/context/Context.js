@@ -1,29 +1,32 @@
-import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useState, useEffect, createContext } from "react";
-import { middleware } from "../../config/Check";
 import { db } from "../../config/firebase";
 export const ContexStore = createContext();
 const Context = ({ children }) => {
   const [user, setUser] = useState([]); // setup the logedin user
-  const [token, setToken] = useState(""); // set token
-  middleware.getAuthToken().then((key) => {
-    setToken(key);
-  });
-  useEffect(() => {
+  const [token, setToken] = useState("");
+  useEffect(async () => {
+    console.log("rajesh");
+  }, []);
+
+  useEffect(async () => {
     try {
-      const q = query(collection(db, "users"), where("user_id", "==", token));
-      onSnapshot(q, (snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          setUser({ ...doc.data(), id: doc.id });
+      if (token) {
+        const q = query(collection(db, "users"), where("user_id", "==", token));
+        onSnapshot(q, (snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            setUser({ ...doc.data(), _id: doc.id });
+          });
         });
-      });
+      } else {
+        setUser([]);
+      }
     } catch (error) {
       console.log("err while geting data", error);
     }
   }, []);
-
-  // state for the details header page
+  // state for the model
   const [isModel, setisModel] = useState(false);
   return (
     <ContexStore.Provider
@@ -32,6 +35,7 @@ const Context = ({ children }) => {
         setUser,
         isModel,
         setisModel,
+        // token,
       }}
     >
       {children}

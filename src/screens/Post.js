@@ -68,12 +68,8 @@ const Post = () => {
         </View>
         <TextInput placeholder="Description" style={styles.post_des} />
         <View style={styles.post_img}>
-            <MaterialCommunityIcons
-              name="image-plus"
-              size={35}
-              color="#BFBFBA"
-            />
-            <Text style={styles.post_img_text}>Choose an Image</Text>
+          <MaterialCommunityIcons name="image-plus" size={35} color="#BFBFBA" />
+          <Text style={styles.post_img_text}>Choose an Image</Text>
         </View>
       </View>
     </ScrollView>

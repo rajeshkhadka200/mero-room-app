@@ -1,12 +1,11 @@
+import React, { useContext, useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Post from "../screens/Post";
 import Fav from "../screens/Fav";
-import Detail from "../screens/Detail";
 import Myroom from "../screens/Myroom";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { styles } from "../styles/nav/bottomNav_design";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -18,8 +17,11 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Text,
+  AsyncStorage,
   Image,
 } from "react-native";
+
+import { ContexStore } from "../context/Context";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -28,6 +30,9 @@ const Stack = createNativeStackNavigator();
 const notif = true;
 
 const Tabs = ({ navigation }) => {
+  const { user } = useContext(ContexStore);
+  console.log("user", user);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -61,12 +66,21 @@ const Tabs = ({ navigation }) => {
                   {notif ? <View style={header.dot}></View> : null}
                 </TouchableOpacity>
                 <TouchableOpacity style={header.headerImg}>
-                  <Image
-                    style={header.avatar}
-                    source={{
-                      uri: "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=eRDg9Hqum5gAX_TkVti&_nc_ht=scontent.fktm6-1.fna&oh=00_AT8ELnB6nJ24NbE2PQXmHJSyNlK9Fyx8x6Y-cFFWx62Xow&oe=62748519",
-                    }}
-                  />
+                  {user ? (
+                    <Image
+                      style={header.avatar}
+                      source={{
+                        uri: user.photoUrl,
+                      }}
+                    />
+                  ) : (
+                    <Image
+                      style={header.avatar}
+                      source={{
+                        uri: "https://scontent.fbwa3-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JnDLo_5PpjYAX8cG4vv&_nc_oc=AQmdU2hM-Q3jsox61SGyJovD3ROHCMzHtMpTPXZNREEXG3AwBGDk475naer2wpodQ1o&tn=jOFtfr9vq0GDmmko&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT-XDUZmFAck3kLBwdCWYvigPPD4PkhYN01zNexQ-Ca4uA&oe=62970D78",
+                      }}
+                    />
+                  )}
                 </TouchableOpacity>
               </View>
             </>

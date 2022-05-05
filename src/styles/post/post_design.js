@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 15,
     display: "flex",
-    marginBottom:75,
+    marginBottom: 75,
     flex: 1,
   },
   post_text: {
@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
     fontSize: 15,
     color: "#000",
+    // fontFamily: "400",
   },
   dropdown1BtnStyle: {
     width: "100%",
@@ -39,7 +40,8 @@ export const styles = StyleSheet.create({
   dropdown2DropdownStyle: {
     backgroundColor: "#efefef",
     borderRadius: 12,
-    width: wp("50%"),
+    width: "90%",
+    flex: 1,
   },
   dropdown2RowStyle: {
     backgroundColor: "#efefef",
@@ -94,16 +96,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#EFEFEF",
     borderRadius: 10,
-    padding:hp("7.5%"),
+    padding: hp("7.5%"),
     paddingBottom: hp("7.5%"),
-    borderStyle: 'dashed',
-    borderColor:"#BFBFBA",
-    borderWidth:3,
-    alignItems:"center"
+    borderStyle: "dashed",
+    borderColor: "#BFBFBA",
+    borderWidth: 3,
+    alignItems: "center",
   },
-  post_img_text:{
-      fontFamily:"400",
-      color:"#afafaf",
-      fontSize:15,
-  }
+  post_img_text: {
+    fontFamily: "400",
+    color: "#afafaf",
+    fontSize: 15,
+  },
 });
