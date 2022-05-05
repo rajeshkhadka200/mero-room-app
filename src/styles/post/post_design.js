@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   dropdown2DropdownStyle: {
     backgroundColor: "#efefef",
     borderRadius: 12,
-    width: wp("50%"),
+flex:1  
   },
   dropdown2RowStyle: {
     backgroundColor: "#efefef",
@@ -75,6 +75,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderRadius: 10,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
   },
   text3: {
     fontFamily: "300",
@@ -105,5 +108,14 @@ export const styles = StyleSheet.create({
       fontFamily:"400",
       color:"#afafaf",
       fontSize:15,
+  },
+  containerStyle:{
+    borderRadius:500
+
+  },
+  cross:{
+    position:"absolute",
+    top:5,
+    right:8
   }
 });
