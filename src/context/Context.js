@@ -28,6 +28,18 @@ const Context = ({ children }) => {
   }, []);
   // state for the model
   const [isModel, setisModel] = useState(false);
+  const [isPost, setisPost] = useState(false);
+  // pst
+  const [img, setImg] = useState(null);
+  const [data, setData] = useState({
+    address: "",
+    district: "",
+    rate: "",
+    rooms_count: "",
+    iskitchen: false,
+    isFlat: false,
+    desc: "",
+  });
   return (
     <ContexStore.Provider
       value={{
@@ -35,7 +47,10 @@ const Context = ({ children }) => {
         setUser,
         isModel,
         setisModel,
-        // token,
+        data,
+        setData,
+        img,
+        setImg,
       }}
     >
       {children}

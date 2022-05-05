@@ -15,13 +15,13 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  TouchableWithoutFeedback,
   Text,
-  AsyncStorage,
+  Pressable,
   Image,
 } from "react-native";
 
 import { ContexStore } from "../context/Context";
+import { upload } from "../utils/HandleUpload";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -30,8 +30,7 @@ const Stack = createNativeStackNavigator();
 const notif = true;
 
 const Tabs = ({ navigation }) => {
-  const { user } = useContext(ContexStore);
-  console.log("user", user);
+  const { user, data, img } = useContext(ContexStore);
 
   return (
     <Tab.Navigator
@@ -129,9 +128,9 @@ const Tabs = ({ navigation }) => {
       <Tab.Screen
         options={{
           headerRight: () => (
-            <TouchableWithoutFeedback>
+            <Pressable onPress={() => upload(data, img)}>
               <Text style={header.btn_post}>Post</Text>
-            </TouchableWithoutFeedback>
+            </Pressable>
           ),
           headerStyle: {
             elevation: 0,

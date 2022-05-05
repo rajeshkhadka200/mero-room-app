@@ -76,6 +76,7 @@ export const District = [
   "Doti",
   "Kailali",
   "Kanchanpur",
+  "Choose a District",
 ];
 
 export const cardData = [

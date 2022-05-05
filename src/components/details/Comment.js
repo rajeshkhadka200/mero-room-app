@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { styles } from "../../styles/details/comment_design";
-import { collection, query, where, orderBy, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import SingleComment from "./SingleComment";
 import { Feather } from "@expo/vector-icons";
