@@ -57,9 +57,10 @@ const HomeHeader = () => {
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
             >
-              {District.slice(0, 10).map((data) => {
+              {District.slice(0, 10).map((data,i) => {
                 return (
                   <TouchableOpacity
+                    key={i}
                     onPress={() => {
                       navigation.navigate("Search", {
                         data,

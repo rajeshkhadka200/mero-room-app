@@ -15,7 +15,6 @@ const Home = ({ navigation }) => {
   const Logout = async () => {
     try {
       await AsyncStorage.removeItem("auth_token");
-      console.log(await AsyncStorage.getItem("auth_token"));
     } catch (error) {
       console.log("logot err", error);
     }
@@ -28,7 +27,7 @@ const Home = ({ navigation }) => {
         }}
       >
         <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
-        <Button title="Logiut" onPress={() => Logout} />
+        <Button title="Logiut" onPress={() => Logout()} />
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* from notif to filter = Home Header */}
           <HomeHeader />

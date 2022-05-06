@@ -24,7 +24,6 @@ import { ContexStore } from "../context/Context";
 import { upload } from "../utils/HandleUpload";
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 //notification indicator
 const notif = true;
@@ -65,7 +64,7 @@ const Tabs = ({ navigation }) => {
                   {notif ? <View style={header.dot}></View> : null}
                 </TouchableOpacity>
                 <TouchableOpacity style={header.headerImg}>
-                  {user ? (
+                  {user.photoUrl ? (
                     <Image
                       style={header.avatar}
                       source={{
@@ -76,7 +75,7 @@ const Tabs = ({ navigation }) => {
                     <Image
                       style={header.avatar}
                       source={{
-                        uri: "https://scontent.fbwa3-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JnDLo_5PpjYAX8cG4vv&_nc_oc=AQmdU2hM-Q3jsox61SGyJovD3ROHCMzHtMpTPXZNREEXG3AwBGDk475naer2wpodQ1o&tn=jOFtfr9vq0GDmmko&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT-XDUZmFAck3kLBwdCWYvigPPD4PkhYN01zNexQ-Ca4uA&oe=62970D78",
+                        uri: "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0=",
                       }}
                     />
                   )}
