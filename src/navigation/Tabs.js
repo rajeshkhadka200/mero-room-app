@@ -30,7 +30,6 @@ const notif = true;
 
 const Tabs = ({ navigation }) => {
   const { user, data, img } = useContext(ContexStore);
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -64,7 +63,7 @@ const Tabs = ({ navigation }) => {
                   {notif ? <View style={header.dot}></View> : null}
                 </TouchableOpacity>
                 <TouchableOpacity style={header.headerImg}>
-                  {user.photoUrl ? (
+                  {user !== null ? (
                     <Image
                       style={header.avatar}
                       source={{

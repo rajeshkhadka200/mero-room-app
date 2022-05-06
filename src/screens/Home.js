@@ -7,7 +7,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { ContexStore } from "../context/Context";
 import HomeHeader from "../components/home/HomeHeader";
 import HomeBody from "../components/home/HomeBody";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -27,7 +26,7 @@ const Home = ({ navigation }) => {
         }}
       >
         <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
-        <Button title="Logiut" onPress={() => Logout()} />
+        <Button title="Logout" onPress={() => Logout()} />
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* from notif to filter = Home Header */}
           <HomeHeader />

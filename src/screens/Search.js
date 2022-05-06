@@ -1,8 +1,9 @@
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, ScrollView } from "react-native";
 import Card from "../components/Global/Card";
 import { cardData } from "../../config/api";
 import React from "react";
 import { styles } from "../styles/search/search_design";
+import NoContent from "../components/Global/NoContent";
 
 const Search = ({ route }) => {
   const renderCard = ({ item }) => {
@@ -23,41 +24,25 @@ const Search = ({ route }) => {
       val.district.toLowerCase().includes(data.toLowerCase())
     );
   });
-  const ReanderNoData = () => {
-    return (
-      <View
-        style={{
-          marginTop: 100,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: "500",
-            fontSize: 25,
-          }}
-        >
-          No data found for {data || search}
-        </Text>
-      </View>
-    );
-  };
   return (
     <>
-      <View style={styles.search_con}>
-        {searchProduct.length > 0 ? (
-          <Text style={styles.search_text}>Result for : {data || search}</Text>
-        ) : null}
+      <ScrollView style={{backgroundColor:"#fff"}}>
+        <View style={styles.search_con}>
+          {searchProduct.length > 0 ? (
+            <Text style={styles.search_text}>
+              Result for : {data || search}
+            </Text>
+          ) : null}
 
-        <FlatList
-          ListEmptyComponent={ReanderNoData}
-          data={searchProduct}
-          renderItem={renderCard}
-          showsVerticalScrollIndicator={false}
-          style={styles.wrapper}
-        />
-      </View>
+          <FlatList
+            ListEmptyComponent={NoContent(search,data)}
+            data={searchProduct}
+            renderItem={renderCard}
+            showsVerticalScrollIndicator={false}
+            style={styles.wrapper}
+          />
+        </View>
+      </ScrollView>
     </>
   );
 };
