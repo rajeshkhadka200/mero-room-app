@@ -38,25 +38,27 @@ const Post = () => {
   } 
   `;
   data.desc = detail;
+  let imgs = [];
   const imageUpload = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.photo,
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,
     });
     if (!result.cancelled) {
-      setImg(result);
+      // setImg(result);
+      imgs.push(result.uri);
     } else {
       alert("Cancelled");
     }
   };
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
-
   const handleChange = (name, value) => {
     setData({ ...data, [name]: value });
   };
+
   const handleRefresh = () => {
     setImg("");
     setData({
