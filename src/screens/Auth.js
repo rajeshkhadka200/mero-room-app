@@ -2,7 +2,6 @@ import { View, Text, Image, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
-import * as Facebook from "expo-facebook";
 import { FB_KEY, GOOGLE_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
@@ -30,7 +29,7 @@ const Auth = () => {
           console.log("err while seting login ", err);
         }
       }
-      const docRef = await addDoc(collection(db, "users"), {
+      await addDoc(collection(db, "users"), {
         user_id: id,
         email,
         name,
@@ -56,33 +55,12 @@ const Auth = () => {
       });
       if (result.type == "success") {
         storeData(result.user);
+        console.log(result.user);
       }
     } catch ({ message }) {
       alert("err from google" + message);
     }
   };
-
-  async function fbLogin() {
-    try {
-      await Facebook.initializeAsync({
-        appId: FB_KEY,
-      });
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ["public_profile"],
-      });
-      if (type === "success") {
-        const response = await fetch(
-          `https://graph.facebook.com/me?access_token=${token}`
-        );
-        const user = await response.json();
-        console.log(user);
-      } else {
-        console.log("cancel");
-      }
-    } catch ({ message }) {
-      alert(`Facebook Login Error: ${message}`);
-    }
-  }
 
   return (
     <>

@@ -6,8 +6,12 @@ export const ContexStore = createContext();
 const Context = ({ children }) => {
   const [user, setUser] = useState([]); // setup the logedin user
   const [token, setToken] = useState("");
-  useEffect(async () => {
-    console.log("rajesh");
+  const getToken = async () => {
+    const _id = await AsyncStorage.getItem("auth_token");
+    setToken(_id);
+  };
+  useEffect(() => {
+    getToken();
   }, []);
 
   useEffect(async () => {
@@ -26,6 +30,7 @@ const Context = ({ children }) => {
       console.log("err while geting data", error);
     }
   }, []);
+  console.log(token);
   // state for the model
   const [isModel, setisModel] = useState(false);
   const [isPost, setisPost] = useState(false);

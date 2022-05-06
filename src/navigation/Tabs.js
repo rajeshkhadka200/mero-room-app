@@ -24,14 +24,13 @@ import { ContexStore } from "../context/Context";
 import { upload } from "../utils/HandleUpload";
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 //notification indicator
 const notif = true;
 
 const Tabs = ({ navigation }) => {
   const { user, data, img } = useContext(ContexStore);
-
+  console.log("tabs", user);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -65,7 +64,7 @@ const Tabs = ({ navigation }) => {
                   {notif ? <View style={header.dot}></View> : null}
                 </TouchableOpacity>
                 <TouchableOpacity style={header.headerImg}>
-                  {user ? (
+                  {user !== null ? (
                     <Image
                       style={header.avatar}
                       source={{

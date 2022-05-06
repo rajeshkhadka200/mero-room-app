@@ -28,7 +28,7 @@ const Home = ({ navigation }) => {
         }}
       >
         <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
-        <Button title="Logiut" onPress={() => Logout} />
+        <Button title="Logout" onPress={() => Logout()} />
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* from notif to filter = Home Header */}
           <HomeHeader />

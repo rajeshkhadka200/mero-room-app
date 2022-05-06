@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -9,7 +8,6 @@ import {
   TouchableWithoutFeedback,
   Pressable,
   RefreshControl,
-  Button,
 } from "react-native";
 import { styles } from "../styles/post/post_design";
 import SelectDropdown from "react-native-select-dropdown";
@@ -27,9 +25,6 @@ import {
 } from "react-native-responsive-screen";
 import { upload } from "../utils/HandleUpload";
 import { ContexStore } from "../context/Context";
-import Textarea from "react-native-textarea";
-// post screen
-
 const Post = () => {
   const { data, setData, img, setImg } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
@@ -43,7 +38,6 @@ const Post = () => {
   } 
   `;
   data.desc = detail;
-
   const imageUpload = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -148,7 +142,7 @@ const Post = () => {
           <View style={styles.post_input3}>
             <Text style={styles.text3}>Kitchen</Text>
             <Checkbox
-              customLabel={true}
+              // customLabel={true}
               label=""
               checked={data.iskitchen}
               noFeedback={true}

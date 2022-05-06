@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  AsyncStorage
+  AsyncStorage,
 } from "react-native";
 import React, { useState, useContext } from "react";
 import { styles } from "../../styles/home/home_header_design";
@@ -17,21 +17,18 @@ import { ContexStore } from "../../context/Context";
 
 // from notif icons to filter
 const HomeHeader = () => {
-  const [tk,setTk] = useState("");
+  const [tk, setTk] = useState("");
   const { user, setUser } = useContext(ContexStore);
   const [search, setSearch] = useState("");
   const navigation = useNavigation();
-  const getToken = async() =>{
-       const token = await AsyncStorage.getItem("auth_Token");
-       setTk(token);
-  }
+
   const Search = () => {
     navigation.navigate("Search", {
       search,
     });
     setSearch("");
   };
-  getToken();
+
   return (
     <>
       <View style={styles.headerWrapper}>
@@ -57,9 +54,10 @@ const HomeHeader = () => {
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
             >
-              {District.slice(0, 10).map((data) => {
+              {District.slice(0, 10).map((data, i) => {
                 return (
                   <TouchableOpacity
+                    key={i}
                     onPress={() => {
                       navigation.navigate("Search", {
                         data,
