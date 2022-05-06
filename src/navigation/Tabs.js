@@ -29,8 +29,34 @@ const Tab = createBottomTabNavigator();
 const notif = true;
 
 const Tabs = ({ navigation }) => {
+  const [option, setoption] = useState("");
   const { user, data, img } = useContext(ContexStore);
-  console.log("tabs", user);
+  const ask = () => {
+    Alert.alert(
+      "Do you want to feature your room ?",
+      "By continuing, our algorithm will sort your rooms at featured room at main Screen ! ",
+      [
+        {
+          text: "No thanks",
+          onPress: () => {
+            // doesnot make feature
+            setoption(false);
+          },
+        },
+        {
+          text: "YES",
+          onPress: () => {
+            // make
+            setoption(true);
+          },
+        },
+      ]
+    );
+  };
+  const combinedFun = () => {
+    ask();
+    upload(data, img, option);
+  };
   return (
     <Tab.Navigator
       screenOptions={{
@@ -127,7 +153,7 @@ const Tabs = ({ navigation }) => {
       <Tab.Screen
         options={{
           headerRight: () => (
-            <Pressable onPress={() => upload(data, img)}>
+            <Pressable onPress={() => combinedFun()}>
               <Text style={header.btn_post}>Post</Text>
             </Pressable>
           ),

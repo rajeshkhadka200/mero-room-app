@@ -31,6 +31,7 @@ const Context = ({ children }) => {
     }
   }, []);
   console.log(token);
+  console.log("user context", user);
   // state for the model
   const [isModel, setisModel] = useState(false);
   const [isPost, setisPost] = useState(false);

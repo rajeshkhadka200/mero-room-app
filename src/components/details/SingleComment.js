@@ -43,11 +43,11 @@ const SingleComment = ({ room_id }) => {
       [
         {
           text: "NO",
-          onPress: () => console.warn("NO Pressed"),
+
           style: "cancel",
         },
         {
-          text: "YES",
+          text: "Delete",
           onPress: () => {
             // delete a comment
             const docRef = doc(db, "comments", id);
