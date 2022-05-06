@@ -94,15 +94,19 @@ export const styles = StyleSheet.create({
     color: "rgba(9, 8, 8, 0.57)",
     textAlign: "left",
   },
-  post_img: {
+  img_con: {
     flex: 1,
-    backgroundColor: "#EFEFEF",
-    borderRadius: 10,
-    padding: hp("7.5%"),
-    paddingBottom: hp("7.5%"),
     borderStyle: "dashed",
     borderColor: "#BFBFBA",
+    borderRadius: 10,
     borderWidth: 3,
+  },
+  post_img: {
+    flex: 1 / 2,
+    backgroundColor: "#EFEFEF",
+    padding: hp("3%"),
+    paddingBottom: hp("3%"),
+    
     alignItems: "center",
   },
   post_img_text: {

@@ -38,25 +38,27 @@ const Post = () => {
   } 
   `;
   data.desc = detail;
+  let imgs = [];
   const imageUpload = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.photo,
       allowsEditing: false,
       aspect: [4, 3],
       quality: 0.8,
     });
     if (!result.cancelled) {
-      setImg(result);
+      // setImg(result);
+      imgs.push(result.uri);
     } else {
       alert("Cancelled");
     }
   };
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
-
   const handleChange = (name, value) => {
     setData({ ...data, [name]: value });
   };
+
   const handleRefresh = () => {
     setImg("");
     setData({
@@ -217,18 +219,56 @@ const Post = () => {
             </TouchableOpacity>
           </>
         ) : (
-          <Pressable onPress={imageUpload}>
-            <View style={styles.post_img}>
-              <TouchableOpacity>
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
-                />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
+          <View style={styles.img_con}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <View style={styles.post_img}>
+                <TouchableOpacity onPress={imageUpload}>
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+              <View style={styles.post_img}>
+                <TouchableOpacity onPress={imageUpload}>
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
             </View>
-          </Pressable>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <View style={styles.post_img}>
+                <TouchableOpacity onPress={imageUpload}>
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+              <View style={styles.post_img}>
+                <TouchableOpacity onPress={imageUpload}>
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+            </View>
+          </View>
         )}
       </View>
     </ScrollView>
