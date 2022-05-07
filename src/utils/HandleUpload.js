@@ -5,11 +5,31 @@ export const upload = async (data, img) => {
   let dummy_arrar = [
     {
       name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fmobile_project-ae027025-3995-4421-a897-d39e6979eef0/ImagePicker/753ace83-fb9a-49b3-ba49-59ac8bf033b2.jpg",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
     },
     {
-      name: "imgs_2",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fmobile_project-ae027025-3995-4421-a897-d39e6979eef0/ImagePicker/753ace83-fb9a-49b3-ba49-59ac8bf033b2.jpg",
+      name: "img_1",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
+    },
+    {
+      name: "img_1",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
+    },
+    {
+      name: "img_1",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
+    },
+    {
+      name: "img_1",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
+    },
+    {
+      name: "img_1",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
+    },
+    {
+      name: "img_1",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
     },
   ];
   const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
@@ -21,6 +41,7 @@ export const upload = async (data, img) => {
   }
   try {
     const docRef = await addDoc(collection(db, "rooms"), {
+      //true
       room_id: Date.now(),
       user_id: 10,
       user_profile: "",
@@ -39,18 +60,17 @@ export const upload = async (data, img) => {
     const metadata = {
       contentType: "image/jpeg",
     };
-    dummy_arrar.map(async (imgs) => {
+    dummy_arrar.map(async (img) => {
       const blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
           resolve(xhr.response);
         };
         xhr.onerror = function (e) {
-          console.log(e);
           reject(new TypeError("Network request failed"));
         };
         xhr.responseType = "blob";
-        xhr.open("GET", imgs.uri, true);
+        xhr.open("GET", img.uri, true);
         xhr.send(null);
       });
       const imageRef = ref(st, `images/${Date.now()}`);
@@ -68,6 +88,8 @@ export const upload = async (data, img) => {
           console.log("err while upload", e);
         });
     });
+
+    //false
   } catch (e) {
     console.error("Error adding document: ", e);
   }

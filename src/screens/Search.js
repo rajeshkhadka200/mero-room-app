@@ -26,7 +26,10 @@ const Search = ({ route }) => {
   });
   return (
     <>
-      <ScrollView style={{backgroundColor:"#fff"}} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={{ backgroundColor: "#fff" }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.search_con}>
           {searchProduct.length > 0 ? (
             <Text style={styles.search_text}>
@@ -35,7 +38,7 @@ const Search = ({ route }) => {
           ) : null}
 
           <FlatList
-            ListEmptyComponent={NoContent(search,data)}
+            ListEmptyComponent={NoContent(search, data)}
             data={searchProduct}
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}

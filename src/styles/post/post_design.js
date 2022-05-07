@@ -106,19 +106,16 @@ export const styles = StyleSheet.create({
     backgroundColor: "#EFEFEF",
     padding: hp("3%"),
     paddingBottom: hp("3%"),
-    
+
     alignItems: "center",
   },
   post_img_text: {
     fontFamily: "400",
     color: "#afafaf",
     fontSize: 15,
+    textAlign: "center",
   },
-  post_img_text: {
-    fontFamily: "400",
-    color: "#afafaf",
-    fontSize: 15,
-  },
+
   containerStyle: {
     borderRadius: 500,
   },

@@ -3,14 +3,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Post from "../screens/Post";
-import Fav from "../screens/Fav";
 import Myroom from "../screens/Myroom";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   View,
   TouchableOpacity,
@@ -22,6 +20,7 @@ import {
 
 import { ContexStore } from "../context/Context";
 import { upload } from "../utils/HandleUpload";
+import Explore from "../screens/Explore";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,6 +29,7 @@ const notif = true;
 
 const Tabs = ({ navigation }) => {
   const { user, data, img } = useContext(ContexStore);
+  console.log("tabs", user);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -74,7 +74,7 @@ const Tabs = ({ navigation }) => {
                     <Image
                       style={header.avatar}
                       source={{
-                        uri: "https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0=",
+                        uri: "https://scontent.fbwa3-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JnDLo_5PpjYAX8cG4vv&_nc_oc=AQmdU2hM-Q3jsox61SGyJovD3ROHCMzHtMpTPXZNREEXG3AwBGDk475naer2wpodQ1o&tn=jOFtfr9vq0GDmmko&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT-XDUZmFAck3kLBwdCWYvigPPD4PkhYN01zNexQ-Ca4uA&oe=62970D78",
                       }}
                     />
                   )}
@@ -109,8 +109,8 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         options={{
-          headerTitleAlign: "center",
-          tabBarLabel: "Favourite",
+          headerTitleAlign: "Left",
+          tabBarLabel: "Explore",
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name={focused ? "favorite" : "favorite-border"}
@@ -120,7 +120,7 @@ const Tabs = ({ navigation }) => {
           ),
         }}
         name="Fav"
-        component={Fav}
+        component={Explore}
       />
 
       <Tab.Screen
@@ -133,7 +133,7 @@ const Tabs = ({ navigation }) => {
           headerStyle: {
             elevation: 0,
             borderColor: "dfdfdf",
-            borderWidth: 1,
+            borderBottomWidth: 1,
           },
           headerTitleStyle: {
             fontFamily: "500",
