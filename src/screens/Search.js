@@ -26,7 +26,7 @@ const Search = ({ route }) => {
   });
   return (
     <>
-      <ScrollView style={{backgroundColor:"#fff"}}>
+      <ScrollView style={{backgroundColor:"#fff"}} showsVerticalScrollIndicator={false}>
         <View style={styles.search_con}>
           {searchProduct.length > 0 ? (
             <Text style={styles.search_text}>

@@ -5,25 +5,17 @@ export const upload = async (data, img) => {
   let dummy_arrar = [
     {
       name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/a5426065-3f5f-42cf-b804-4b55841d81ff.png",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fmobile_project-ae027025-3995-4421-a897-d39e6979eef0/ImagePicker/753ace83-fb9a-49b3-ba49-59ac8bf033b2.jpg",
     },
     {
       name: "imgs_2",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/a5426065-3f5f-42cf-b804-4b55841d81ff.png",
-    },
-    {
-      name: "3",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/a5426065-3f5f-42cf-b804-4b55841d81ff.png",
-    },
-    {
-      name: "img_4",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/a5426065-3f5f-42cf-b804-4b55841d81ff.png",
+      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fmobile_project-ae027025-3995-4421-a897-d39e6979eef0/ImagePicker/753ace83-fb9a-49b3-ba49-59ac8bf033b2.jpg",
     },
   ];
   const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
     data;
   for (var key in data) {
-    if (data[key] === "" || data[key] === "Choose a District" || img === null) {
+    if (data[key] === "" || data[key] === "Choose a District") {
       return alert("all feilds are required !!");
     }
   }
@@ -62,9 +54,10 @@ export const upload = async (data, img) => {
         xhr.send(null);
       });
       const imageRef = ref(st, `images/${Date.now()}`);
-      await uploadBytes(imageRef, blob, metadata)
+    await uploadBytes(imageRef, blob, metadata)
         .then(async () => {
           const downloadURL = await getDownloadURL(imageRef);
+          console.log(downloadURL);
           imgs_array.push(downloadURL);
           await updateDoc(doc(db, "rooms", docRef.id), {
             thumbnail: imgs_array,

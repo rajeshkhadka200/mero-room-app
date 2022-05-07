@@ -7,7 +7,7 @@ import {
 export const styles = StyleSheet.create({
     no_content_con:{
         width:wp("100%"),
-        height:hp("100%"),
+        maxHeight:"100%",
         alignItems:"center",
         marginTop:150,
         padding:20

@@ -12,7 +12,7 @@ const Context = ({ children }) => {
   };
   useEffect(() => {
     getToken();
-  }, []);
+  }, [token]);
 
   useEffect(async () => {
     try {
@@ -30,11 +30,6 @@ const Context = ({ children }) => {
       console.log("err while geting data", error);
     }
   }, []);
-  if(token)
-  console.log("Context ma token kina aayou??",token);
-  else{
-    console.log("la vayo dami",token);
-  }
   // state for the model
   const [isModel, setisModel] = useState(false);
   const [isPost, setisPost] = useState(false);
