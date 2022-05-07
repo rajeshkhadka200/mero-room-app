@@ -29,14 +29,13 @@ const Context = ({ children }) => {
     } catch (error) {
       console.log("err while geting data", error);
     }
-  }, []);
-  console.log(token);
-  console.log("user context", user);
+  }, [token]);
+
   // state for the model
   const [isModel, setisModel] = useState(false);
-  const [isPost, setisPost] = useState(false);
+
   // pst
-  const [img, setImg] = useState(null);
+  const [img, setImg] = useState([]);
   const [data, setData] = useState({
     address: "",
     district: "",
@@ -46,6 +45,9 @@ const Context = ({ children }) => {
     isFlat: false,
     desc: "",
   });
+
+  // state for the post loader track
+  const [isRoomuploading, setisRoomuploading] = useState(false);
   return (
     <ContexStore.Provider
       value={{
@@ -57,6 +59,8 @@ const Context = ({ children }) => {
         setData,
         img,
         setImg,
+        isRoomuploading,
+        setisRoomuploading,
       }}
     >
       {children}

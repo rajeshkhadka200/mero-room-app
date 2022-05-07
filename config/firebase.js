@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage, storage } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 import { API_KEY, AUTH_DOMAIN } from "@env";
 const firebaseConfig = {
   apiKey: API_KEY,

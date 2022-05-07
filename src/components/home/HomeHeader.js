@@ -17,7 +17,6 @@ import { ContexStore } from "../../context/Context";
 
 // from notif icons to filter
 const HomeHeader = () => {
-  const [tk, setTk] = useState("");
   const { user, setUser } = useContext(ContexStore);
   const [search, setSearch] = useState("");
   const navigation = useNavigation();
@@ -33,7 +32,7 @@ const HomeHeader = () => {
     <>
       <View style={styles.headerWrapper}>
         <View style={styles.searchCon}>
-          <Text style={styles.searchText}>Hi, Utsav</Text>
+          <Text style={styles.searchText}>Hi, {user.name}</Text>
           <View style={styles.searchWrapper}>
             <TextInput
               value={search}

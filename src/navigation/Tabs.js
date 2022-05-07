@@ -3,14 +3,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Post from "../screens/Post";
-import Fav from "../screens/Fav";
 import Myroom from "../screens/Myroom";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   View,
   TouchableOpacity,
@@ -22,6 +20,7 @@ import {
 
 import { ContexStore } from "../context/Context";
 import { upload } from "../utils/HandleUpload";
+import Explore from "../screens/Explore";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,34 +28,8 @@ const Tab = createBottomTabNavigator();
 const notif = true;
 
 const Tabs = ({ navigation }) => {
-  const [option, setoption] = useState("");
   const { user, data, img } = useContext(ContexStore);
-  const ask = () => {
-    Alert.alert(
-      "Do you want to feature your room ?",
-      "By continuing, our algorithm will sort your rooms at featured room at main Screen ! ",
-      [
-        {
-          text: "No thanks",
-          onPress: () => {
-            // doesnot make feature
-            setoption(false);
-          },
-        },
-        {
-          text: "YES",
-          onPress: () => {
-            // make
-            setoption(true);
-          },
-        },
-      ]
-    );
-  };
-  const combinedFun = () => {
-    ask();
-    upload(data, img, option);
-  };
+  console.log("tabs", user);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -136,8 +109,8 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         options={{
-          headerTitleAlign: "center",
-          tabBarLabel: "Favourite",
+          headerTitleAlign: "Left",
+          tabBarLabel: "Explore",
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name={focused ? "favorite" : "favorite-border"}
@@ -147,13 +120,13 @@ const Tabs = ({ navigation }) => {
           ),
         }}
         name="Fav"
-        component={Fav}
+        component={Explore}
       />
 
       <Tab.Screen
         options={{
           headerRight: () => (
-            <Pressable onPress={() => combinedFun()}>
+            <Pressable onPress={() => upload(data, img)}>
               <Text style={header.btn_post}>Post</Text>
             </Pressable>
           ),
