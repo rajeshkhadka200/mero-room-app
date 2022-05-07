@@ -131,3 +131,78 @@ export const userWhoApplied = [
     createdAt: "2078-05-15",
   },
 ];
+
+export const LikeCard = [
+  {
+    id: "1",
+    image: require("../assets/img/room.jpg"),
+    address: "Devinagar-13,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "2",
+    image: require("../assets/img/room1.jpg"),
+    address: "Kalikanagar-12,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "3",
+    image: require("../assets/img/room2.jpg"),
+    address: "Sukhanagar-10,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "4",
+    image: require("../assets/img/room.jpg"),
+    address: "Devinagar-13,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "5",
+    image: require("../assets/img/room1.jpg"),
+    address: "Kalikanagar-12,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "6",
+    image: require("../assets/img/room2.jpg"),
+    address: "Sukhanagar-10,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "7",
+    image: require("../assets/img/room.jpg"),
+    address: "Devinagar-13,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "8",
+    image: require("../assets/img/room1.jpg"),
+    address: "Kalikanagar-12,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "9",
+    image: require("../assets/img/room2.jpg"),
+    address: "Sukhanagar-10,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "10",
+    image: require("../assets/img/room.jpg"),
+    address: "Devinagar-13,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "11",
+    image: require("../assets/img/room1.jpg"),
+    address: "Kalikanagar-12,Butwal",
+    price: "Rs 10000",
+  },
+  {
+    id: "12",
+    image: require("../assets/img/room2.jpg"),
+    address: "Sukhanagar-10,Butwal",
+    price: "Rs 10000",
+  },
+];
