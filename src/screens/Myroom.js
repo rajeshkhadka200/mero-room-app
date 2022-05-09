@@ -21,7 +21,7 @@ const Myroom = () => {
   const renderRooms = ({ item }) => {
     return (
       <>
-        <RoomCard data={item} render_location="pro" />
+        <RoomCard data={item} render_location="my_rooms" />
       </>
     );
   };
