@@ -74,9 +74,10 @@ export const upload = async (data, img) => {
         xhr.send(null);
       });
       const imageRef = ref(st, `images/${Date.now()}`);
-      await uploadBytes(imageRef, blob, metadata)
+    await uploadBytes(imageRef, blob, metadata)
         .then(async () => {
           const downloadURL = await getDownloadURL(imageRef);
+          console.log(downloadURL);
           imgs_array.push(downloadURL);
           await updateDoc(doc(db, "rooms", docRef.id), {
             thumbnail: imgs_array,

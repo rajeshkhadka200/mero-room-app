@@ -68,7 +68,7 @@ const Detail_header = ({ route }) => {
       <View>
         <Text style={styles.arrow}>
           <AntDesign
-            onPress={() => navigation.navigate("Tabs")}
+            onPress={() => navigation.goBack()}
             name="arrowleft"
             size={24}
             color="white"

@@ -158,9 +158,9 @@ const Post = () => {
           <View style={styles.post_input3}>
             <Text style={styles.text3}>Kitchen</Text>
             <Checkbox
-              // customLabel={true}
-              label=""
+              customLabel={true}
               checked={data.iskitchen}
+              label=""
               noFeedback={true}
               checkedComponent={
                 <Ionicons name="checkmark-circle" size={28} color="#5B628F" />

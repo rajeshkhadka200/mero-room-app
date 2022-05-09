@@ -10,9 +10,9 @@ const Context = ({ children }) => {
     const _id = await AsyncStorage.getItem("auth_token");
     setToken(_id);
   };
-  useEffect(() => {
-    getToken();
-  }, []);
+  // useEffect(() => {
+  //   getToken();
+  // }, [token]);
 
   useEffect(async () => {
     try {

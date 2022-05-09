@@ -150,7 +150,7 @@ const Tabs = ({ navigation }) => {
           headerStyle: {
             elevation: 0,
             borderColor: "dfdfdf",
-            borderWidth: 1,
+            borderBottomWidth: 1,
           },
           headerTitleStyle: {
             fontFamily: "500",
@@ -201,7 +201,40 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         options={{
-          headerTitleAlign: "center",
+          headerStyle: {
+            elevation: 0,
+            borderBottomColor: "#efefef",
+            borderBottomWidth: 1,
+          },
+          headerTitleStyle: {
+            fontFamily: "500",
+            marginLeft: -5,
+            marginTop: 4,
+          },
+          headerLeft: () => (
+            <>
+              <Pressable onPress={() => navigation.goBack()}>
+                <AntDesign
+                  style={{ marginLeft: 15 }}
+                  name="arrowleft"
+                  size={28}
+                  color="black"
+                />
+              </Pressable>
+            </>
+          ),
+          headerRight: () => (
+            <>
+              <MaterialIcons
+                style={{ marginRight: 15 }}
+                name="logout"
+                size={28}
+                color="black"
+              />
+            </>
+          ),
+
+          headerTitleAlign: "Left",
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <FontAwesome

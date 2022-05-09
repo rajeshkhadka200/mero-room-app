@@ -1,24 +1,61 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, ScrollView, Image, Pressable } from "react-native";
 import React from "react";
-import Profileportion from "../components/profile/Profileportion";
-import { NavigationContainer } from "@react-navigation/native";
-import TabNavigator from "../components/profile/TabNavigator";
+import { styles } from "../styles/Profile/profile_design.js";
+import { Entypo } from "@expo/vector-icons";
 
 const Profile = () => {
   return (
     <>
-      <Profileportion />
-      <NavigationContainer independent={true}>
-        <TabNavigator />
-      </NavigationContainer>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{ backgroundColor: "#fff" }}
+      >
+        <View style={styles.header}>
+          <View style={styles.cover_bg}></View>
+          <View>
+            <Image
+              style={styles.pp}
+              source={{
+                uri: "https://scontent.fktm10-1.fna.fbcdn.net/v/t39.30808-1/271552238_521282596092505_372241037423835333_n.jpg?stp=dst-jpg_p240x240&_nc_cat=104&ccb=1-6&_nc_sid=7206a8&_nc_ohc=3tPlezk2SpoAX-Ca6jI&_nc_ht=scontent.fktm10-1.fna&oh=00_AT_eB09DZrnnlPIZe5RWIhU-VI18FKD2m8d5GekBC07ulw&oe=627D5F7B",
+              }}
+            />
+            <Pressable style={styles.camera_con}>
+              <Entypo name="camera" size={20} color="black" />
+            </Pressable>
+          </View>
+          <Text style={styles.profile_name}>Utsav Bhattarai</Text>
+        </View>
+        <View style={styles.bottom_con}>
+         <View style={styles.stat_con}>
+           <View style={styles.box}>
+             <Text style={styles.num}>
+               4
+             </Text>
+             <Text style={styles.label}>
+               Favourite
+             </Text>
+           </View>
+           <View style={styles.box}>
+             <Text style={styles.num}>
+               10
+             </Text>
+             <Text style={styles.label}>
+               My Rooms
+             </Text>
+           </View>
+           <View style={styles.box}>
+             <Text style={styles.num}>
+               45
+             </Text>
+             <Text style={styles.label}>
+               Total Rooms
+             </Text>
+           </View>
+           
+         </View>
+        </View>
+      </ScrollView>
     </>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 export default Profile;
