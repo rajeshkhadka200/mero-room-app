@@ -49,6 +49,8 @@ export const styles = StyleSheet.create({
     flex: 2,
     paddingVertical: 5,
     borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
   },
   btn_text: {
     color: "#fff",
