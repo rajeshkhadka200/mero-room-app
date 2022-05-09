@@ -1,8 +1,30 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
 import React from "react";
-import MyRoomCard from "../components/myroom/MyRoomCard";
+import RoomCard from "../components/Global/RoomCard";
 
 const Myroom = () => {
+  const my_room = [
+    {
+      photo: require("../../assets/img/room1.jpg"),
+      address: "Butwal Kalikanagar",
+      price: "5000",
+      room_id: 5,
+    },
+    {
+      photo: require("../../assets/img/room2.jpg"),
+      address: "Butwal Sukhanagar",
+      price: "4000",
+      room_id: 5,
+    },
+  ];
+
+  const renderRooms = ({ item }) => {
+    return (
+      <>
+        <RoomCard data={item} render_location="pro" />
+      </>
+    );
+  };
   return (
     <ScrollView
       style={{
@@ -18,22 +40,7 @@ const Myroom = () => {
           marginTop: 20,
         }}
       >
-        <MyRoomCard
-          value={{
-            photo: require("../../assets/img/room1.jpg"),
-            address: "Butwal Kalikanagar",
-            price: "5000",
-            room_id: 5,
-          }}
-        />
-        <MyRoomCard
-          value={{
-            photo: require("../../assets/img/room2.jpg"),
-            address: "Butwal Sukhanagar",
-            price: "4000",
-            room_id: 5,
-          }}
-        />
+        <FlatList data={my_room} renderItem={renderRooms} />
       </View>
     </ScrollView>
   );
