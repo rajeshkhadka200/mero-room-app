@@ -66,7 +66,7 @@ const Profile = () => {
             </View>
             <View style={styles.box}>
               <Text style={styles.num}>10</Text>
-              <Text style={styles.label}>My Rooms</Text>
+              <Text style={styles.label}>My uploads</Text>
             </View>
             <View style={styles.box}>
               <Text style={styles.num}>45</Text>
@@ -105,7 +105,13 @@ const Profile = () => {
               <View style={styles.line}></View>
             </View>
             {/* actual data */}
-            <FlatList data={my_fav} renderItem={renderRooms} />
+            <FlatList
+              data={my_fav}
+              renderItem={renderRooms}
+              keyExtractor={(i) => {
+                i.index;
+              }}
+            />
           </View>
         </View>
       </ScrollView>

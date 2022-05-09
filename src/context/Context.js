@@ -10,9 +10,9 @@ const Context = ({ children }) => {
     const _id = await AsyncStorage.getItem("auth_token");
     setToken(_id);
   };
-  // useEffect(() => {
-  //   getToken();
-  // }, [token]);
+  useEffect(() => {
+    getToken();
+  }, [token]);
 
   useEffect(async () => {
     try {
@@ -26,7 +26,7 @@ const Context = ({ children }) => {
       console.log("err while geting data", error);
     }
   }, [token]);
-
+  console.log(user);
   // state for the model
   const [isModel, setisModel] = useState(false);
 
