@@ -2,6 +2,9 @@ import { View, Text, ScrollView, Image, Pressable } from "react-native";
 import React from "react";
 import { styles } from "../styles/Profile/profile_design.js";
 import { Entypo } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 const Profile = () => {
   return (
@@ -26,33 +29,30 @@ const Profile = () => {
           <Text style={styles.profile_name}>Utsav Bhattarai</Text>
         </View>
         <View style={styles.bottom_con}>
-         <View style={styles.stat_con}>
-           <View style={styles.box}>
-             <Text style={styles.num}>
-               4
-             </Text>
-             <Text style={styles.label}>
-               Favourite
-             </Text>
-           </View>
-           <View style={styles.box}>
-             <Text style={styles.num}>
-               10
-             </Text>
-             <Text style={styles.label}>
-               My Rooms
-             </Text>
-           </View>
-           <View style={styles.box}>
-             <Text style={styles.num}>
-               45
-             </Text>
-             <Text style={styles.label}>
-               Total Rooms
-             </Text>
-           </View>
-           
-         </View>
+          <View style={styles.stat_con}>
+            <View style={styles.box}>
+              <Text style={styles.num}>4</Text>
+              <Text style={styles.label}>Favourite</Text>
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.num}>10</Text>
+              <Text style={styles.label}>My Rooms</Text>
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.num}>45</Text>
+              <Text style={styles.label}>Total Rooms</Text>
+            </View>
+          </View>
+          <View style={styles.btn_con}>
+            <Pressable style={styles.btn1}>
+              <FontAwesome5 name="pen" size={16} color="#fff" style={{marginRight:5}} />
+              <Text style={styles.text1}>Edit Profile</Text>
+            </Pressable>
+            <Pressable style={styles.btn2}>
+              <Text style={styles.text2}>LogOut</Text>
+            <MaterialIcons name="logout" size={18} color="#000" style={{marginLeft:5}} />
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </>
