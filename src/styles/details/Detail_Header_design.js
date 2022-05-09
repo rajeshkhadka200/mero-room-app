@@ -128,6 +128,7 @@ export const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: "#5B628F",
     borderRadius: 10,
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },

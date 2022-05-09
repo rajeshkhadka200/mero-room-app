@@ -65,6 +65,7 @@ export const styles = StyleSheet.create({
   label: {
     fontFamily: "500",
     fontSize: 13,
+    color: "rgba(0, 0, 0, 0.79)",
   },
   btn_con: {
     flex: 1,
@@ -78,8 +79,8 @@ export const styles = StyleSheet.create({
     flex: 1 / 1.6,
     borderRadius: 5,
     alignItems: "center",
-    justifyContent:"center",
-    flexDirection:"row"
+    justifyContent: "center",
+    flexDirection: "row",
   },
   text1: {
     color: "#fff",
@@ -92,11 +93,28 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
-    flexDirection:"row"
-
+    flexDirection: "row",
   },
-  text2:{
-    fontFamily:"500",
+  text2: {
+    fontFamily: "500",
     lineHeight: 37,
+  },
+  lower_header: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  fav_logo: {
+    fontFamily: "500",
+    fontSize: 18,
+  },
+  love_icon: {
+    marginHorizontal: 10,
+  },
+  line: {
+    flex: 1,
+    height: 2,
+    backgroundColor: "#757575",
+    borderRadius: 5,
   },
 });

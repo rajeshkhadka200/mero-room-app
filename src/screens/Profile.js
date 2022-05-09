@@ -1,12 +1,42 @@
-import { View, Text, ScrollView, Image, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+  FlatList,
+} from "react-native";
 import React from "react";
 import { styles } from "../styles/Profile/profile_design.js";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialIcons } from '@expo/vector-icons'; 
-
+import { MaterialIcons } from "@expo/vector-icons";
+import RoomCard from "../components/Global/RoomCard.js";
 
 const Profile = () => {
+  const my_fav = [
+    {
+      photo: require("../../assets/img/room1.jpg"),
+      address: "Butwal Kalikanagar",
+      price: "5000",
+      room_id: 5,
+    },
+    {
+      photo: require("../../assets/img/room2.jpg"),
+      address: "Butwal Sukhanagar",
+      price: "4000",
+      room_id: 5,
+    },
+  ];
+
+  const renderRooms = ({ item }) => {
+    return (
+      <>
+        <RoomCard data={item} render_location="profile" />
+      </>
+    );
+  };
+
   return (
     <>
       <ScrollView
@@ -45,13 +75,37 @@ const Profile = () => {
           </View>
           <View style={styles.btn_con}>
             <Pressable style={styles.btn1}>
-              <FontAwesome5 name="pen" size={16} color="#fff" style={{marginRight:5}} />
+              <FontAwesome5
+                name="pen"
+                size={16}
+                color="#fff"
+                style={{ marginRight: 5 }}
+              />
               <Text style={styles.text1}>Edit Profile</Text>
             </Pressable>
             <Pressable style={styles.btn2}>
               <Text style={styles.text2}>LogOut</Text>
-            <MaterialIcons name="logout" size={18} color="#000" style={{marginLeft:5}} />
+              <MaterialIcons
+                name="logout"
+                size={18}
+                color="#000"
+                style={{ marginLeft: 5 }}
+              />
             </Pressable>
+          </View>
+          <View style={styles.lower_wrapper_fav}>
+            <View style={styles.lower_header}>
+              <Text style={styles.fav_logo}>My Favourite</Text>
+              <MaterialIcons
+                style={styles.love_icon}
+                name="favorite"
+                size={24}
+                color="#F66565"
+              />
+              <View style={styles.line}></View>
+            </View>
+            {/* actual data */}
+            <FlatList data={my_fav} renderItem={renderRooms} />
           </View>
         </View>
       </ScrollView>

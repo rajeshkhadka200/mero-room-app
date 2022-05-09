@@ -7,16 +7,12 @@ import {
 } from "react-native";
 import React, { useContext } from "react";
 import Detail_header from "../components/details/Detail_header";
-import { ContexStore } from "../context/Context";
 
 // main detail page
 const Detail = () => {
-  const contextData = useContext(ContexStore);
-  const { isModel } = contextData;
-
   return (
     <SafeAreaView>
-      <ScrollView scrollEnabled={!isModel}>
+      <ScrollView>
         {/* this includes picture, others and others info */}
         <Detail_header />
         {/* Comment */}

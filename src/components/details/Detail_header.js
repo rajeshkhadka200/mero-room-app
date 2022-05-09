@@ -1,13 +1,21 @@
 import React, { useContext, useRef, useState } from "react";
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Pressable,
+} from "react-native";
+import call from "react-native-phone-call";
 import { styles } from "../../styles/details/Detail_Header_design.js"; //header css
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Modal from "../../components/details/Model";
 import { ContexStore } from "../../context/Context.js";
 import Comment from "./Comment.js";
+import { Entypo } from "@expo/vector-icons";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -33,12 +41,14 @@ const WhiteIcon = ({ text }) => {
 const Detail_header = ({ route }) => {
   // const {room_id} = route.params
   const room_id = 5;
-  const contextData = useContext(ContexStore);
-  const { isModel, setisModel } = contextData;
-
   const navigation = useNavigation();
-  const handleModel = () => {
-    setisModel(!isModel);
+  const makeCall = () => {
+    const args = {
+      number: "9854858548",
+      prompt: true,
+    };
+    // Make a call
+    call(args).catch(console.error);
   };
 
   const imgs = [
@@ -137,7 +147,7 @@ const Detail_header = ({ route }) => {
             </Text>
             {/* render map here */}
             <View style={styles.btn_wrapper}>
-              <TouchableOpacity style={styles.btn_apply}>
+              <Pressable style={styles.btn_apply}>
                 <Text
                   style={{
                     color: "#fff",
@@ -145,19 +155,25 @@ const Detail_header = ({ route }) => {
                     fontFamily: "500",
                   }}
                 >
-                  Apply
+                  Contact for room
                 </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleModel} style={styles.btn_left}>
-                <FontAwesome5 name="user-friends" size={24} color="#5B628F" />
+                <AntDesign
+                  style={{
+                    marginLeft: 5,
+                  }}
+                  name="arrowright"
+                  size={24}
+                  color="#fff"
+                />
+              </Pressable>
+              <TouchableOpacity onPress={makeCall} style={styles.btn_left}>
+                <Entypo name="phone" size={24} color="#5B628F" />
               </TouchableOpacity>
             </View>
           </View>
         </View>
         <Comment room_id={room_id} />
       </View>
-
-      {isModel ? <Modal /> : null}
     </>
   );
 };
