@@ -21,15 +21,24 @@ import {
 import { ContexStore } from "../context/Context";
 import { upload } from "../utils/HandleUpload";
 import Explore from "../screens/Explore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
-
 //notification indicator
 const notif = true;
-
 const Tabs = ({ navigation }) => {
+  const Logout = async () => {
+    alert("loging out");
+    try {
+      await AsyncStorage.removeItem("auth_token");
+      console.log(await AsyncStorage.getItem("auth_token"));
+    } catch (error) {
+      console.log("err in logout", error);
+    }
+  };
   const { user, data, img } = useContext(ContexStore);
   console.log("tabs", user);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -54,20 +63,28 @@ const Tabs = ({ navigation }) => {
                 <TouchableOpacity style={header.headerIcon}>
                   <Ionicons
                     onPress={() => {
-                      navigation.navigate("Notif");
+                      Logout();
                     }}
+                    // onPress={() => {
+                    //   navigation.navigate("Notif");
+                    // }}
                     name="notifications-outline"
                     size={27}
                     color="#929191"
                   />
                   {notif ? <View style={header.dot}></View> : null}
                 </TouchableOpacity>
-                <TouchableOpacity style={header.headerImg}>
-                  {user !== null ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Auth");
+                  }}
+                  style={header.headerImg}
+                >
+                  {user.length > 0 ? (
                     <Image
                       style={header.avatar}
                       source={{
-                        uri: user.photoUrl,
+                        uri: user[0]?.photoUrl,
                       }}
                     />
                   ) : (

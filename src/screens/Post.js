@@ -24,7 +24,21 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { ContexStore } from "../context/Context";
+import { CheckLogin } from "../utils/Check";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Post = () => {
+  const [token, settoken] = useState("");
+  const getToken = async () => {
+    const id = await AsyncStorage.getItem("auth_token");
+    settoken(id);
+  };
+  getToken();
+  console.log(token);
+  if (token === null) {
+    CheckLogin("Please Login", "Login to access");
+    console.log("hello");
+  }
+
   const { data, setData, img, setImg } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`

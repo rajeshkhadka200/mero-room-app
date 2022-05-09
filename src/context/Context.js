@@ -16,16 +16,12 @@ const Context = ({ children }) => {
 
   useEffect(async () => {
     try {
-      if (token) {
-        const q = query(collection(db, "users"), where("user_id", "==", token));
-        onSnapshot(q, (snapshot) => {
-          snapshot.docs.forEach((doc) => {
-            setUser({ ...doc.data(), _id: doc.id });
-          });
+      const q = query(collection(db, "users"), where("user_id", "==", token));
+      onSnapshot(q, (snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          setUser([{ ...doc.data(), _id: doc.id }]);
         });
-      } else {
-        setUser([]);
-      }
+      });
     } catch (error) {
       console.log("err while geting data", error);
     }
