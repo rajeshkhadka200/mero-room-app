@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    // paddingVertical:20
+    paddingVertical: 18,
   },
   num: {
     fontFamily: "600",
