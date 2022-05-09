@@ -14,7 +14,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import { District } from "../../config/api";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Checkbox from "react-native-modest-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
@@ -33,12 +33,10 @@ const Post = () => {
     settoken(id);
   };
   getToken();
-  console.log(token);
+
   if (token === null) {
     CheckLogin("Please Login", "Login to access");
-    console.log("hello");
   }
-
   const { data, setData, img, setImg } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`
