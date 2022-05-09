@@ -53,7 +53,7 @@ export default function App() {
     <>
       <Context>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Auth">
+          <Stack.Navigator initialRouteName="Tabs">
             <Stack.Screen
               options={{ headerShown: false }}
               name="Tabs"

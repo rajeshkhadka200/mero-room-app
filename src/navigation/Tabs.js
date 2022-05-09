@@ -62,12 +62,15 @@ const Tabs = ({ navigation }) => {
                   />
                   {notif ? <View style={header.dot}></View> : null}
                 </TouchableOpacity>
-                <TouchableOpacity style={header.headerImg}>
-                  {user !== null ? (
+                <TouchableOpacity
+                  style={header.headerImg}
+                  onPress={() => navigation.navigate("Auth")}
+                >
+                  {user.length > 0 ? (
                     <Image
                       style={header.avatar}
                       source={{
-                        uri: user.photoUrl,
+                        uri: user[0]?.photoUrl,
                       }}
                     />
                   ) : (
@@ -184,7 +187,38 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         options={{
-          headerTitleAlign: "center",
+          headerStyle:{
+            borderBottomColor:"#efefef",
+            borderBottomWidth:1
+          },
+          headerTitleStyle:{
+             fontFamily:"500",
+             marginLeft:-5,
+             marginTop:4
+          },
+          headerLeft: () => (
+            <>
+              <Pressable onPress={() => navigation.goBack()}>
+                <AntDesign
+                  style={{ marginLeft: 15 }}
+                  name="arrowleft"
+                  size={28}
+                  color="black"
+                />
+              </Pressable>
+            </>
+          ),
+          headerRight: () => (
+            <>
+              <MaterialIcons
+                style={{ marginRight: 15 }}
+                name="logout"
+                size={28}
+                color="black"
+              />
+            </>
+          ),
+          headerTitleAlign: "Left",
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <FontAwesome

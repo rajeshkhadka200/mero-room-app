@@ -32,7 +32,7 @@ const HomeHeader = () => {
     <>
       <View style={styles.headerWrapper}>
         <View style={styles.searchCon}>
-          <Text style={styles.searchText}>Hi, {user.name}</Text>
+          <Text style={styles.searchText}>Hi, {user[0]?.name}</Text>
           <View style={styles.searchWrapper}>
             <TextInput
               value={search}
