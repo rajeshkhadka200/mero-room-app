@@ -38,10 +38,16 @@ const Post = ({ navigation }) => {
     data.isFlat ? `a whole flat` : `room only.`
   } 
   `;
-  let array = new Array(4);
+  // let array = new Array(4);
+
+  const [images, setimages] = useState({
+    one: "",
+    two: "",
+    three: "",
+    four: "",
+  });
   data.desc = detail;
-  const imageUpload = async (index) => {
-    console.log(index);
+  const imageUpload = async (key) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.photo,
       allowsEditing: false,
@@ -49,13 +55,10 @@ const Post = ({ navigation }) => {
       quality: 0.8,
     });
     if (!result.cancelled) {
-      array[index] = result.uri;
-      console.log("array", array);
-      // setImg([...img, (img[index] = result.uri)]);
-      setImg([...img, array]);
+      setimages({ ...images, [key]: result.uri });
     }
   };
-  console.log("stte", img);
+  console.log("images new", images);
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
   const handleChange = (name, value) => {
@@ -201,28 +204,36 @@ const Post = ({ navigation }) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload(0);
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
+            {images.one === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("one");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>choose an image</Text>
+              </View>
+            ) : (
+              <View style={styles.post_img}>
+                <Image
+                  style={styles.post_img}
+                  source={{
+                    uri: images.one,
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>
-                choose
-                {/* {img.length < 1 ? "choose an image" : "picked already"} */}
-              </Text>
-            </View>
+              </View>
+            )}
 
             <View style={styles.post_img}>
               <TouchableOpacity
                 onPress={() => {
-                  imageUpload(1);
+                  imageUpload("two");
                 }}
               >
                 <MaterialCommunityIcons
@@ -240,7 +251,7 @@ const Post = ({ navigation }) => {
             <View style={styles.post_img}>
               <TouchableOpacity
                 onPress={() => {
-                  imageUpload(2);
+                  imageUpload("three");
                 }}
               >
                 <MaterialCommunityIcons
@@ -254,7 +265,7 @@ const Post = ({ navigation }) => {
             <View style={styles.post_img}>
               <TouchableOpacity
                 onPress={() => {
-                  imageUpload(3);
+                  imageUpload("four");
                 }}
               >
                 <MaterialCommunityIcons
