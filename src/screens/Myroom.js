@@ -40,7 +40,13 @@ const Myroom = () => {
           marginTop: 20,
         }}
       >
-        <FlatList data={my_room} renderItem={renderRooms} />
+        <FlatList
+          data={my_room}
+          renderItem={renderRooms}
+          keyExtractor={(i) => {
+            i.index;
+          }}
+        />
       </View>
     </ScrollView>
   );

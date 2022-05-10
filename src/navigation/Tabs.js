@@ -37,7 +37,6 @@ const Tabs = ({ navigation }) => {
     }
   };
   const { user, data, img } = useContext(ContexStore);
-  console.log("tabs", user);
 
   return (
     <Tab.Navigator
@@ -100,9 +99,9 @@ const Tabs = ({ navigation }) => {
             </>
           ),
           headerStyle: {
-            elevation: 0,
             backgroundColor: "#fff",
             height: 65,
+            elevation: 0,
           },
           headerTitleStyle: {
             fontFamily: "500",
@@ -126,22 +125,66 @@ const Tabs = ({ navigation }) => {
       />
       <Tab.Screen
         options={{
-          headerTitleAlign: "Left",
-          tabBarLabel: "Explore",
-          tabBarIcon: ({ focused }) => (
-            <MaterialIcons
-              name={focused ? "favorite" : "favorite-border"}
-              size={30}
-              color={focused ? "#5B628F" : "#929191"}
-            />
+          headerStyle: {
+            elevation: 0,
+            borderBottomColor: "#efefef",
+            borderBottomWidth: 1,
+          },
+          headerTitleStyle: {
+            fontFamily: "500",
+            marginLeft: -5,
+            marginTop: 4,
+          },
+          headerLeft: () => (
+            <>
+              <Pressable onPress={() => navigation.goBack()}>
+                <AntDesign
+                  style={{ marginLeft: 15 }}
+                  name="arrowleft"
+                  size={28}
+                  color="black"
+                />
+              </Pressable>
+            </>
           ),
+          tabBarLabel: "Explore",
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <MaterialIcons name="explore" size={35} color="#5B628F" />
+            ) : (
+              <AntDesign name="find" size={30} color="#929191" />
+            ),
         }}
-        name="Fav"
+        name="Explore"
         component={Explore}
       />
 
       <Tab.Screen
         options={{
+          headerStyle: {
+            elevation: 0,
+            borderBottomColor: "#Dfdfdf",
+            borderBottomWidth: 1,
+          },
+          headerTitleStyle: {
+            fontFamily: "500",
+            marginLeft: -5,
+            marginTop: 4,
+            fontSize: 18,
+          },
+          headerLeft: () => (
+            <>
+              <Pressable onPress={() => navigation.goBack()}>
+                <AntDesign
+                  style={{ marginLeft: 15 }}
+                  name="arrowleft"
+                  size={28}
+                  color="black"
+                />
+              </Pressable>
+            </>
+          ),
+
           headerRight: () => (
             <Pressable onPress={() => upload(data, img)}>
               <Text style={header.btn_post}>Post</Text>
@@ -174,14 +217,27 @@ const Tabs = ({ navigation }) => {
         options={{
           headerStyle: {
             elevation: 0,
-            borderBottomWidth: 1,
             borderBottomColor: "#Dfdfdf",
+            borderBottomWidth: 1,
           },
           headerTitleStyle: {
             fontFamily: "500",
-            color: "#000",
+            marginLeft: -5,
+            marginTop: 4,
             fontSize: 18,
           },
+          headerLeft: () => (
+            <>
+              <Pressable onPress={() => navigation.goBack()}>
+                <AntDesign
+                  style={{ marginLeft: 15 }}
+                  name="arrowleft"
+                  size={28}
+                  color="black"
+                />
+              </Pressable>
+            </>
+          ),
 
           headerTitleAlign: "left",
           tabBarLabel: "My Room",
@@ -203,13 +259,14 @@ const Tabs = ({ navigation }) => {
         options={{
           headerStyle: {
             elevation: 0,
-            borderBottomColor: "#efefef",
+            borderBottomColor: "#Dfdfdf",
             borderBottomWidth: 1,
           },
           headerTitleStyle: {
             fontFamily: "500",
             marginLeft: -5,
             marginTop: 4,
+            fontSize: 18,
           },
           headerLeft: () => (
             <>
