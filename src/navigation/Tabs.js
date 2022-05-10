@@ -36,7 +36,7 @@ const Tabs = ({ navigation }) => {
       console.log("err in logout", error);
     }
   };
-  const { user, data, img } = useContext(ContexStore);
+  const { user, data, images } = useContext(ContexStore);
 
   return (
     <Tab.Navigator
@@ -186,7 +186,7 @@ const Tabs = ({ navigation }) => {
           ),
 
           headerRight: () => (
-            <Pressable onPress={() => upload(data, img)}>
+            <Pressable onPress={() => upload(data, images)}>
               <Text style={header.btn_post}>Post</Text>
             </Pressable>
           ),

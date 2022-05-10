@@ -41,7 +41,12 @@ const Context = ({ children }) => {
     isFlat: false,
     desc: "",
   });
-
+  const [images, setimages] = useState({
+    one: "",
+    two: "",
+    three: "",
+    four: "",
+  });
   // state for the post loader track
   const [isRoomuploading, setisRoomuploading] = useState(false);
   return (
@@ -53,8 +58,8 @@ const Context = ({ children }) => {
         setisModel,
         data,
         setData,
-        img,
-        setImg,
+        images,
+        setimages,
         isRoomuploading,
         setisRoomuploading,
       }}

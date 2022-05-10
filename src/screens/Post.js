@@ -18,16 +18,10 @@ import React, { useState, useEffect } from "react";
 import Checkbox from "react-native-modest-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { Entypo } from "@expo/vector-icons";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import { ContexStore } from "../context/Context";
-import { CheckLogin } from "../utils/Check";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const Post = ({ navigation }) => {
-  const { data, setData, img, setImg } = React.useContext(ContexStore);
+  const { data, setData, images, setimages } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`
   }. Kitchen is ${
@@ -38,16 +32,10 @@ const Post = ({ navigation }) => {
     data.isFlat ? `a whole flat` : `room only.`
   } 
   `;
-  // let array = new Array(4);
 
-  const [images, setimages] = useState({
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-  });
   data.desc = detail;
   const imageUpload = async (key) => {
+    console.log("key", key);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.photo,
       allowsEditing: false,
@@ -58,7 +46,6 @@ const Post = ({ navigation }) => {
       setimages({ ...images, [key]: result.uri });
     }
   };
-  console.log("images new", images);
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
   const handleChange = (name, value) => {
@@ -230,52 +217,85 @@ const Post = ({ navigation }) => {
               </View>
             )}
 
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload("two");
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
+            {images.two === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("two");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+            ) : (
+              <View style={styles.post_img}>
+                <Image
+                  style={styles.post_img}
+                  source={{
+                    uri: images.two,
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
-            </View>
+              </View>
+            )}
           </View>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload("three");
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
+            {images.three === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("three");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+            ) : (
+              <View style={styles.post_img}>
+                <Image
+                  style={styles.post_img}
+                  source={{
+                    uri: images.three,
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
-            </View>
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload("four");
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
+              </View>
+            )}
+            {images.four === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("four");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+            ) : (
+              <View style={styles.post_img}>
+                <Image
+                  style={styles.post_img}
+                  source={{
+                    uri: images.four,
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
-            </View>
+              </View>
+            )}
           </View>
         </View>
       </View>
