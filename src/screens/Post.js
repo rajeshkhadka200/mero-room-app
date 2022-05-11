@@ -9,6 +9,7 @@ import {
   Pressable,
   RefreshControl,
 } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 import { styles } from "../styles/post/post_design";
 import SelectDropdown from "react-native-select-dropdown";
 import { District } from "../../config/api";
@@ -53,6 +54,9 @@ const Post = ({ navigation }) => {
       setimages({ ...images, [key]: result.uri });
     }
   };
+  const cutImg = (key) => {
+    setimages({ ...images, [key]: "" });
+  };
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
   const handleChange = (name, value) => {
@@ -83,7 +87,7 @@ const Post = ({ navigation }) => {
           Note: Please fill the form with correct details
         </Text>
         <TextInput
-          editable={isRoomuploading}
+          editable={!isRoomuploading}
           value={data.address}
           placeholder="Enter the Address"
           style={styles.post_input1}
@@ -122,7 +126,7 @@ const Post = ({ navigation }) => {
         />
         <View style={styles.post_input2_con}>
           <TextInput
-            editable={isRoomuploading}
+            editable={!isRoomuploading}
             value={data.rate}
             keyboardType="number-pad"
             placeholder="Rate"
@@ -132,7 +136,7 @@ const Post = ({ navigation }) => {
             }}
           />
           <TextInput
-            editable={isRoomuploading}
+            editable={!isRoomuploading}
             value={data.rooms_count}
             keyboardType="number-pad"
             placeholder="No of Room"
@@ -224,6 +228,15 @@ const Post = ({ navigation }) => {
                     uri: images.one,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("one");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
             {images.two === "" ? (
@@ -249,6 +262,15 @@ const Post = ({ navigation }) => {
                     uri: images.two,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("two");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
           </View>
@@ -278,6 +300,15 @@ const Post = ({ navigation }) => {
                     uri: images.three,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("three");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
             {images.four === "" ? (
@@ -303,6 +334,15 @@ const Post = ({ navigation }) => {
                     uri: images.four,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("four");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
           </View>

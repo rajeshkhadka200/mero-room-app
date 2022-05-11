@@ -95,6 +95,9 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
   img_con: {
+    height: "auto",
+    flex: 1,
+    borderStyle: "dashed",
     borderColor: "#BFBFBA",
     borderRadius: 10,
     borderStyle:"dashed",
@@ -106,6 +109,7 @@ export const styles = StyleSheet.create({
     position: "relative",
     height: 250 / 2,
     width: "50%",
+    resizeMode: "cover",
   },
   con_after_img: {
     position: "absolute",
@@ -140,5 +144,17 @@ export const styles = StyleSheet.create({
 
   containerStyle: {
     borderRadius: 500,
+  },
+  cross: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+    justifyContent: "center",
+    height: 30,
+    width: 30,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    borderRadius: 500,
+    textAlign: "center",
+    lineHeight: 30,
   },
 });
