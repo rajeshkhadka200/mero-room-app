@@ -47,7 +47,7 @@ const Context = ({ children }) => {
     three: "",
     four: "",
   });
-  // state for the post loader track
+  // state for the post success track
   const [isRoomuploading, setisRoomuploading] = useState(false);
   return (
     <ContexStore.Provider

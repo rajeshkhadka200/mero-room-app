@@ -95,18 +95,28 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
   img_con: {
+    height: 250,
     flex: 1,
     borderStyle: "dashed",
     borderColor: "#BFBFBA",
     borderRadius: 10,
     borderWidth: 3,
   },
+  img_con_after: {
+    position: "relative",
+    height: 250 / 2,
+    width: "50%",
+  },
+  con_after_img: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+  },
   post_img: {
-    flex: 1 / 2,
+    width: "50%",
     backgroundColor: "#EFEFEF",
     padding: hp("3%"),
     paddingBottom: hp("3%"),
-
     alignItems: "center",
   },
   post_img_text: {

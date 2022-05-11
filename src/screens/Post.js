@@ -21,7 +21,14 @@ import * as ImagePicker from "expo-image-picker";
 import { ContexStore } from "../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const Post = ({ navigation }) => {
-  const { data, setData, images, setimages } = React.useContext(ContexStore);
+  const {
+    data,
+    setData,
+    images,
+    setimages,
+    isRoomuploading,
+    setisRoomuploading,
+  } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`
   }. Kitchen is ${
@@ -76,6 +83,7 @@ const Post = ({ navigation }) => {
           Note: Please fill the form with correct details
         </Text>
         <TextInput
+          editable={isRoomuploading}
           value={data.address}
           placeholder="Enter the Address"
           style={styles.post_input1}
@@ -114,6 +122,7 @@ const Post = ({ navigation }) => {
         />
         <View style={styles.post_input2_con}>
           <TextInput
+            editable={isRoomuploading}
             value={data.rate}
             keyboardType="number-pad"
             placeholder="Rate"
@@ -123,6 +132,7 @@ const Post = ({ navigation }) => {
             }}
           />
           <TextInput
+            editable={isRoomuploading}
             value={data.rooms_count}
             keyboardType="number-pad"
             placeholder="No of Room"
@@ -207,9 +217,9 @@ const Post = ({ navigation }) => {
                 <Text style={styles.post_img_text}>choose an image</Text>
               </View>
             ) : (
-              <View style={styles.post_img}>
+              <View style={styles.img_con_after}>
                 <Image
-                  style={styles.post_img}
+                  style={styles.con_after_img}
                   source={{
                     uri: images.one,
                   }}
@@ -233,9 +243,9 @@ const Post = ({ navigation }) => {
                 <Text style={styles.post_img_text}>Choose an Image</Text>
               </View>
             ) : (
-              <View style={styles.post_img}>
+              <View style={styles.img_con_after}>
                 <Image
-                  style={styles.post_img}
+                  style={styles.con_after_img}
                   source={{
                     uri: images.two,
                   }}
@@ -262,9 +272,9 @@ const Post = ({ navigation }) => {
                 <Text style={styles.post_img_text}>Choose an Image</Text>
               </View>
             ) : (
-              <View style={styles.post_img}>
+              <View style={styles.img_con_after}>
                 <Image
-                  style={styles.post_img}
+                  style={styles.con_after_img}
                   source={{
                     uri: images.three,
                   }}
@@ -287,9 +297,9 @@ const Post = ({ navigation }) => {
                 <Text style={styles.post_img_text}>Choose an Image</Text>
               </View>
             ) : (
-              <View style={styles.post_img}>
+              <View style={styles.img_con_after}>
                 <Image
-                  style={styles.post_img}
+                  style={styles.con_after_img}
                   source={{
                     uri: images.four,
                   }}

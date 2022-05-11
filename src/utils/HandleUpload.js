@@ -3,6 +3,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // storage
 import { addDoc, collection, updateDoc, doc } from "firebase/firestore"; // firestore
 export const upload = async (data, img) => {
   let images_to_push = [];
+  let downloadLink = [];
   const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
     data;
 
@@ -34,8 +35,10 @@ export const upload = async (data, img) => {
       desc,
       thumbnail: [],
     });
+    if (docRef) {
+      console.log("uploaded with id", docRef.id);
+    }
 
-    let downloadLink = [];
     const metadata = {
       contentType: "image/jpeg",
     };
@@ -52,9 +55,10 @@ export const upload = async (data, img) => {
         xhr.open("GET", img, true);
         xhr.send(null);
       });
-      const imageRef = ref(st, `images/${Date.now()}`);
+      const imageRef = ref(st, `images/${Date.now()}-meroroom`);
       await uploadBytes(imageRef, blob, metadata)
         .then(async () => {
+          console.log("uploaded");
           const downloadURL = await getDownloadURL(imageRef);
           downloadLink.push(downloadURL);
           await updateDoc(doc(db, "rooms", docRef.id), {
