@@ -23,7 +23,7 @@ const Auth = () => {
         try {
           await AsyncStorage.setItem("auth_token", id);
           alert("Loged in successfully");
-          navigation.replace("Tabs");
+          navigation.navigate("Tabs");
           return;
         } catch (err) {
           console.log("err while seting login ", err);
@@ -38,6 +38,8 @@ const Auth = () => {
       try {
         await AsyncStorage.setItem("auth_token", id);
         alert("sign up in successfully");
+        navigation.navigate("Tabs");
+
 
         return;
       } catch (err) {

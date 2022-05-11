@@ -86,7 +86,7 @@ const Post = ({ navigation }) => {
           Note: Please fill the form with correct details
         </Text>
         <TextInput
-          editable={isRoomuploading}
+          editable={!isRoomuploading}
           value={data.address}
           placeholder="Enter the Address"
           style={styles.post_input1}
@@ -125,7 +125,7 @@ const Post = ({ navigation }) => {
         />
         <View style={styles.post_input2_con}>
           <TextInput
-            editable={isRoomuploading}
+            editable={!isRoomuploading}
             value={data.rate}
             keyboardType="number-pad"
             placeholder="Rate"
@@ -135,7 +135,7 @@ const Post = ({ navigation }) => {
             }}
           />
           <TextInput
-            editable={isRoomuploading}
+            editable={!isRoomuploading}
             value={data.rooms_count}
             keyboardType="number-pad"
             placeholder="No of Room"
@@ -217,7 +217,7 @@ const Post = ({ navigation }) => {
                     color="#BFBFBA"
                   />
                 </TouchableOpacity>
-                <Text style={styles.post_img_text}>choose an image</Text>
+                <Text style={styles.post_img_text}>Choose an image</Text>
               </View>
             ) : (
               <View style={styles.img_con_after}>
@@ -238,7 +238,6 @@ const Post = ({ navigation }) => {
                 </Text>
               </View>
             )}
-
             {images.two === "" ? (
               <View style={styles.post_img}>
                 <TouchableOpacity

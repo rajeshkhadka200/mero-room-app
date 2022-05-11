@@ -39,7 +39,7 @@ const Tabs = ({ navigation }) => {
       console.log("err in logout", error);
     }
   };
-  const { user, data, images, isRoomuploading, setisRoomuploading } =
+  const { user, data, images,setData,setimages, isRoomuploading, setisRoomuploading } =
     useContext(ContexStore);
   //post hooks
 
@@ -107,6 +107,22 @@ const Tabs = ({ navigation }) => {
           });
           if (downloadLink.length === 4) {
             setisRoomuploading(false);
+            setData({
+              address: "",
+              district: "",
+              rate: "",
+              rooms_count: "",
+              iskitchen: false,
+              isFlat: false,
+              desc: "",
+            })
+            setimages({
+              one: "",
+              two: "",
+              three: "",
+              four: "",
+            })
+            
           }
           blob.close();
         })
@@ -274,7 +290,7 @@ const Tabs = ({ navigation }) => {
                     <ActivityIndicator size="small" color="#fff" />
                   </>
                 ) : (
-                  "post"
+                  "Post"
                 )}
               </Text>
             </Pressable>
