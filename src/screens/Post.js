@@ -9,6 +9,7 @@ import {
   Pressable,
   RefreshControl,
 } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 import { styles } from "../styles/post/post_design";
 import SelectDropdown from "react-native-select-dropdown";
 import { District } from "../../config/api";
@@ -52,6 +53,9 @@ const Post = ({ navigation }) => {
     if (!result.cancelled) {
       setimages({ ...images, [key]: result.uri });
     }
+  };
+  const cutImg = (key) => {
+    setimages({ ...images, [key]: "" });
   };
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
@@ -224,6 +228,15 @@ const Post = ({ navigation }) => {
                     uri: images.one,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("one");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
 
@@ -250,6 +263,15 @@ const Post = ({ navigation }) => {
                     uri: images.two,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("two");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
           </View>
@@ -279,6 +301,15 @@ const Post = ({ navigation }) => {
                     uri: images.three,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("three");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
             {images.four === "" ? (
@@ -304,6 +335,15 @@ const Post = ({ navigation }) => {
                     uri: images.four,
                   }}
                 />
+                <Text
+                  onPress={() => {
+                    cutImg("four");
+                  }}
+                  style={styles.cross}
+                >
+                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                </Text>
               </View>
             )}
           </View>
