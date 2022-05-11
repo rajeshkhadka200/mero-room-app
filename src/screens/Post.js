@@ -43,7 +43,6 @@ const Post = ({ navigation }) => {
 
   data.desc = detail;
   const imageUpload = async (key) => {
-    console.log("key", key);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.photo,
       allowsEditing: false,
@@ -234,7 +233,7 @@ const Post = ({ navigation }) => {
                   }}
                   style={styles.cross}
                 >
-                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  <Entypo name="circle-with-cross" size={20} color="#fff" />
                   {/* <Entypo name="cross" size={20} color="#fff" /> */}
                 </Text>
               </View>
@@ -269,7 +268,7 @@ const Post = ({ navigation }) => {
                   }}
                   style={styles.cross}
                 >
-                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  <Entypo name="circle-with-cross" size={20} color="#fff" />
                   {/* <Entypo name="cross" size={20} color="#fff" /> */}
                 </Text>
               </View>
@@ -307,7 +306,7 @@ const Post = ({ navigation }) => {
                   }}
                   style={styles.cross}
                 >
-                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  <Entypo name="circle-with-cross" size={20} color="#fff" />
                   {/* <Entypo name="cross" size={20} color="#fff" /> */}
                 </Text>
               </View>
@@ -341,7 +340,7 @@ const Post = ({ navigation }) => {
                   }}
                   style={styles.cross}
                 >
-                  <Entypo name="circle-with-cross" size={24} color="#fff" />
+                  <Entypo name="circle-with-cross" size={20} color="#fff" />
                   {/* <Entypo name="cross" size={20} color="#fff" /> */}
                 </Text>
               </View>
