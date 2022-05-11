@@ -95,19 +95,30 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
   img_con: {
-    flex: 1,
+    width:"100%",
     borderStyle: "dashed",
     borderColor: "#BFBFBA",
     borderRadius: 10,
     borderWidth: 3,
   },
   post_img: {
-    flex: 1 / 2,
+    width:"50%",
     backgroundColor: "#EFEFEF",
-    padding: hp("3%"),
+    paddingTop: hp("3%"),
     paddingBottom: hp("3%"),
-
     alignItems: "center",
+  },
+  img:{
+    width:wp("30%"),
+  },
+  cross:{
+      width:20,
+      height:20,
+      backgroundColor:"#000",
+      position:"absolute",
+      top:5,
+      right:215,
+      borderRadius:500
   },
   post_img_text: {
     fontFamily: "400",
@@ -118,10 +129,5 @@ export const styles = StyleSheet.create({
 
   containerStyle: {
     borderRadius: 500,
-  },
-  cross: {
-    position: "absolute",
-    top: 5,
-    right: 8,
   },
 });

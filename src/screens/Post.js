@@ -217,51 +217,90 @@ const Post = ({ navigation }) => {
                     color="#BFBFBA"
                   />
                 </TouchableOpacity>
-                <Text style={styles.post_img_text}>choose an image</Text>
+                <Text style={styles.post_img_text}>Choose an image</Text>
               </View>
             ) : (
-              <View style={styles.post_img}>
+              <>
                 <Image
-                  style={styles.post_img}
+                  style={styles.img}
                   source={{
                     uri: images.one,
                   }}
                 />
-              </View>
+                <Pressable
+                  style={styles.cross}
+                  onPress={() => setimages({ ...images, one: "" })}
+                >
+                  <Entypo name="cross" size={20} color="white" />
+                </Pressable>
+              </>
             )}
-
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload("two");
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
+            {images.two === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("two");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an image</Text>
+              </View>
+            ) : (
+              <>
+                <Image
+                  style={styles.img}
+                  source={{
+                    uri: images.two,
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
-            </View>
+                <Pressable
+                  style={styles.cross}
+                  onPress={() => setimages({ ...images, two: "" })}
+                >
+                  <Entypo name="cross" size={20} color="white" />
+                </Pressable>
+              </>
+            )}
           </View>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload("three");
+            {images.three === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("three");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an image</Text>
+              </View>
+            ) : (
+              <>
+              <Image
+                style={styles.img}
+                source={{
+                  uri: images.three,
                 }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
-            </View>
+                <Pressable
+                  style={styles.cross}
+                  onPress={() => setimages({ ...images, three: "" })}
+                >
+                  <Entypo name="cross" size={20} color="white" />
+                </Pressable>
+                </>
+            )}
             <View style={styles.post_img}>
               <TouchableOpacity
                 onPress={() => {
