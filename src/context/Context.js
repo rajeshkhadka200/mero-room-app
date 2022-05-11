@@ -41,8 +41,13 @@ const Context = ({ children }) => {
     isFlat: false,
     desc: "",
   });
-
-  // state for the post loader track
+  const [images, setimages] = useState({
+    one: "",
+    two: "",
+    three: "",
+    four: "",
+  });
+  // state for the post success track
   const [isRoomuploading, setisRoomuploading] = useState(false);
   return (
     <ContexStore.Provider
@@ -53,8 +58,8 @@ const Context = ({ children }) => {
         setisModel,
         data,
         setData,
-        img,
-        setImg,
+        images,
+        setimages,
         isRoomuploading,
         setisRoomuploading,
       }}

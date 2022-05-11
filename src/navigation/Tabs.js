@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
@@ -9,6 +9,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+// import { upload } from "../utils/HandleUpload";
+import { ActivityIndicator } from "react-native";
 import {
   View,
   TouchableOpacity,
@@ -17,9 +19,10 @@ import {
   Pressable,
   Image,
 } from "react-native";
-
+import { db, st } from "../../config/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // storage
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore"; // firestore
 import { ContexStore } from "../context/Context";
-import { upload } from "../utils/HandleUpload";
 import Explore from "../screens/Explore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -36,8 +39,83 @@ const Tabs = ({ navigation }) => {
       console.log("err in logout", error);
     }
   };
-  const { user, data, img } = useContext(ContexStore);
+  const { user, data, images, isRoomuploading, setisRoomuploading } =
+    useContext(ContexStore);
+  //post hooks
 
+  // post function
+  const upload = async (data, img) => {
+    let images_to_push = [];
+    let downloadLink = [];
+    const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
+      data;
+    for (var key in img) {
+      if (img[key] === "") {
+        return alert("Please select an images !");
+      }
+    }
+    for (var key in data) {
+      if (data[key] === "" || data[key] === "Choose a District") {
+        return alert("all feilds are required !!");
+      }
+    }
+    for (var key in img) {
+      images_to_push.push(img[key]);
+    }
+
+    setisRoomuploading(true);
+    const docRef = await addDoc(collection(db, "rooms"), {
+      room_id: Date.now(),
+      user_id: 10,
+      user_profile: "",
+      address,
+      district,
+      rate,
+      rooms_count,
+      iskitchen,
+      isFlat,
+      desc,
+      thumbnail: [],
+    });
+    if (!docRef.id) {
+      setisRoomuploading(false);
+      return alert("Error while uploading");
+    }
+    const metadata = {
+      contentType: "image/jpeg",
+    };
+    images_to_push.map(async (img) => {
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function (e) {
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", img, true);
+        xhr.send(null);
+      });
+      const imageRef = ref(st, `images/${Date.now()}-meroroom`);
+      await uploadBytes(imageRef, blob, metadata)
+        .then(async () => {
+          const downloadURL = await getDownloadURL(imageRef);
+          downloadLink.push(downloadURL);
+          await updateDoc(doc(db, "rooms", docRef.id), {
+            thumbnail: downloadLink,
+          });
+          if (downloadLink.length === 4) {
+            setisRoomuploading(false);
+          }
+          blob.close();
+        })
+        .catch((e) => {
+          setisRoomuploading(false);
+          console.log("err while upload", e);
+        });
+    });
+  };
   return (
     <Tab.Navigator
       screenOptions={{
@@ -186,8 +264,19 @@ const Tabs = ({ navigation }) => {
           ),
 
           headerRight: () => (
-            <Pressable onPress={() => upload(data, img)}>
-              <Text style={header.btn_post}>Post</Text>
+            <Pressable
+              disabled={isRoomuploading}
+              onPress={() => upload(data, images)}
+            >
+              <Text style={header.btn_post}>
+                {isRoomuploading ? (
+                  <>
+                    <ActivityIndicator size="small" color="#fff" />
+                  </>
+                ) : (
+                  "post"
+                )}
+              </Text>
             </Pressable>
           ),
           headerStyle: {
@@ -326,7 +415,7 @@ const header = StyleSheet.create({
     backgroundColor: "#5B628F",
     paddingHorizontal: 14,
     paddingVertical: 7,
-    width: 60,
+    // width: 60,
     borderRadius: 5,
     fontFamily: "500",
     color: "#fff",

@@ -2,46 +2,27 @@ import { db, st } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // storage
 import { addDoc, collection, updateDoc, doc } from "firebase/firestore"; // firestore
 export const upload = async (data, img) => {
-  let dummy_arrar = [
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-    {
-      name: "img_1",
-      uri: "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540rajeshkhadka200%252Fmobile_project/ImagePicker/21d43166-95a5-48f2-aa81-dd37b8efb0b0.jpg",
-    },
-  ];
+  let images_to_push = [];
+  let downloadLink = [];
   const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
     data;
+
+  for (var key in img) {
+    if (img[key] === "") {
+      return alert("Please select an images !");
+    }
+  }
   for (var key in data) {
     if (data[key] === "" || data[key] === "Choose a District") {
       return alert("all feilds are required !!");
     }
   }
+  for (var key in img) {
+    images_to_push.push(img[key]);
+  }
+
   try {
     const docRef = await addDoc(collection(db, "rooms"), {
-      //true
       room_id: Date.now(),
       user_id: 10,
       user_profile: "",
@@ -54,13 +35,14 @@ export const upload = async (data, img) => {
       desc,
       thumbnail: [],
     });
+    if (docRef) {
+      console.log("uploaded with id", docRef.id);
+    }
 
-    let imgs_array = [];
-    // handle file upload
     const metadata = {
       contentType: "image/jpeg",
     };
-    dummy_arrar.map(async (img) => {
+    images_to_push.map(async (img) => {
       const blob = await new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function () {
@@ -70,17 +52,17 @@ export const upload = async (data, img) => {
           reject(new TypeError("Network request failed"));
         };
         xhr.responseType = "blob";
-        xhr.open("GET", img.uri, true);
+        xhr.open("GET", img, true);
         xhr.send(null);
       });
-      const imageRef = ref(st, `images/${Date.now()}`);
-    await uploadBytes(imageRef, blob, metadata)
+      const imageRef = ref(st, `images/${Date.now()}-meroroom`);
+      await uploadBytes(imageRef, blob, metadata)
         .then(async () => {
+          console.log("uploaded");
           const downloadURL = await getDownloadURL(imageRef);
-          console.log(downloadURL);
-          imgs_array.push(downloadURL);
+          downloadLink.push(downloadURL);
           await updateDoc(doc(db, "rooms", docRef.id), {
-            thumbnail: imgs_array,
+            thumbnail: downloadLink,
           });
           blob.close();
         })
@@ -88,8 +70,6 @@ export const upload = async (data, img) => {
           console.log("err while upload", e);
         });
     });
-
-    //false
   } catch (e) {
     console.error("Error adding document: ", e);
   }

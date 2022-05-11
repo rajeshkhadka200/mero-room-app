@@ -18,16 +18,17 @@ import React, { useState, useEffect } from "react";
 import Checkbox from "react-native-modest-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { Entypo } from "@expo/vector-icons";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 import { ContexStore } from "../context/Context";
-import { CheckLogin } from "../utils/Check";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const Post = ({ navigation }) => {
-  const { data, setData, img, setImg } = React.useContext(ContexStore);
+  const {
+    data,
+    setData,
+    images,
+    setimages,
+    isRoomuploading,
+    setisRoomuploading,
+  } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`
   }. Kitchen is ${
@@ -38,16 +39,10 @@ const Post = ({ navigation }) => {
     data.isFlat ? `a whole flat` : `room only.`
   } 
   `;
-  // let array = new Array(4);
 
-  const [images, setimages] = useState({
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-  });
   data.desc = detail;
   const imageUpload = async (key) => {
+    console.log("key", key);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.photo,
       allowsEditing: false,
@@ -58,7 +53,6 @@ const Post = ({ navigation }) => {
       setimages({ ...images, [key]: result.uri });
     }
   };
-  console.log("images new", images);
   const [select1, setSelect1] = useState(false);
   const [select2, setSelect2] = useState(false);
   const handleChange = (name, value) => {
@@ -89,6 +83,7 @@ const Post = ({ navigation }) => {
           Note: Please fill the form with correct details
         </Text>
         <TextInput
+          editable={isRoomuploading}
           value={data.address}
           placeholder="Enter the Address"
           style={styles.post_input1}
@@ -127,6 +122,7 @@ const Post = ({ navigation }) => {
         />
         <View style={styles.post_input2_con}>
           <TextInput
+            editable={isRoomuploading}
             value={data.rate}
             keyboardType="number-pad"
             placeholder="Rate"
@@ -136,6 +132,7 @@ const Post = ({ navigation }) => {
             }}
           />
           <TextInput
+            editable={isRoomuploading}
             value={data.rooms_count}
             keyboardType="number-pad"
             placeholder="No of Room"
@@ -220,20 +217,14 @@ const Post = ({ navigation }) => {
                 <Text style={styles.post_img_text}>Choose an image</Text>
               </View>
             ) : (
-              <>
+              <View style={styles.img_con_after}>
                 <Image
-                  style={styles.img}
+                  style={styles.con_after_img}
                   source={{
                     uri: images.one,
                   }}
                 />
-                <Pressable
-                  style={styles.cross}
-                  onPress={() => setimages({ ...images, one: "" })}
-                >
-                  <Entypo name="cross" size={20} color="white" />
-                </Pressable>
-              </>
+              </View>
             )}
             {images.two === "" ? (
               <View style={styles.post_img}>
@@ -248,23 +239,17 @@ const Post = ({ navigation }) => {
                     color="#BFBFBA"
                   />
                 </TouchableOpacity>
-                <Text style={styles.post_img_text}>Choose an image</Text>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
               </View>
             ) : (
-              <>
+              <View style={styles.img_con_after}>
                 <Image
-                  style={styles.img}
+                  style={styles.con_after_img}
                   source={{
                     uri: images.two,
                   }}
                 />
-                <Pressable
-                  style={styles.cross}
-                  onPress={() => setimages({ ...images, two: "" })}
-                >
-                  <Entypo name="cross" size={20} color="white" />
-                </Pressable>
-              </>
+              </View>
             )}
           </View>
           <View
@@ -283,38 +268,43 @@ const Post = ({ navigation }) => {
                     color="#BFBFBA"
                   />
                 </TouchableOpacity>
-                <Text style={styles.post_img_text}>Choose an image</Text>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
               </View>
             ) : (
-              <>
-              <Image
-                style={styles.img}
-                source={{
-                  uri: images.three,
-                }}
+              <View style={styles.img_con_after}>
+                <Image
+                  style={styles.con_after_img}
+                  source={{
+                    uri: images.three,
+                  }}
                 />
-                <Pressable
-                  style={styles.cross}
-                  onPress={() => setimages({ ...images, three: "" })}
-                >
-                  <Entypo name="cross" size={20} color="white" />
-                </Pressable>
-                </>
+              </View>
             )}
-            <View style={styles.post_img}>
-              <TouchableOpacity
-                onPress={() => {
-                  imageUpload("four");
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="image-plus"
-                  size={35}
-                  color="#BFBFBA"
+            {images.four === "" ? (
+              <View style={styles.post_img}>
+                <TouchableOpacity
+                  onPress={() => {
+                    imageUpload("four");
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="image-plus"
+                    size={35}
+                    color="#BFBFBA"
+                  />
+                </TouchableOpacity>
+                <Text style={styles.post_img_text}>Choose an Image</Text>
+              </View>
+            ) : (
+              <View style={styles.img_con_after}>
+                <Image
+                  style={styles.con_after_img}
+                  source={{
+                    uri: images.four,
+                  }}
                 />
-              </TouchableOpacity>
-              <Text style={styles.post_img_text}>Choose an Image</Text>
-            </View>
+              </View>
+            )}
           </View>
         </View>
       </View>
