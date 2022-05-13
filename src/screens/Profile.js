@@ -46,7 +46,7 @@ const Profile = () => {
     try {
       await AsyncStorage.removeItem("auth_token");
       setUser([]);
-      navigation.navigate("Tabs");
+      navigation.navigate("Tabs",{screen:Home});
     } catch (error) {
       console.log("err in logout", error);
     }
