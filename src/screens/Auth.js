@@ -47,7 +47,7 @@ const Auth = () => {
           await AsyncStorage.setItem("auth_token", id);
           fetchUser();
           alert("Loged in successfully");
-          navigation.navigate("Tabs");
+          navigation.navigate("Mero Room");
           return;
         } catch (err) {
           console.log("err while seting login ", err);
@@ -65,7 +65,7 @@ const Auth = () => {
         // setUser
         fetchUser();
         alert("sign up in successfully");
-        navigation.navigate("Tabs");
+        navigation.navigate("Mero Room");
         return;
       } catch (err) {
         console.log("err while seting reg", err);
