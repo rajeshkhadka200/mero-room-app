@@ -13,9 +13,12 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import RoomCard from "../components/Global/RoomCard.js";
 import { ContexStore } from "../context/Context.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
-  const { user, rooms } = React.useContext(ContexStore);
+  const navigation = useNavigation();
+  const { user, setUser } = React.useContext(ContexStore);
   console.log("user in profile", user);
   const my_fav = [
     {
@@ -39,7 +42,15 @@ const Profile = () => {
       </>
     );
   };
-
+  const Logout = async () => {
+    try {
+      await AsyncStorage.removeItem("auth_token");
+      setUser([]);
+      navigation.navigate("Tabs");
+    } catch (error) {
+      console.log("err in logout", error);
+    }
+  };
   return (
     <>
       <ScrollView
@@ -52,19 +63,19 @@ const Profile = () => {
             <Image
               style={styles.pp}
               source={{
-                uri: "https://scontent.fktm10-1.fna.fbcdn.net/v/t39.30808-1/271552238_521282596092505_372241037423835333_n.jpg?stp=dst-jpg_p240x240&_nc_cat=104&ccb=1-6&_nc_sid=7206a8&_nc_ohc=3tPlezk2SpoAX-Ca6jI&_nc_ht=scontent.fktm10-1.fna&oh=00_AT_eB09DZrnnlPIZe5RWIhU-VI18FKD2m8d5GekBC07ulw&oe=627D5F7B",
+                uri: user[0]?.photoUrl,
               }}
             />
             <Pressable style={styles.camera_con}>
               <Entypo name="camera" size={20} color="black" />
             </Pressable>
           </View>
-          <Text style={styles.profile_name}>Utsav Bhattarai</Text>
+          <Text style={styles.profile_name}>{user[0]?.name}</Text>
         </View>
         <View style={styles.bottom_con}>
           <View style={styles.stat_con}>
             <View style={styles.box}>
-              <Text style={styles.num}>4</Text>
+              <Text style={styles.num}>{user[0]?.fav.length}</Text>
               <Text style={styles.label}>Favourite</Text>
             </View>
             <View style={styles.box}>
@@ -86,7 +97,7 @@ const Profile = () => {
               />
               <Text style={styles.text1}>Edit Profile</Text>
             </Pressable>
-            <Pressable style={styles.btn2}>
+            <Pressable onPress={Logout} style={styles.btn2}>
               <Text style={styles.text2}>LogOut</Text>
               <MaterialIcons
                 name="logout"
