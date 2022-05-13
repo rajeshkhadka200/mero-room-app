@@ -10,6 +10,8 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Pressable,
+  ActivityIndicator
 } from "react-native";
 // icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -48,9 +50,22 @@ import Profile from "../screens/Profile";
 import { ContexStore } from "../context/Context";
 import { useNavigation } from "@react-navigation/native";
 
+//Database
+import { db, st } from "../../config/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // storage
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore"; // firestore
+
 export default function Route() {
   const navigation = useNavigation();
-  const { user } = React.useContext(ContexStore);
+  const {
+    user,
+    data,
+    images,
+    setData,
+    setimages,
+    isRoomuploading,
+    setisRoomuploading,
+  } = React.useContext(ContexStore);
   const notif = true;
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -71,6 +86,96 @@ export default function Route() {
     return <AppLoading />;
   }
   const Stack = createNativeStackNavigator();
+
+
+  //room upload function
+  const upload = async (data, img) => {
+    let images_to_push = [];
+    let downloadLink = [];
+    const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
+      data;
+    for (var key in img) {
+      if (img[key] === "") {
+        return alert("Please select an images !");
+      }
+    }
+    for (var key in data) {
+      if (data[key] === "" || data[key] === "Choose a District") {
+        return alert("all feilds are required !!");
+      }
+    }
+    for (var key in img) {
+      images_to_push.push(img[key]);
+    }
+
+    setisRoomuploading(true);
+    const docRef = await addDoc(collection(db, "rooms"), {
+      room_id: Date.now(),
+      user_id: 10,
+      user_profile: "",
+      address,
+      district,
+      rate,
+      rooms_count,
+      iskitchen,
+      isFlat,
+      desc,
+      thumbnail: [],
+    });
+    if (!docRef.id) {
+      setisRoomuploading(false);
+      return alert("Error while uploading");
+    }
+    const metadata = {
+      contentType: "image/jpeg",
+    };
+    images_to_push.map(async (img) => {
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function (e) {
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", img, true);
+        xhr.send(null);
+      });
+      const imageRef = ref(st, `images/${Date.now()}-meroroom`);
+      await uploadBytes(imageRef, blob, metadata)
+        .then(async () => {
+          const downloadURL = await getDownloadURL(imageRef);
+          downloadLink.push(downloadURL);
+          await updateDoc(doc(db, "rooms", docRef.id), {
+            thumbnail: downloadLink,
+          });
+          if (downloadLink.length === 4) {
+            setisRoomuploading(false);
+            setData({
+              address: "",
+              district: "",
+              rate: "",
+              rooms_count: "",
+              iskitchen: false,
+              isFlat: false,
+              desc: "",
+            });
+            setimages({
+              one: "",
+              two: "",
+              three: "",
+              four: "",
+            });
+          }
+          blob.close();
+        })
+        .catch((e) => {
+          setisRoomuploading(false);
+          console.log("err while upload", e);
+        });
+    });
+  };
   return (
     <>
       <Stack.Navigator>
@@ -90,7 +195,7 @@ export default function Route() {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate("Explore");
+                      navigation.navigate("Auth");
                     }}
                     style={header.headerImg}
                   >
@@ -130,34 +235,99 @@ export default function Route() {
           component={Home}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              elevation: 0,
+              borderBottomColor: "#efefef",
+              borderBottomWidth: 1,
+            },
+            headerTitleStyle: {
+              fontFamily: "500",
+            },
+          }}
           name="Explore"
           component={Explore}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              elevation: 0,
+              borderBottomColor: "#Dfdfdf",
+              borderBottomWidth: 1,
+            },
+            headerTitleStyle: {
+              fontFamily: "500",
+              marginLeft: -5,
+              marginTop: 4,
+              fontSize: 18,
+            },
+            headerRight: () => (
+              <Pressable
+                disabled={isRoomuploading}
+                onPress={() => upload(data, images)}
+              >
+                <Text style={header.btn_post}>
+                  {isRoomuploading ? (
+                    <>
+                      <ActivityIndicator size="small" color="#fff" />
+                    </>
+                  ) : (
+                    "Post"
+                  )}
+                </Text>
+              </Pressable>
+            ),
+          }}
           name="Post"
           component={Post}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{
+            headerShadowVisible: true,
+            headerShown: true,
+            headerStyle: {
+              borderBottomColor: "#Dfdfdf",
+              borderBottomWidth: 1,
+            },
+            headerTitleStyle: {
+              fontFamily: "500",
+              marginLeft: -5,
+              marginTop: 4,
+              fontSize: 18,
+            },
+          }}
           name="MyRoom"
           component={Myroom}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              elevation: 0,
+              borderBottomColor: "#Dfdfdf",
+              borderBottomWidth: 1,
+            },
+            headerTitleStyle: {
+              fontFamily: "500",
+              marginLeft: -5,
+              marginTop: 4,
+              fontSize: 18,
+            },
+          }}
           name="Profile"
           component={Profile}
         />
         <Stack.Screen
-          options={{ headerShown: true }}
+          options={{ headerShown: false }}
           name="Auth"
           component={Auth}
         />
 
         <Stack.Screen
           options={{
-            headerShown: true,
+            headerShown: false,
           }}
           name="Detail"
           component={Detail}
@@ -208,7 +378,6 @@ const header = StyleSheet.create({
     top: 6.5,
   },
   btn_post: {
-    marginRight: 15,
     backgroundColor: "#5B628F",
     paddingHorizontal: 14,
     paddingVertical: 7,
