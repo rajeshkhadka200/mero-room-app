@@ -4,7 +4,7 @@ import React, { useState, useEffect, createContext } from "react";
 import { db } from "../../config/firebase";
 export const ContexStore = createContext();
 const Context = ({ children }) => {
-  const [user, setUser] = useState([]); // setup the logedin user
+  const [user, setUser] = useState([]); // setup the logined in user
   const [token, setToken] = useState("");
   const getToken = async () => {
     const _id = await AsyncStorage.getItem("auth_token");

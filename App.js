@@ -7,6 +7,7 @@ import Tabs from "./src/navigation/Tabs";
 
 //importing screen
 import Detail from "./src/screens/Detail";
+import Home from "./src/screens/Home";
 LogBox.ignoreLogs(["Setting a timer"]);
 import Context from "./src/context/Context";
 
@@ -58,6 +59,10 @@ export default function App() {
               options={{ headerShown: false }}
               name="Tabs"
               component={Tabs}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
             />
 
             <Stack.Screen

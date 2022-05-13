@@ -10,8 +10,6 @@ import {
 import React, { useState, useEffect, useContext } from "react";
 import HomeHeader from "../components/home/HomeHeader";
 import HomeBody from "../components/home/HomeBody";
-import { ContexStore } from "../context/Context";
-import { userWhoApplied } from "../../config/api";
 const Home = ({ navigation }) => {
   return (
     <>
@@ -40,5 +38,4 @@ const Home = ({ navigation }) => {
     </>
   );
 };
-const mainDesign = StyleSheet.create({});
 export default Home;

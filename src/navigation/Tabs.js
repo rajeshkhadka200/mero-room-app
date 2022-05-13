@@ -122,6 +122,7 @@ const Tabs = ({ navigation }) => {
               three: "",
               four: "",
             })
+            alert("Uploaded")
             
           }
           blob.close();
