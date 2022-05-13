@@ -4,14 +4,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   LogBox,
   StatusBar,
-  ScrollView,
   Text,
   View,
   Image,
   TouchableOpacity,
   StyleSheet,
   Pressable,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 // icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -86,8 +85,6 @@ export default function Route() {
     return <AppLoading />;
   }
   const Stack = createNativeStackNavigator();
-
-
   //room upload function
   const upload = async (data, img) => {
     let images_to_push = [];
@@ -236,6 +233,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
+            headerShadowVisible: false,
             headerShown: true,
             headerStyle: {
               elevation: 0,
@@ -309,6 +307,11 @@ export default function Route() {
               borderBottomColor: "#Dfdfdf",
               borderBottomWidth: 1,
             },
+            headerRight: () => (
+              <>
+                <MaterialIcons name="logout" size={28} color="black" />
+              </>
+            ),
             headerTitleStyle: {
               fontFamily: "500",
               marginLeft: -5,

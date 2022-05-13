@@ -62,7 +62,6 @@ const Auth = () => {
       });
       try {
         await AsyncStorage.setItem("auth_token", id);
-        // setUser
         fetchUser();
         alert("sign up in successfully");
         navigation.navigate("Mero Room");
