@@ -29,16 +29,16 @@ const Tab = createBottomTabNavigator();
 //notification indicator
 const notif = true;
 const Tabs = ({ navigation }) => {
-  const { setUser } = React.useContext(ContexStore);
   const Logout = async () => {
     try {
       await AsyncStorage.removeItem("auth_token");
-      console.log("tab", await AsyncStorage.getItem("auth_token"));
       setUser([]);
+      navigation.navigate("Tabs");
     } catch (error) {
       console.log("err in logout", error);
     }
   };
+
   const {
     user,
     data,

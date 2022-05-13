@@ -5,12 +5,11 @@ import { db } from "../../config/firebase";
 export const ContexStore = createContext();
 const Context = ({ children }) => {
   const [user, setUser] = useState([]); // setup the logedin user
-  console.log("user in context", user);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        console.log("inside");
         const token = await AsyncStorage.getItem("auth_token");
+        console.log("token in func", token);
         const q = query(collection(db, "users"), where("user_id", "==", token));
         onSnapshot(q, (snapshot) => {
           snapshot.docs.forEach((doc) => {
@@ -28,7 +27,6 @@ const Context = ({ children }) => {
   const [isModel, setisModel] = useState(false);
 
   // state for the post
-  const [img, setImg] = useState([]);
   const [data, setData] = useState({
     address: "",
     district: "",
@@ -58,7 +56,7 @@ const Context = ({ children }) => {
     };
     getRooms();
   }, []);
-  const [render, setrender] = useState("");
+
   return (
     <ContexStore.Provider
       value={{
@@ -73,7 +71,6 @@ const Context = ({ children }) => {
         isRoomuploading,
         rooms,
         setisRoomuploading,
-        setrender,
       }}
     >
       {children}
