@@ -1,0 +1,238 @@
+import React, { useEffect } from "react";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  LogBox,
+  StatusBar,
+  ScrollView,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+// icons
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+//importing screen
+import Detail from "../screens/Detail";
+LogBox.ignoreLogs(["Setting a timer"]);
+
+// imports fonts
+import {
+  Poppins_200ExtraLight,
+  Poppins_300Light,
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  useFonts,
+} from "@expo-google-fonts/poppins";
+import {
+  OleoScriptSwashCaps_400Regular,
+  OleoScriptSwashCaps_700Bold,
+} from "@expo-google-fonts/oleo-script-swash-caps";
+// import app loading
+import AppLoading from "expo-app-loading";
+import Search from "../screens/Search";
+import Auth from "../screens/Auth";
+import Post from "../screens/Post";
+// import Notification from "./src/screens/Notification";
+import Home from "../screens/Home";
+import Explore from "../screens/Explore";
+import Myroom from "../screens/Myroom";
+import Profile from "../screens/Profile";
+import { ContexStore } from "../context/Context";
+import { useNavigation } from "@react-navigation/native";
+
+export default function Route() {
+  const navigation = useNavigation();
+  const { user } = React.useContext(ContexStore);
+  const notif = true;
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
+
+  // use the fonts
+  let [fontsLoaded] = useFonts({
+    200: Poppins_200ExtraLight,
+    300: Poppins_300Light,
+    400: Poppins_400Regular,
+    500: Poppins_500Medium,
+    600: Poppins_600SemiBold,
+    700: Poppins_700Bold,
+    999: OleoScriptSwashCaps_700Bold,
+    888: OleoScriptSwashCaps_400Regular,
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+  const Stack = createNativeStackNavigator();
+  return (
+    <>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerRight: () => (
+              <>
+                <View style={header.wrapper}>
+                  <TouchableOpacity style={header.headerIcon}>
+                    <Ionicons
+                      name="notifications-outline"
+                      size={27}
+                      color="#929191"
+                    />
+                    {notif ? <View style={header.dot}></View> : null}
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate("Explore");
+                    }}
+                    style={header.headerImg}
+                  >
+                    {user.length > 0 ? (
+                      <Image
+                        style={header.avatar}
+                        source={{
+                          uri: user[0]?.photoUrl,
+                        }}
+                      />
+                    ) : (
+                      <Image
+                        style={header.avatar}
+                        source={{
+                          uri: "https://scontent.fbwa3-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JnDLo_5PpjYAX8cG4vv&_nc_oc=AQmdU2hM-Q3jsox61SGyJovD3ROHCMzHtMpTPXZNREEXG3AwBGDk475naer2wpodQ1o&tn=jOFtfr9vq0GDmmko&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT-XDUZmFAck3kLBwdCWYvigPPD4PkhYN01zNexQ-Ca4uA&oe=62970D78",
+                        }}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
+              </>
+            ),
+            headerStyle: {
+              backgroundColor: "#fff",
+              height: 65,
+            },
+            headerShadowVisible: false,
+            headerTitleStyle: {
+              fontFamily: "500",
+              color: "rgba(0, 0, 0, 1)",
+              fontSize: 28,
+              marginLeft: 6,
+              fontFamily: "888",
+            },
+          }}
+          name="Mero Room"
+          component={Home}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Explore"
+          component={Explore}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Post"
+          component={Post}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="MyRoom"
+          component={Myroom}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Profile"
+          component={Profile}
+        />
+        <Stack.Screen
+          options={{ headerShown: true }}
+          name="Auth"
+          component={Auth}
+        />
+
+        <Stack.Screen
+          options={{
+            headerShown: true,
+          }}
+          name="Detail"
+          component={Detail}
+        />
+        {/* <Stack.Screen
+              options={{
+                headerShown: true,
+              }}
+              name="Notif"
+              component={Notification}
+            /> */}
+        <Stack.Screen
+          name="Search"
+          component={Search}
+          options={{
+            headerStyle: {
+              elevation: 0,
+              borderColor: "dfdfdf",
+              borderBottomWidth: 1,
+            },
+            headerTitleStyle: {
+              fontFamily: "500",
+              color: "rgba(0, 0, 0, 1)",
+              fontSize: 15,
+            },
+            headerShadowVisible: true,
+          }}
+        />
+      </Stack.Navigator>
+
+      <StatusBar backgroundColor={"#333"} />
+    </>
+  );
+}
+
+const header = StyleSheet.create({
+  headerIcon: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+  },
+  dot: {
+    padding: 3.2,
+    backgroundColor: "#FF7700",
+    borderRadius: 500,
+    position: "absolute",
+    right: 6,
+    top: 6.5,
+  },
+  btn_post: {
+    marginRight: 15,
+    backgroundColor: "#5B628F",
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    borderRadius: 5,
+    fontFamily: "500",
+    color: "#fff",
+  },
+  wrapper: {
+    flexDirection: "row",
+  },
+  headerImg: {
+    borderColor: "#2374E1",
+    borderWidth: 2,
+    // marginRight: 15,
+    marginLeft: 10,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 39,
+    height: 39,
+  },
+  avatar: {
+    width: 34,
+    height: 33,
+    borderRadius: 25.5,
+  },
+});
