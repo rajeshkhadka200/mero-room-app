@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
     fontSize: 15,
     color: "#000",
-    // fontFamily: "400",
+    fontFamily: "400",
   },
   dropdown1BtnStyle: {
     width: "100%",
@@ -57,8 +57,11 @@ export const styles = StyleSheet.create({
     marginVertical: 15,
     flex: 1,
     justifyContent: "space-between",
+    fontFamily: "400",
   },
   post_input2: {
+    fontFamily: "400",
+
     flex: 1 / 2.2,
     paddingHorizontal: 15,
     paddingVertical: 12,
@@ -69,6 +72,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    fontFamily: "400",
   },
   post_input3: {
     backgroundColor: "#EFEFEF",
@@ -79,6 +83,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    fontFamily: "400",
   },
   text3: {
     fontFamily: "300",
@@ -100,10 +105,10 @@ export const styles = StyleSheet.create({
     borderStyle: "dashed",
     borderColor: "#BFBFBA",
     borderRadius: 10,
-    borderStyle:"dashed",
-    borderWidth:3,
-    height:"auto",
-    flex:1,
+    borderStyle: "dashed",
+    borderWidth: 3,
+    height: "auto",
+    flex: 1,
   },
   img_con_after: {
     position: "relative",
@@ -123,23 +128,25 @@ export const styles = StyleSheet.create({
     paddingBottom: hp("3%"),
     alignItems: "center",
   },
-  img:{
-    width:wp("30%"),
+  img: {
+    width: wp("30%"),
   },
-  cross:{
-      width:20,
-      height:20,
-      backgroundColor:"#000",
-      position:"absolute",
-      top:5,
-      right:215,
-      borderRadius:500
+  cross: {
+    width: 20,
+    height: 20,
+    backgroundColor: "#000",
+    position: "absolute",
+    top: 5,
+    right: 215,
+    borderRadius: 500,
   },
   post_img_text: {
     fontFamily: "400",
     color: "#afafaf",
     fontSize: 15,
     textAlign: "center",
+    // borderWidth: 1,
+    width: "80%",
   },
 
   containerStyle: {

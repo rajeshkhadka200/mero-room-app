@@ -12,8 +12,11 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import RoomCard from "../components/Global/RoomCard.js";
+import { ContexStore } from "../context/Context.js";
 
 const Profile = () => {
+  const { user, rooms } = React.useContext(ContexStore);
+  console.log("user in profile", user);
   const my_fav = [
     {
       photo: require("../../assets/img/room1.jpg"),
