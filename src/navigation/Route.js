@@ -178,6 +178,7 @@ export default function Route() {
       <Stack.Navigator>
         <Stack.Screen
           options={{
+            animation: "none",
             headerShown: true,
             headerRight: () => (
               <>
@@ -233,6 +234,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
+            animation: "none",
             headerShadowVisible: false,
             headerShown: true,
             headerStyle: {
@@ -249,6 +251,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
+            animation: "none",
             headerShown: true,
             headerStyle: {
               elevation: 0,
@@ -283,6 +286,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
+            animation: "none",
             headerShadowVisible: true,
             headerShown: true,
             headerStyle: {
@@ -301,6 +305,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
+            animation: "none",
             headerShown: true,
             headerStyle: {
               elevation: 0,
@@ -323,13 +328,14 @@ export default function Route() {
           component={Profile}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
+          options={{ headerShown: false, animation: "none" }}
           name="Auth"
           component={Auth}
         />
 
         <Stack.Screen
           options={{
+            animation: "none",
             headerShown: false,
           }}
           name="Detail"
@@ -346,6 +352,7 @@ export default function Route() {
           name="Search"
           component={Search}
           options={{
+            animation: "none",
             headerStyle: {
               elevation: 0,
               borderColor: "dfdfdf",
