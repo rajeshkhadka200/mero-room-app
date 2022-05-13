@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
@@ -164,9 +164,6 @@ const Tabs = ({ navigation }) => {
                     onPress={() => {
                       Logout();
                     }}
-                    // onPress={() => {
-                    //   navigation.navigate("Notif");
-                    // }}
                     name="notifications-outline"
                     size={27}
                     color="#929191"
@@ -210,15 +207,6 @@ const Tabs = ({ navigation }) => {
             marginLeft: 6,
             fontFamily: "888",
           },
-          headerShown: true,
-          tabBarLabel: "Home",
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name={focused ? "md-home" : "ios-home-outline"}
-              size={24}
-              color={focused ? "#5B628F" : "#929191"}
-            />
-          ),
         }}
         name="Mero Room"
         component={Home}
@@ -437,7 +425,6 @@ const header = StyleSheet.create({
     backgroundColor: "#5B628F",
     paddingHorizontal: 14,
     paddingVertical: 7,
-    // width: 60,
     borderRadius: 5,
     fontFamily: "500",
     color: "#fff",
