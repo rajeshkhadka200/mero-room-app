@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
 import { FB_KEY, GOOGLE_KEY } from "@env";
@@ -7,8 +7,10 @@ import { useNavigation } from "@react-navigation/native";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ContexStore } from "../context/Context";
 
 const Auth = () => {
+  const { user, setUser, setrender } = React.useContext(ContexStore);
   const navigation = useNavigation();
   const storeData = async ({ id, email, name, photoUrl }) => {
     try {
@@ -34,13 +36,13 @@ const Auth = () => {
         email,
         name,
         photoUrl,
+        fav: [],
       });
       try {
         await AsyncStorage.setItem("auth_token", id);
+        // setUser
         alert("sign up in successfully");
         navigation.navigate("Tabs");
-
-
         return;
       } catch (err) {
         console.log("err while seting reg", err);

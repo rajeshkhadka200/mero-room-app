@@ -97,6 +97,7 @@ const Detail_header = ({ route }) => {
           })}
         </View> */}
         <FlatList
+          nestedScrollEnabled={true}
           // viewabilityConfig={viewabilityConfig.current}
           onViewableItemsChanged={onViewableItemsChanged.current}
           showsHorizontalScrollIndicator={false}
@@ -104,8 +105,8 @@ const Detail_header = ({ route }) => {
           horizontal
           data={imgs}
           renderItem={renderImgs}
-          keyExtractor={() => {
-            Date.now();
+          keyExtractor={(i) => {
+            i.index;
           }}
         />
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
@@ -9,7 +9,6 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-// import { upload } from "../utils/HandleUpload";
 import { ActivityIndicator } from "react-native";
 import {
   View,
@@ -30,17 +29,25 @@ const Tab = createBottomTabNavigator();
 //notification indicator
 const notif = true;
 const Tabs = ({ navigation }) => {
+  const { setUser } = React.useContext(ContexStore);
   const Logout = async () => {
-    alert("loging out");
     try {
       await AsyncStorage.removeItem("auth_token");
-      console.log(await AsyncStorage.getItem("auth_token"));
+      console.log("tab", await AsyncStorage.getItem("auth_token"));
+      setUser([]);
     } catch (error) {
       console.log("err in logout", error);
     }
   };
-  const { user, data, images,setData,setimages, isRoomuploading, setisRoomuploading } =
-    useContext(ContexStore);
+  const {
+    user,
+    data,
+    images,
+    setData,
+    setimages,
+    isRoomuploading,
+    setisRoomuploading,
+  } = useContext(ContexStore);
   //post hooks
 
   // post function
@@ -115,15 +122,13 @@ const Tabs = ({ navigation }) => {
               iskitchen: false,
               isFlat: false,
               desc: "",
-            })
+            });
             setimages({
               one: "",
               two: "",
               three: "",
               four: "",
-            })
-            alert("Uploaded")
-            
+            });
           }
           blob.close();
         })

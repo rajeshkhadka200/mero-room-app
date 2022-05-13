@@ -18,16 +18,9 @@ const Home = ({ navigation }) => {
           backgroundColor: "#fff",
         }}
       >
-        {/* <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
-        <Button title="Logout" onPress={() => Logout()} /> */}
         <ScrollView
           showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={false}
-              onRefresh={() => console.log("h3llo")}
-            />
-          }
+          refreshControl={<RefreshControl refreshing={false} />}
         >
           {/* from notif to filter = Home Header */}
           <HomeHeader />
