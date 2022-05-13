@@ -178,6 +178,8 @@ export default function Route() {
       <Stack.Navigator>
         <Stack.Screen
           options={{
+            gestureEnabled:true,
+            animation:"none",
             headerShown: true,
             headerRight: () => (
               <>
