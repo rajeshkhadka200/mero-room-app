@@ -15,8 +15,9 @@ import RoomCard from "../components/Global/RoomCard.js";
 import { ContexStore } from "../context/Context.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import Nav from "../navigation/Nav.js";
 
-const Profile = () => {
+const Profile = ({ route }) => {
   const navigation = useNavigation();
   const { user, setUser } = React.useContext(ContexStore);
   console.log("user in profile", user);
@@ -46,7 +47,7 @@ const Profile = () => {
     try {
       await AsyncStorage.removeItem("auth_token");
       setUser([]);
-      navigation.navigate("Tabs",{screen:Home});
+      navigation.navigate("Mero Room");
     } catch (error) {
       console.log("err in logout", error);
     }
@@ -129,6 +130,7 @@ const Profile = () => {
           </View>
         </View>
       </ScrollView>
+      <Nav active={route.name} />
     </>
   );
 };

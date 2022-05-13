@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
 import React from "react";
 import RoomCard from "../components/Global/RoomCard";
+import Nav from "../navigation/Nav";
 
-const Myroom = () => {
+const Myroom = ({ route }) => {
   const my_room = [
     {
       photo: require("../../assets/img/room1.jpg"),
@@ -26,29 +27,32 @@ const Myroom = () => {
     );
   };
   return (
-    <ScrollView
-      style={{
-        height: "100%",
-        width: "100%",
-        backgroundColor: "#fff",
-        paddingHorizontal: 15,
-        marginBottom: 50,
-      }}
-    >
-      <View
+    <>
+      <ScrollView
         style={{
-          marginTop: 20,
+          height: "100%",
+          width: "100%",
+          backgroundColor: "#fff",
+          paddingHorizontal: 15,
+          marginBottom: 50,
         }}
       >
-        <FlatList
-          data={my_room}
-          renderItem={renderRooms}
-          keyExtractor={(i) => {
-            i.index;
+        <View
+          style={{
+            marginTop: 20,
           }}
-        />
-      </View>
-    </ScrollView>
+        >
+          <FlatList
+            data={my_room}
+            renderItem={renderRooms}
+            keyExtractor={(i) => {
+              i.index;
+            }}
+          />
+        </View>
+      </ScrollView>
+      <Nav active={route.name} />
+    </>
   );
 };
 const inner_design = StyleSheet.create({

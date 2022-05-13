@@ -1,16 +1,10 @@
-import {
-  ScrollView,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  SafeAreaView,
-  RefreshControl,
-} from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import { ScrollView, SafeAreaView, RefreshControl } from "react-native";
+import React from "react";
 import HomeHeader from "../components/home/HomeHeader";
 import HomeBody from "../components/home/HomeBody";
-const Home = ({ navigation }) => {
+import Nav from "../navigation/Nav";
+const Home = ({ navigation, route }) => {
+  console.log(route);
   return (
     <>
       <SafeAreaView
@@ -27,6 +21,7 @@ const Home = ({ navigation }) => {
           {/* frombelow filter */}
           <HomeBody />
         </ScrollView>
+        <Nav active={route.name} />
       </SafeAreaView>
     </>
   );

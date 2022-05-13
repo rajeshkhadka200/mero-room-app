@@ -21,7 +21,8 @@ import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { ContexStore } from "../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-const Post = ({ navigation }) => {
+import Nav from "../navigation/Nav";
+const Post = ({ route }) => {
   const {
     data,
     setData,
@@ -75,279 +76,284 @@ const Post = ({ navigation }) => {
   };
 
   return (
-    <ScrollView
-      style={{ backgroundColor: "#fff" }}
-      refreshControl={
-        <RefreshControl refreshing={false} onRefresh={handleRefresh} />
-      }
-    >
-      <View style={styles.post_con}>
-        <Text style={styles.post_text}>
-          Note: Please fill the form with correct details
-        </Text>
-        <TextInput
-          editable={!isRoomuploading}
-          value={data.address}
-          placeholder="Enter the Address"
-          style={styles.post_input1}
-          onChangeText={(text) => {
-            handleChange("address", text);
-          }}
-        />
-        <SelectDropdown
-          defaultValue={"Choose a District"}
-          data={District}
-          buttonStyle={styles.dropdown1BtnStyle}
-          buttonTextStyle={styles.dropdown1BtnTxtStyle}
-          defaultButtonText={"Choose a District"}
-          dropdownStyle={styles.dropdown2DropdownStyle}
-          rowStyle={styles.dropdown2RowStyle}
-          rowTextStyle={styles.dropdown2RowTxtStyle}
-          onSelect={(selectedItem, index) => {
-            setData({ ...data, district: selectedItem });
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-          renderDropdownIcon={(isOpened) => {
-            return (
-              <AntDesign
-                name={isOpened ? "up" : "down"}
-                color={"rgba(9, 8, 8, 0.37)"}
-                size={18}
+    <>
+      <ScrollView
+        style={{ backgroundColor: "#fff" }}
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={handleRefresh} />
+        }
+      >
+        <View style={styles.post_con}>
+          <Text style={styles.post_text}>
+            Note: Please fill the form with correct details
+          </Text>
+          <TextInput
+            editable={!isRoomuploading}
+            value={data.address}
+            placeholder="Enter the Address"
+            style={styles.post_input1}
+            onChangeText={(text) => {
+              handleChange("address", text);
+            }}
+          />
+          <SelectDropdown
+            defaultValue={"Choose a District"}
+            data={District}
+            buttonStyle={styles.dropdown1BtnStyle}
+            buttonTextStyle={styles.dropdown1BtnTxtStyle}
+            defaultButtonText={"Choose a District"}
+            dropdownStyle={styles.dropdown2DropdownStyle}
+            rowStyle={styles.dropdown2RowStyle}
+            rowTextStyle={styles.dropdown2RowTxtStyle}
+            onSelect={(selectedItem, index) => {
+              setData({ ...data, district: selectedItem });
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+            renderDropdownIcon={(isOpened) => {
+              return (
+                <AntDesign
+                  name={isOpened ? "up" : "down"}
+                  color={"rgba(9, 8, 8, 0.37)"}
+                  size={18}
+                />
+              );
+            }}
+            dropdownIconPosition={"right"}
+          />
+          <View style={styles.post_input2_con}>
+            <TextInput
+              editable={!isRoomuploading}
+              value={data.rate}
+              keyboardType="number-pad"
+              placeholder="Rate"
+              style={styles.post_input2}
+              onChangeText={(text) => {
+                handleChange("rate", text);
+              }}
+            />
+            <TextInput
+              editable={!isRoomuploading}
+              value={data.rooms_count}
+              keyboardType="number-pad"
+              placeholder="No of Room"
+              style={styles.post_input2}
+              onChangeText={(text) => {
+                handleChange("rooms_count", text);
+              }}
+            />
+          </View>
+          <View style={styles.post_input3_con}>
+            <View style={styles.post_input3}>
+              <Text style={styles.text3}>Kitchen</Text>
+              <Checkbox
+                customLabel={true}
+                checked={data.iskitchen}
+                label=""
+                noFeedback={true}
+                checkedComponent={
+                  <Ionicons name="checkmark-circle" size={28} color="#5B628F" />
+                }
+                uncheckedComponent={
+                  <Ionicons
+                    name="checkmark-circle-outline"
+                    size={28}
+                    color="#a8a8a8"
+                  />
+                }
+                onChange={(checked) =>
+                  setData({ ...data, iskitchen: !data.iskitchen })
+                }
               />
-            );
-          }}
-          dropdownIconPosition={"right"}
-        />
-        <View style={styles.post_input2_con}>
+            </View>
+            <View style={styles.post_input3}>
+              <Text style={styles.text3}>Flat</Text>
+              <Checkbox
+                customLabel={true}
+                label=""
+                noFeedback={true}
+                checked={data.isFlat}
+                checkedComponent={
+                  <Ionicons name="checkmark-circle" size={28} color="#5B628F" />
+                }
+                uncheckedComponent={
+                  <Ionicons
+                    name="checkmark-circle-outline"
+                    size={28}
+                    color="#a8a8a8"
+                  />
+                }
+                onChange={(checked) =>
+                  setData({ ...data, isFlat: !data.isFlat })
+                }
+              />
+            </View>
+          </View>
           <TextInput
-            editable={!isRoomuploading}
-            value={data.rate}
-            keyboardType="number-pad"
-            placeholder="Rate"
-            style={styles.post_input2}
-            onChangeText={(text) => {
-              handleChange("rate", text);
+            multiline={true}
+            editable={false}
+            allowFontScaling={false}
+            style={{
+              fontFamily: "400",
+              ...styles.post_des,
             }}
+            value={detail}
+            placeholder={"Details is generated by Our AI"}
           />
-          <TextInput
-            editable={!isRoomuploading}
-            value={data.rooms_count}
-            keyboardType="number-pad"
-            placeholder="No of Room"
-            style={styles.post_input2}
-            onChangeText={(text) => {
-              handleChange("rooms_count", text);
-            }}
-          />
-        </View>
-        <View style={styles.post_input3_con}>
-          <View style={styles.post_input3}>
-            <Text style={styles.text3}>Kitchen</Text>
-            <Checkbox
-              customLabel={true}
-              checked={data.iskitchen}
-              label=""
-              noFeedback={true}
-              checkedComponent={
-                <Ionicons name="checkmark-circle" size={28} color="#5B628F" />
-              }
-              uncheckedComponent={
-                <Ionicons
-                  name="checkmark-circle-outline"
-                  size={28}
-                  color="#a8a8a8"
-                />
-              }
-              onChange={(checked) =>
-                setData({ ...data, iskitchen: !data.iskitchen })
-              }
-            />
-          </View>
-          <View style={styles.post_input3}>
-            <Text style={styles.text3}>Flat</Text>
-            <Checkbox
-              customLabel={true}
-              label=""
-              noFeedback={true}
-              checked={data.isFlat}
-              checkedComponent={
-                <Ionicons name="checkmark-circle" size={28} color="#5B628F" />
-              }
-              uncheckedComponent={
-                <Ionicons
-                  name="checkmark-circle-outline"
-                  size={28}
-                  color="#a8a8a8"
-                />
-              }
-              onChange={(checked) => setData({ ...data, isFlat: !data.isFlat })}
-            />
-          </View>
-        </View>
-        <TextInput
-          multiline={true}
-          editable={false}
-          allowFontScaling={false}
-          style={{
-            fontFamily: "400",
-            ...styles.post_des,
-          }}
-          value={detail}
-          placeholder={"Details is generated by Our AI"}
-        />
-        <View style={styles.img_con}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            {images.one === "" ? (
-              <View style={styles.post_img}>
-                <TouchableOpacity
-                  onPress={() => {
-                    imageUpload("one");
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="image-plus"
-                    size={35}
-                    color="#BFBFBA"
+          <View style={styles.img_con}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              {images.one === "" ? (
+                <View style={styles.post_img}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      imageUpload("one");
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="image-plus"
+                      size={35}
+                      color="#BFBFBA"
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.post_img_text}>Choose an image</Text>
+                </View>
+              ) : (
+                <View style={styles.img_con_after}>
+                  <Image
+                    style={styles.con_after_img}
+                    source={{
+                      uri: images.one,
+                    }}
                   />
-                </TouchableOpacity>
-                <Text style={styles.post_img_text}>Choose an image</Text>
-              </View>
-            ) : (
-              <View style={styles.img_con_after}>
-                <Image
-                  style={styles.con_after_img}
-                  source={{
-                    uri: images.one,
-                  }}
-                />
-                <Text
-                  onPress={() => {
-                    cutImg("one");
-                  }}
-                  style={styles.cross}
-                >
-                  <Entypo name="circle-with-cross" size={20} color="#fff" />
-                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
-                </Text>
-              </View>
-            )}
-            {images.two === "" ? (
-              <View style={styles.post_img}>
-                <TouchableOpacity
-                  onPress={() => {
-                    imageUpload("two");
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="image-plus"
-                    size={35}
-                    color="#BFBFBA"
+                  <Text
+                    onPress={() => {
+                      cutImg("one");
+                    }}
+                    style={styles.cross}
+                  >
+                    <Entypo name="circle-with-cross" size={20} color="#fff" />
+                    {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                  </Text>
+                </View>
+              )}
+              {images.two === "" ? (
+                <View style={styles.post_img}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      imageUpload("two");
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="image-plus"
+                      size={35}
+                      color="#BFBFBA"
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.post_img_text}>Choose an Image</Text>
+                </View>
+              ) : (
+                <View style={styles.img_con_after}>
+                  <Image
+                    style={styles.con_after_img}
+                    source={{
+                      uri: images.two,
+                    }}
                   />
-                </TouchableOpacity>
-                <Text style={styles.post_img_text}>Choose an Image</Text>
-              </View>
-            ) : (
-              <View style={styles.img_con_after}>
-                <Image
-                  style={styles.con_after_img}
-                  source={{
-                    uri: images.two,
-                  }}
-                />
-                <Text
-                  onPress={() => {
-                    cutImg("two");
-                  }}
-                  style={styles.cross}
-                >
-                  <Entypo name="circle-with-cross" size={20} color="#fff" />
-                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
-                </Text>
-              </View>
-            )}
-          </View>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            {images.three === "" ? (
-              <View style={styles.post_img}>
-                <TouchableOpacity
-                  onPress={() => {
-                    imageUpload("three");
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="image-plus"
-                    size={35}
-                    color="#BFBFBA"
+                  <Text
+                    onPress={() => {
+                      cutImg("two");
+                    }}
+                    style={styles.cross}
+                  >
+                    <Entypo name="circle-with-cross" size={20} color="#fff" />
+                    {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                  </Text>
+                </View>
+              )}
+            </View>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              {images.three === "" ? (
+                <View style={styles.post_img}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      imageUpload("three");
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="image-plus"
+                      size={35}
+                      color="#BFBFBA"
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.post_img_text}>Choose an Image</Text>
+                </View>
+              ) : (
+                <View style={styles.img_con_after}>
+                  <Image
+                    style={styles.con_after_img}
+                    source={{
+                      uri: images.three,
+                    }}
                   />
-                </TouchableOpacity>
-                <Text style={styles.post_img_text}>Choose an Image</Text>
-              </View>
-            ) : (
-              <View style={styles.img_con_after}>
-                <Image
-                  style={styles.con_after_img}
-                  source={{
-                    uri: images.three,
-                  }}
-                />
-                <Text
-                  onPress={() => {
-                    cutImg("three");
-                  }}
-                  style={styles.cross}
-                >
-                  <Entypo name="circle-with-cross" size={20} color="#fff" />
-                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
-                </Text>
-              </View>
-            )}
-            {images.four === "" ? (
-              <View style={styles.post_img}>
-                <TouchableOpacity
-                  onPress={() => {
-                    imageUpload("four");
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="image-plus"
-                    size={35}
-                    color="#BFBFBA"
+                  <Text
+                    onPress={() => {
+                      cutImg("three");
+                    }}
+                    style={styles.cross}
+                  >
+                    <Entypo name="circle-with-cross" size={20} color="#fff" />
+                    {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                  </Text>
+                </View>
+              )}
+              {images.four === "" ? (
+                <View style={styles.post_img}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      imageUpload("four");
+                    }}
+                  >
+                    <MaterialCommunityIcons
+                      name="image-plus"
+                      size={35}
+                      color="#BFBFBA"
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.post_img_text}>Choose an Image</Text>
+                </View>
+              ) : (
+                <View style={styles.img_con_after}>
+                  <Image
+                    style={styles.con_after_img}
+                    source={{
+                      uri: images.four,
+                    }}
                   />
-                </TouchableOpacity>
-                <Text style={styles.post_img_text}>Choose an Image</Text>
-              </View>
-            ) : (
-              <View style={styles.img_con_after}>
-                <Image
-                  style={styles.con_after_img}
-                  source={{
-                    uri: images.four,
-                  }}
-                />
-                <Text
-                  onPress={() => {
-                    cutImg("four");
-                  }}
-                  style={styles.cross}
-                >
-                  <Entypo name="circle-with-cross" size={20} color="#fff" />
-                  {/* <Entypo name="cross" size={20} color="#fff" /> */}
-                </Text>
-              </View>
-            )}
+                  <Text
+                    onPress={() => {
+                      cutImg("four");
+                    }}
+                    style={styles.cross}
+                  >
+                    <Entypo name="circle-with-cross" size={20} color="#fff" />
+                    {/* <Entypo name="cross" size={20} color="#fff" /> */}
+                  </Text>
+                </View>
+              )}
+            </View>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Nav active={route.name} />
+    </>
   );
 };
 export default Post;
