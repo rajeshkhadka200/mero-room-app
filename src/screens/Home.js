@@ -1,4 +1,9 @@
-import { ScrollView, SafeAreaView, RefreshControl } from "react-native";
+import {
+  ScrollView,
+  SafeAreaView,
+  RefreshControl,
+  KeyboardAvoidingView,
+} from "react-native";
 import React from "react";
 import HomeHeader from "../components/home/HomeHeader";
 import HomeBody from "../components/home/HomeBody";
@@ -7,22 +12,28 @@ const Home = ({ navigation, route }) => {
   console.log(route);
   return (
     <>
-      <SafeAreaView
-        style={{
-          backgroundColor: "#fff",
-        }}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 40 : 0}
       >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          refreshControl={<RefreshControl refreshing={false} />}
+        <SafeAreaView
+          style={{
+            backgroundColor: "#fff",
+          }}
         >
-          {/* from notif to filter = Home Header */}
-          <HomeHeader />
-          {/* frombelow filter */}
-          <HomeBody />
-        </ScrollView>
-        <Nav active={route.name} />
-      </SafeAreaView>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={<RefreshControl refreshing={false} />}
+          >
+            {/* from notif to filter = Home Header */}
+            <HomeHeader />
+            {/* frombelow filter */}
+            <HomeBody />
+          </ScrollView>
+          <Nav active={route.name} />
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </>
   );
 };

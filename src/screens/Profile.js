@@ -20,7 +20,6 @@ import Nav from "../navigation/Nav.js";
 const Profile = ({ route }) => {
   const navigation = useNavigation();
   const { user, setUser } = React.useContext(ContexStore);
-  console.log("user in profile", user);
   const my_fav = [
     {
       photo: require("../../assets/img/room1.jpg"),
