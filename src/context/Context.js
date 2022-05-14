@@ -9,7 +9,6 @@ const Context = ({ children }) => {
     const fetchUser = async () => {
       try {
         const token = await AsyncStorage.getItem("auth_token");
-        console.log("token in func", token);
         const q = query(collection(db, "users"), where("user_id", "==", token));
         onSnapshot(q, (snapshot) => {
           snapshot.docs.forEach((doc) => {

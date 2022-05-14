@@ -193,7 +193,7 @@ export default function Route() {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate("Profile");
+                      navigation.navigate("Auth");
                     }}
                     style={header.headerImg}
                   >
