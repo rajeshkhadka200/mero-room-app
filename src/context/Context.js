@@ -9,10 +9,13 @@ const Context = ({ children }) => {
     const fetchUser = async () => {
       try {
         const token = await AsyncStorage.getItem("auth_token");
-        const q = query(collection(db, "users"), where("user_id", "==", token));
+        const q = query(
+          collection(db, "users"),
+          where("auth_token", "==", token)
+        );
         onSnapshot(q, (snapshot) => {
           snapshot.docs.forEach((doc) => {
-            setUser([{ ...doc.data(), _id: doc.id }]);
+            setUser([{ ...doc.data(), oprn_id: doc.id }]);
           });
         });
       } catch (error) {
@@ -24,7 +27,6 @@ const Context = ({ children }) => {
 
   // state for the model
   const [isModel, setisModel] = useState(false);
-
   // state for the post
   const [data, setData] = useState({
     address: "",
@@ -49,14 +51,13 @@ const Context = ({ children }) => {
     const getRooms = async () => {
       onSnapshot(collection(db, "rooms"), (snapshot) => {
         snapshot.docs.forEach((doc) => {
-          setrooms([{ ...doc.data(), _id: doc.id }]);
+          setrooms([{ ...doc.data(), oprn_id: doc.id }]);
         });
       });
     };
     getRooms();
   }, []);
-  // active tab context
-
+  console.log("rooms in", rooms);
   return (
     <ContexStore.Provider
       value={{

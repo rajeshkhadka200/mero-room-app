@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 import { styles } from "../styles/Global/nav_design";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -31,7 +31,11 @@ const Nav = ({ active }) => {
       if (token) {
         navigation.navigate(key);
       } else {
-        alert("Please login to access " + key);
+        Alert.alert(
+          "Please Login",
+          "First you need to Login or register to access " + key
+        );
+        navigation.navigate("Auth");
       }
     } else {
       navigation.navigate(key);

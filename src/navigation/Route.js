@@ -65,6 +65,7 @@ export default function Route() {
     isRoomuploading,
     setisRoomuploading,
   } = React.useContext(ContexStore);
+
   const notif = true;
   useEffect(() => {
     LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
@@ -107,9 +108,8 @@ export default function Route() {
 
     setisRoomuploading(true);
     const docRef = await addDoc(collection(db, "rooms"), {
-      room_id: Date.now(),
-      user_id: 10,
-      user_profile: "",
+      token: user[0]?.auth_token,
+      user_profile: user[0]?.photoUrl,
       address,
       district,
       rate,

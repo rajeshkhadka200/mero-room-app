@@ -18,7 +18,8 @@ import { ContexStore } from "../../context/Context";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
   const navigation = useNavigation();
-  const { address, image, price, avatar } = data;
+  const { address, price, user_profile } = data;
+  const { thumbnail } = data;
   const [isfav, setisfav] = useState([]);
   const favOperation = async (room_id) => {
     // check if user wants to remove or add
@@ -48,7 +49,12 @@ export default function Card({ data, check }) {
             navigation.navigate("Detail");
           }}
         >
-          <Image source={image} style={styles.img} />
+          <Image
+            source={{
+              uri: thumbnail && thumbnail[0],
+            }}
+            style={styles.img}
+          />
         </TouchableWithoutFeedback>
         <View style={styles.img_des}>
           <View style={styles.left}>
@@ -56,7 +62,7 @@ export default function Card({ data, check }) {
               <Image
                 style={styles.avatar}
                 source={{
-                  uri: avatar,
+                  uri: user_profile,
                 }}
               />
             </View>
