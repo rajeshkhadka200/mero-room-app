@@ -15,7 +15,7 @@ const Nav = ({ active }) => {
   console.log(active);
   const navigation = useNavigation();
   const redirect = (key) => {
-    if (key === "Profile" || key === "Post") {
+    if (key === "Profile" || key === "Post" || key === "MyRoom") {
       let token = AsyncStorage.getItem("auth_token");
       if (token) {
         return navigation.navigate(key);
