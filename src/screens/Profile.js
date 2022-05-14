@@ -116,7 +116,7 @@ const Profile = ({ route }) => {
                 size={24}
                 color="#F66565"
               />
-              <View style={styles.line}></View>
+              {/* <View style={styles.line}></View> */}
             </View>
             {/* actual data */}
             <FlatList
