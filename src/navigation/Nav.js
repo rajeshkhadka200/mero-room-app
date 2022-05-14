@@ -1,8 +1,10 @@
-import { Pressable,View} from "react-native";
+import { Pressable,View,StyleSheet} from "react-native";
 import React from "react";
 import { styles } from "../styles/Global/nav_design";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
+
+
 //home
 import Home_outline from "../../assets/svg/home_not.svg";
 import Home_focused from "../../assets/svg/home_a.svg";
@@ -27,11 +29,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Nav = ({ active }) => {
   console.log(active);
   const navigation = useNavigation();
-  const redirect = (key) => {
+  const redirect = async(key) => {
     if (key === "Profile" || key === "Post") {
-      let token = AsyncStorage.getItem("auth_token");
+      let token = await AsyncStorage.getItem("auth_token");
       if (token) {
-        return navigation.navigate(key);
+         return navigation.navigate(key);
       }
       alert("Please Login to access" + key);
     }
@@ -39,23 +41,29 @@ const Nav = ({ active }) => {
   };
   return (
     <View style={styles.nav}>
-      <Pressable onPress={() => redirect("Mero Room")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Mero Room")}>
         {active === "Mero Room" ? <Home_focused /> : <Home_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("Explore")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Explore")}>
         {active === "Explore" ? <Explore_focused /> : <Explore_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("Post")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Post")}>
         {active === "Post" ? <Post_focused /> : <Post_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("MyRoom")}>
+      <Pressable style={icon.btn} onPress={() => redirect("MyRoom")}>
         {active === "MyRoom" ? <Room_focused /> : <Room_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("Profile")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Profile")}>
         {active === "Profile" ? <Profile_focused /> : <Profile_outline />}
       </Pressable>
     </View>
   );
 };
+const icon = StyleSheet.create({
+  btn:{
+    padding:10
+
+  }
+})
 
 export default React.memo(Nav);
