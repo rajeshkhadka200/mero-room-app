@@ -9,12 +9,20 @@ import Home_focused from "../../assets/svg/home_a.svg";
 //explore
 import Explore_outline from "../../assets/svg/explore_not.svg";
 import Explore_focused from "../../assets/svg/explore_a.svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Nav = ({ active }) => {
   console.log(active);
   const navigation = useNavigation();
   const redirect = (key) => {
-    navigation.navigate(key);
+    if (key === "Profile" || key === "Post") {
+      let token = AsyncStorage.getItem("auth_token");
+      if (token) {
+        return navigation.navigate(key);
+      }
+      alert("Please Login to access" + key);
+    }
+    return navigation.navigate(key);
   };
   return (
     <Animatable.View style={styles.nav}>
