@@ -7,6 +7,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 const RoomCard = ({ data, render_location }) => {
   const { address, rate, oprn_id } = data;
+  console.log(oprn_id);
   const { thumbnail } = data;
 
   const deleteRoom = async (doc_id) => {

@@ -7,11 +7,9 @@ import {
 } from "react-native";
 import React, { useContext, useEffect } from "react";
 import Detail_header from "../components/details/Detail_header";
-import { ContexStore } from "../context/Context";
 
 // main detail page
 const Detail = () => {
-  const { user, rooms } = useContext(ContexStore);
 
   return (
     <SafeAreaView>

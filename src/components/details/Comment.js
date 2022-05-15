@@ -16,9 +16,6 @@ import { Feather } from "@expo/vector-icons";
 import { ContexStore } from "../../context/Context";
 const Comment = ({ room_id }) => {
   const { user } = useContext(ContexStore);
-  console.log(user);
-  const user_img =
-    "https://scontent.fktm6-1.fna.fbcdn.net/v/t39.30808-6/271552238_521282596092505_372241037423835333_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=eRDg9Hqum5gAX8i69h8&_nc_ht=scontent.fktm6-1.fna&oh=00_AT_gYHZDRrC1HvOkB0Scs51QXVg0I1pBnB4bMDeVAQH8EQ&oe=62728AD9";
   //post the comments
   const [comment, setComment] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -35,10 +32,10 @@ const Comment = ({ room_id }) => {
       setComment("");
       const res = await addDoc(collection(db, "comments"), {
         room_id: room_id,
-        user_id: user.user_id,
-        user_name: user.name,
+        user_id: user[0]?.auth_token,
+        user_name: user[0]?.name,
         comment,
-        user_profile: user_img,
+        user_profile: user[0]?.photoUrl,
         createdAt: Date.now(),
       });
       setisLoading(false);

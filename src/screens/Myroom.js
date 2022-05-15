@@ -17,7 +17,7 @@ const Myroom = ({ route }) => {
         onSnapshot(q, (snapshot) => {
           const data = snapshot.docs.map((doc) => ({
             ...doc.data(),
-            _id: doc.id,
+            oprn_id: doc.id,
           }));
           setRooms(data);
         });
