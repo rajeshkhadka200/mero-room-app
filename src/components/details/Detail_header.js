@@ -42,6 +42,9 @@ const Detail_header = ({ route }) => {
   // const {room_id} = route.params
   const room_id = 5;
   const navigation = useNavigation();
+  const {test} = useContext(ContexStore)
+
+  console.log(route);
   const makeCall = () => {
     const args = {
       number: "9854858548",
@@ -69,7 +72,6 @@ const Detail_header = ({ route }) => {
   };
   const [index, setindex] = useState();
   const onViewableItemsChanged = useRef((item) => {
-    console.log(item);
     // setindex(item.viewableItems[0].index);
   });
 
@@ -156,16 +158,9 @@ const Detail_header = ({ route }) => {
                     fontFamily: "500",
                   }}
                 >
-                  Contact for room
+                  Chat with Owner
                 </Text>
-                <AntDesign
-                  style={{
-                    marginLeft: 5,
-                  }}
-                  name="arrowright"
-                  size={24}
-                  color="#fff"
-                />
+                
               </Pressable>
               <TouchableOpacity onPress={makeCall} style={styles.btn_left}>
                 <Entypo name="phone" size={24} color="#5B628F" />

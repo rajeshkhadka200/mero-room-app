@@ -27,7 +27,7 @@ const SingleComment = ({ room_id }) => {
     onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         ...doc.data(),
-        _id: doc.id,
+        oprn_id: doc.id,
       }));
       setcomment(data);
     });
@@ -76,10 +76,10 @@ const SingleComment = ({ room_id }) => {
             }}
           >
             <Text style={styles.username}>{item.user_name}</Text>
-            {user.user_id === item.user_id ? (
+            {user[0]?.auth_token === item.user_id ? (
               <Entypo
                 onPress={() => {
-                  deleteComment(item._id);
+                  deleteComment(item.oprn_id);
                 }}
                 name="dots-three-vertical"
                 size={18}

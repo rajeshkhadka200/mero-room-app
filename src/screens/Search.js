@@ -38,7 +38,7 @@ const Search = ({ route }) => {
           ) : null}
 
           <FlatList
-            ListEmptyComponent={NoContent(search, data)}
+            ListEmptyComponent={NoContent(search,`District ${data}`)}
             data={searchProduct}
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}

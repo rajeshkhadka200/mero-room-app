@@ -52,7 +52,7 @@ const Context = ({ children }) => {
       onSnapshot(collection(db, "rooms"), (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           ...doc.data(),
-          _id: doc.id,
+          oprn_id: doc.id,
         }));
         setTest(data);
       });

@@ -18,7 +18,6 @@ import { ContexStore } from "../../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
-  console.log(user);
   const [inFav, setinFav] = useState();
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
@@ -52,7 +51,6 @@ export default function Card({ data, check }) {
     //delete from fav
     console.log("add to fav  ");
   };
-
   return (
     <>
       <View
@@ -65,7 +63,10 @@ export default function Card({ data, check }) {
       >
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate("Detail");
+            navigation.navigate("Detail", {
+              room_id:oprn_id
+            }
+            );
           }}
         >
           <Image

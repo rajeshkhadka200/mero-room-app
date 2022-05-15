@@ -17,7 +17,7 @@ const Myroom = ({ route }) => {
         onSnapshot(q, (snapshot) => {
           const data = snapshot.docs.map((doc) => ({
             ...doc.data(),
-            _id: doc.id,
+            oprn_id: doc.id,
           }));
           setRooms(data);
         });
@@ -29,6 +29,7 @@ const Myroom = ({ route }) => {
   }, []);
 
   const renderRooms = ({ item }) => {
+    console.log(item);
     return (
       <>
         <RoomCard data={item} render_location="my_rooms" />
@@ -58,11 +59,7 @@ const Myroom = ({ route }) => {
             keyExtractor={(i) => {
               i.index;
             }}
-            ListEmptyComponent={NoContent(
-              "",
-              "",
-              "You doesnot posted any rooms !!"
-            )}
+            ListEmptyComponent={NoContent("", "", "You don't post any Room")}
           />
         </View>
       </ScrollView>
