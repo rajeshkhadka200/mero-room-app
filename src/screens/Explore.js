@@ -5,12 +5,13 @@ import Card from "../components/Global/Card";
 import Nav from "../navigation/Nav";
 import { TabRouter } from "@react-navigation/native";
 import { ContexStore } from "../context/Context";
+import EmptyComp from "../components/Global/Empty";
 const Explore = ({ route }) => {
-  const { rooms } = useContext(ContexStore);
+  const { test } = useContext(ContexStore);
   const renderCard = ({ item }) => {
     return <Card data={item} check="yes" />;
   };
-  console.log("rooms in exp", rooms);
+
   return (
     <>
       <ScrollView
@@ -25,9 +26,10 @@ const Explore = ({ route }) => {
           }}
         >
           <FlatList
-            data={rooms}
+            data={test}
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}
+            ListEmptyComponent={<EmptyComp check="yes" />}
             style={{
               marginBottom: 60,
             }}

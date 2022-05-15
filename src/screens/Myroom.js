@@ -1,24 +1,32 @@
-import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, ScrollView, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import RoomCard from "../components/Global/RoomCard";
 import Nav from "../navigation/Nav";
-import { ContexStore } from "../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import NoContent from "../components/Global/NoContent";
 
 const Myroom = ({ route }) => {
-  const [token, settoken] = useState("");
-  const [myRooms, setmyRooms] = useState();
-  const { rooms } = useContext(ContexStore);
+  const [room, setRooms] = useState([]);
   useEffect(() => {
     const fetchMyRoom = async () => {
-      let id = await AsyncStorage.getItem("auth_token");
+      try {
+        const token = await AsyncStorage.getItem("auth_token");
+        const q = query(collection(db, "rooms"), where("token", "==", token));
+        onSnapshot(q, (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            _id: doc.id,
+          }));
+          setRooms(data);
+        });
+      } catch (error) {
+        console.log("err while geting data", error);
+      }
     };
     fetchMyRoom();
   }, []);
-
-  const array = rooms.filter((data) => {
-    return data.token === token;
-  });
 
   const renderRooms = ({ item }) => {
     return (
@@ -27,6 +35,7 @@ const Myroom = ({ route }) => {
       </>
     );
   };
+
   return (
     <>
       <ScrollView
@@ -40,15 +49,16 @@ const Myroom = ({ route }) => {
       >
         <View
           style={{
-            marginTop: 20,
+            marginVertical: 20,
           }}
         >
           <FlatList
-            data={array}
+            data={room}
             renderItem={renderRooms}
             keyExtractor={(i) => {
               i.index;
             }}
+            ListEmptyComponent={NoContent("search", "data")}
           />
         </View>
       </ScrollView>

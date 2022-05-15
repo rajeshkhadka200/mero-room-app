@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Pressable, View } from "react-native";
+import { Alert, Pressable, View,StyleSheet} from "react-native";
 import { styles } from "../styles/Global/nav_design";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -46,20 +46,26 @@ const Nav = ({ active }) => {
       <Pressable style={styles.pressable} onPress={() => redirect("Mero Room")}>
         {active === "Mero Room" ? <Home_focused /> : <Home_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("Explore")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Explore")}>
         {active === "Explore" ? <Explore_focused /> : <Explore_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("Post")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Post")}>
         {active === "Post" ? <Post_focused /> : <Post_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("MyRoom")}>
+      <Pressable style={icon.btn} onPress={() => redirect("MyRoom")}>
         {active === "MyRoom" ? <Room_focused /> : <Room_outline />}
       </Pressable>
-      <Pressable onPress={() => redirect("Profile")}>
+      <Pressable style={icon.btn} onPress={() => redirect("Profile")}>
         {active === "Profile" ? <Profile_focused /> : <Profile_outline />}
       </Pressable>
     </View>
   );
 };
+const icon = StyleSheet.create({
+  btn:{
+    padding:10
+
+  }
+})
 
 export default React.memo(Nav);
