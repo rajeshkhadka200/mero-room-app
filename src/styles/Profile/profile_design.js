@@ -109,7 +109,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
   },
   love_icon: {
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   line: {
     flex: 1,

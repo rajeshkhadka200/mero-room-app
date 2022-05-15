@@ -1,23 +1,27 @@
 import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RoomCard from "../components/Global/RoomCard";
 import Nav from "../navigation/Nav";
+import { ContexStore } from "../context/Context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import NoContent from "../components/Global/NoContent"
+import NoRooms from "../components/Global/NoRooms";
 
 const Myroom = ({ route }) => {
-  const my_room = [
-    {
-      photo: require("../../assets/img/room1.jpg"),
-      address: "Butwal Kalikanagar",
-      price: "5000",
-      room_id: 5,
-    },
-    {
-      photo: require("../../assets/img/room2.jpg"),
-      address: "Butwal Sukhanagar",
-      price: "4000",
-      room_id: 5,
-    },
-  ];
+  const [token, settoken] = useState("");
+  const [myRooms, setmyRooms] = useState();
+  const { test } = useContext(ContexStore);
+  useEffect(() => {
+    const fetchToken = async () => {
+      let id = await AsyncStorage.getItem("auth_token");
+      settoken(id);
+    };
+    fetchToken();
+  }, []);
+
+  const array = test.filter((data) => {
+    return data.token === token;
+  });
 
   const renderRooms = ({ item }) => {
     return (
@@ -26,6 +30,7 @@ const Myroom = ({ route }) => {
       </>
     );
   };
+  const check="yes"
   return (
     <>
       <ScrollView
@@ -39,15 +44,17 @@ const Myroom = ({ route }) => {
       >
         <View
           style={{
-            marginTop: 20,
+            marginVertical: 20,
+            alignItems:"center"
           }}
         >
           <FlatList
-            data={my_room}
+            data={array}
             renderItem={renderRooms}
             keyExtractor={(i) => {
               i.index;
             }}
+            ListEmptyComponent={NoRooms(check)}
           />
         </View>
       </ScrollView>

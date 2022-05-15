@@ -61,6 +61,8 @@ export const styles = StyleSheet.create({
   },
   post_input2: {
     fontFamily: "400",
+    fontSize: 15,
+
 
     flex: 1 / 2.2,
     paddingHorizontal: 15,

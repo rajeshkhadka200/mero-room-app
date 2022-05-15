@@ -9,10 +9,13 @@ const Context = ({ children }) => {
     const fetchUser = async () => {
       try {
         const token = await AsyncStorage.getItem("auth_token");
-        const q = query(collection(db, "users"), where("user_id", "==", token));
+        const q = query(
+          collection(db, "users"),
+          where("auth_token", "==", token)
+        );
         onSnapshot(q, (snapshot) => {
           snapshot.docs.forEach((doc) => {
-            setUser([{ ...doc.data(), _id: doc.id }]);
+            setUser([{ ...doc.data(), oprn_id: doc.id }]);
           });
         });
       } catch (error) {
@@ -21,10 +24,10 @@ const Context = ({ children }) => {
     };
     fetchUser();
   }, []);
+  console.log(user);
 
   // state for the model
   const [isModel, setisModel] = useState(false);
-
   // state for the post
   const [data, setData] = useState({
     address: "",
@@ -43,20 +46,22 @@ const Context = ({ children }) => {
   });
   // state for the post success track
   const [isRoomuploading, setisRoomuploading] = useState(false);
-  const [rooms, setrooms] = useState([]);
+  // const [rooms, setrooms] = useState([]);
   // get rooms
+  const [test,setTest] = useState([])
+  const rooms=[];
   useEffect(() => {
     const getRooms = async () => {
       onSnapshot(collection(db, "rooms"), (snapshot) => {
         snapshot.docs.forEach((doc) => {
-          setrooms([{ ...doc.data(), _id: doc.id }]);
+          rooms.push({ ...doc.data(), oprn_id: doc.id });
+          setTest(rooms)
         });
       });
     };
     getRooms();
   }, []);
-  // active tab context
-
+  console.log("rooms in", test);
   return (
     <ContexStore.Provider
       value={{
@@ -69,8 +74,8 @@ const Context = ({ children }) => {
         images,
         setimages,
         isRoomuploading,
-        rooms,
         setisRoomuploading,
+        test
       }}
     >
       {children}

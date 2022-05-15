@@ -114,9 +114,9 @@ const Profile = ({ route }) => {
                 style={styles.love_icon}
                 name="favorite"
                 size={24}
-                color="#F66565"
+                color="#E35A5A"
               />
-              <View style={styles.line}></View>
+              {/* <View style={styles.line}></View> */}
             </View>
             {/* actual data */}
             <FlatList

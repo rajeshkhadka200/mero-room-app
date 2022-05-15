@@ -1,9 +1,8 @@
-import { Pressable,View,StyleSheet} from "react-native";
 import React from "react";
+import { Alert, Pressable, View,StyleSheet} from "react-native";
 import { styles } from "../styles/Global/nav_design";
-import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //home
 import Home_outline from "../../assets/svg/home_not.svg";
@@ -24,24 +23,27 @@ import Room_focused from "../../assets/svg/room_a.svg";
 import Profile_outline from "../../assets/svg/profile_not.svg";
 import Profile_focused from "../../assets/svg/profile_a.svg";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const Nav = ({ active }) => {
-  console.log(active);
   const navigation = useNavigation();
-  const redirect = async(key) => {
-    if (key === "Profile" || key === "Post") {
+  const redirect = async (key) => {
+    if (key === "Profile" || key === "Post" || key === "MyRoom") {
       let token = await AsyncStorage.getItem("auth_token");
       if (token) {
-         return navigation.navigate(key);
+        navigation.navigate(key);
+      } else {
+        Alert.alert(
+          "Please Login",
+          "First you need to Login or register to access " + key
+        );
+        navigation.navigate("Auth");
       }
-      alert("Please Login to access" + key);
+    } else {
+      navigation.navigate(key);
     }
-    return navigation.navigate(key);
   };
   return (
     <View style={styles.nav}>
-      <Pressable style={icon.btn} onPress={() => redirect("Mero Room")}>
+      <Pressable style={styles.pressable} onPress={() => redirect("Mero Room")}>
         {active === "Mero Room" ? <Home_focused /> : <Home_outline />}
       </Pressable>
       <Pressable style={icon.btn} onPress={() => redirect("Explore")}>
