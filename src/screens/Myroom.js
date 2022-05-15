@@ -10,11 +10,10 @@ const Myroom = ({ route }) => {
   const [myRooms, setmyRooms] = useState();
   const { rooms } = useContext(ContexStore);
   useEffect(() => {
-    const fetchToken = async () => {
+    const fetchMyRoom = async () => {
       let id = await AsyncStorage.getItem("auth_token");
-      settoken(id);
     };
-    fetchToken();
+    fetchMyRoom();
   }, []);
 
   const array = rooms.filter((data) => {

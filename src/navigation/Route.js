@@ -107,6 +107,7 @@ export default function Route() {
     }
 
     setisRoomuploading(true);
+    // await addDoc(collection(db, "users"), {
     const docRef = await addDoc(collection(db, "rooms"), {
       token: user[0]?.auth_token,
       user_profile: user[0]?.photoUrl,
@@ -335,7 +336,6 @@ export default function Route() {
 
         <Stack.Screen
           options={{
-            animation: "none",
             headerShown: false,
           }}
           name="Detail"
