@@ -24,6 +24,7 @@ const Myroom = ({ route }) => {
   });
 
   const renderRooms = ({ item }) => {
+    console.log(item);
     return (
       <>
         <RoomCard data={item} render_location="my_rooms" />
@@ -45,7 +46,6 @@ const Myroom = ({ route }) => {
         <View
           style={{
             marginVertical: 20,
-            alignItems:"center"
           }}
         >
           <FlatList
@@ -54,7 +54,7 @@ const Myroom = ({ route }) => {
             keyExtractor={(i) => {
               i.index;
             }}
-            ListEmptyComponent={NoRooms(check)}
+            // ListEmptyComponent={NoRooms(check)}
           />
         </View>
       </ScrollView>
