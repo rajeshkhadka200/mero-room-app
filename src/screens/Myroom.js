@@ -58,7 +58,11 @@ const Myroom = ({ route }) => {
             keyExtractor={(i) => {
               i.index;
             }}
-            ListEmptyComponent={NoContent("search", "data")}
+            ListEmptyComponent={NoContent(
+              "",
+              "",
+              "You doesnot posted any rooms !!"
+            )}
           />
         </View>
       </ScrollView>
