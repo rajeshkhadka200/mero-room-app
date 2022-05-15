@@ -1,27 +1,32 @@
-import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import { View, StyleSheet, ScrollView, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import RoomCard from "../components/Global/RoomCard";
 import Nav from "../navigation/Nav";
-import { ContexStore } from "../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import NoContent from "../components/Global/NoContent"
-import NoRooms from "../components/Global/NoRooms";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import NoContent from "../components/Global/NoContent";
 
 const Myroom = ({ route }) => {
-  const [token, settoken] = useState("");
-  const [myRooms, setmyRooms] = useState();
-  const { test } = useContext(ContexStore);
+  const [room, setRooms] = useState([]);
   useEffect(() => {
-    const fetchToken = async () => {
-      let id = await AsyncStorage.getItem("auth_token");
-      settoken(id);
+    const fetchMyRoom = async () => {
+      try {
+        const token = await AsyncStorage.getItem("auth_token");
+        const q = query(collection(db, "rooms"), where("token", "==", token));
+        onSnapshot(q, (snapshot) => {
+          const data = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            _id: doc.id,
+          }));
+          setRooms(data);
+        });
+      } catch (error) {
+        console.log("err while geting data", error);
+      }
     };
-    fetchToken();
+    fetchMyRoom();
   }, []);
-
-  const array = test.filter((data) => {
-    return data.token === token;
-  });
 
   const renderRooms = ({ item }) => {
     console.log(item);
@@ -31,7 +36,7 @@ const Myroom = ({ route }) => {
       </>
     );
   };
-  const check="yes"
+
   return (
     <>
       <ScrollView
@@ -49,12 +54,12 @@ const Myroom = ({ route }) => {
           }}
         >
           <FlatList
-            data={array}
+            data={room}
             renderItem={renderRooms}
             keyExtractor={(i) => {
               i.index;
             }}
-            // ListEmptyComponent={NoRooms(check)}
+            ListEmptyComponent={NoContent("","","You don't post any Room")}
           />
         </View>
       </ScrollView>

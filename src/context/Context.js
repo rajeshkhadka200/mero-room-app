@@ -24,7 +24,6 @@ const Context = ({ children }) => {
     };
     fetchUser();
   }, []);
-  console.log(user);
 
   // state for the model
   const [isModel, setisModel] = useState(false);
@@ -46,22 +45,22 @@ const Context = ({ children }) => {
   });
   // state for the post success track
   const [isRoomuploading, setisRoomuploading] = useState(false);
-  // const [rooms, setrooms] = useState([]);
-  // get rooms
-  const [test,setTest] = useState([])
-  const rooms=[];
+  const [test, setTest] = useState([]);
+
   useEffect(() => {
     const getRooms = async () => {
       onSnapshot(collection(db, "rooms"), (snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          rooms.push({ ...doc.data(), oprn_id: doc.id });
-          setTest(rooms)
-        });
+        const data = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          _id: doc.id,
+        }));
+        setTest(data);
       });
     };
+
     getRooms();
   }, []);
-  console.log("rooms in", test);
+
   return (
     <ContexStore.Provider
       value={{
@@ -75,7 +74,7 @@ const Context = ({ children }) => {
         setimages,
         isRoomuploading,
         setisRoomuploading,
-        test
+        test,
       }}
     >
       {children}

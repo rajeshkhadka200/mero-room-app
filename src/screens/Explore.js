@@ -11,7 +11,7 @@ const Explore = ({ route }) => {
   const renderCard = ({ item }) => {
     return <Card data={item} check="yes" />;
   };
-  console.log("rooms in exp", test);
+
   return (
     <>
       <ScrollView
@@ -29,7 +29,7 @@ const Explore = ({ route }) => {
             data={test}
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}
-            ListEmptyComponent={<EmptyComp check="yes"/>}
+            ListEmptyComponent={<EmptyComp check="yes" />}
             style={{
               marginBottom: 60,
             }}

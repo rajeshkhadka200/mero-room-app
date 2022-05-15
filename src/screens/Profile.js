@@ -20,21 +20,6 @@ import Nav from "../navigation/Nav.js";
 const Profile = ({ route }) => {
   const navigation = useNavigation();
   const { user, setUser } = React.useContext(ContexStore);
-  const my_fav = [
-    {
-      photo: require("../../assets/img/room1.jpg"),
-      address: "Butwal Kalikanagar",
-      price: "5000",
-      room_id: 5,
-    },
-    {
-      photo: require("../../assets/img/room2.jpg"),
-      address: "Butwal Sukhanagar",
-      price: "4000",
-      room_id: 5,
-    },
-  ];
-
   const renderRooms = ({ item }) => {
     return (
       <>
@@ -119,13 +104,13 @@ const Profile = ({ route }) => {
               {/* <View style={styles.line}></View> */}
             </View>
             {/* actual data */}
-            <FlatList
+            {/* <FlatList
               data={my_fav}
               renderItem={renderRooms}
               keyExtractor={(i) => {
                 i.index;
               }}
-            />
+            /> */}
           </View>
         </View>
       </ScrollView>
