@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   },
   new_text: {
     color: "rgba(0, 0, 0, 1)",
-    fontSize: 22,
+    fontSize: 18,
     fontFamily: "400",
   },
   card_wrapper: {

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   Pressable,
+  Alert,
 } from "react-native";
 import call from "react-native-phone-call";
 import { styles } from "../../styles/details/Detail_Header_design.js";
@@ -143,7 +144,15 @@ const Detail_header = ({ room_id }) => {
             <Text style={styles.desc_para}>{roomDetail[0]?.desc}</Text>
             {/* render map here */}
             <View style={styles.btn_wrapper}>
-              <Pressable style={styles.btn_apply}>
+              <Pressable
+                onPress={() => {
+                  Alert.alert(
+                    "Sorry!",
+                    "This fearure is currently unavailable."
+                  );
+                }}
+                style={styles.btn_apply}
+              >
                 <Text
                   style={{
                     color: "#fff",

@@ -2,11 +2,10 @@ import {
   View,
   Text,
   TextInput,
-  TouchableWithoutFeedback,
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { styles } from "../../styles/details/comment_design";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
@@ -21,7 +20,7 @@ const Comment = ({ room_id }) => {
   const [isLoading, setisLoading] = useState(false);
 
   const postComment = async () => {
-    if (!user) {
+    if (user.length < 1) {
       return alert("Please Login to comment !!");
     } else if (!comment) return alert("Comment cannot be empty !");
     else if (comment.length < 3) {
@@ -30,7 +29,7 @@ const Comment = ({ room_id }) => {
     try {
       setisLoading(true);
       setComment("");
-      const res = await addDoc(collection(db, "comments"), {
+      await addDoc(collection(db, "comments"), {
         room_id: room_id,
         user_id: user[0]?.auth_token,
         user_name: user[0]?.name,

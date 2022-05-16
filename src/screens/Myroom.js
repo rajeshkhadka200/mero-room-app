@@ -1,5 +1,5 @@
 import { View, StyleSheet, ScrollView, FlatList } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RoomCard from "../components/Global/RoomCard";
 import Nav from "../navigation/Nav";
 import AsyncStorage from "@react-native-async-storage/async-storage";
