@@ -16,40 +16,54 @@ import { styles } from "../../styles/Global/card_design";
 import { useNavigation } from "@react-navigation/native";
 import { ContexStore } from "../../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { db } from "../../../config/firebase";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
+  console.log("user", user[0]);
   const [inFav, setinFav] = useState();
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
   const { thumbnail } = data;
-
   const changeClolor = () => {
     const isAlreadyIn = user[0]?.fav.filter((data) => {
       return oprn_id === data;
     });
-    // if (isAlreadyIn.length > 0) {
-    //   setinFav(true);
-    // }
+    if (isAlreadyIn?.length > 0) {
+      setinFav(true);
+    }
   };
   React.useEffect(() => {
     changeClolor();
   }, []);
 
   const favOperation = async (room_id) => {
-    console.log(room_id);
     let token = await AsyncStorage.getItem("auth_token");
     if (!token) {
       return alert("Please Login to add in Fav");
     }
-    // check if user wants to remove or add
-    const isAllready = user[0]?.fav.filter((data) => {
-      return room_id === data;
+    const docRef = doc(db, "users", user[0]?.oprn_id);
+    const ifAlready = user[0]?.fav.filter((data) => {
+      return data === room_id;
     });
-    if (isAllready.length === 1) {
-      return console.log("remove from fav");
+
+    if (!ifAlready.length > 0) {
+      try {
+        await updateDoc(docRef, {
+          fav: arrayUnion(room_id),
+        });
+      } catch (error) {
+        console.log("err whil aad", error);
+      }
+    } else {
+      try {
+        await updateDoc(docRef, {
+          fav: arrayRemove(room_id),
+        });
+      } catch (error) {
+        console.log("err whil del", error);
+      }
     }
-    //delete from fav
-    console.log("add to fav  ");
   };
   return (
     <>
@@ -64,9 +78,8 @@ export default function Card({ data, check }) {
         <TouchableWithoutFeedback
           onPress={() => {
             navigation.navigate("Detail", {
-              room_id:oprn_id
-            }
-            );
+              room_id: oprn_id,
+            });
           }}
         >
           <Image
@@ -96,7 +109,7 @@ export default function Card({ data, check }) {
             onPress={() => {
               favOperation(oprn_id);
             }}
-            name="hearto"
+            name={inFav ? "heart" : "hearto"}
             size={30}
             color={inFav ? "#E35A5A" : "white"}
             // color="#E35A5A"

@@ -22,6 +22,9 @@ const HomeHeader = () => {
   const navigation = useNavigation();
 
   const Search = () => {
+    if (search === "") {
+      return;
+    }
     navigation.navigate("Search", {
       search,
     });
@@ -32,7 +35,9 @@ const HomeHeader = () => {
     <>
       <View style={styles.headerWrapper}>
         <View style={styles.searchCon}>
-          <Text style={styles.searchText}>Hi, {user.length > 0 ? user[0]?.name : "User"}</Text>
+          <Text style={styles.searchText}>
+            Hi, {user.length > 0 ? user[0]?.name : "User"}
+          </Text>
           <View style={styles.searchWrapper}>
             <TextInput
               value={search}

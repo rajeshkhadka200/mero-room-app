@@ -29,7 +29,6 @@ const Myroom = ({ route }) => {
   }, []);
 
   const renderRooms = ({ item }) => {
-    console.log(item);
     return (
       <>
         <RoomCard data={item} render_location="my_rooms" />
@@ -59,7 +58,7 @@ const Myroom = ({ route }) => {
             keyExtractor={(i) => {
               i.index;
             }}
-            ListEmptyComponent={NoContent("","","You don't post any Room")}
+            ListEmptyComponent={NoContent("", "", "You don't post any Room")}
           />
         </View>
       </ScrollView>

@@ -2,7 +2,7 @@ import { View, Text, Image } from "react-native";
 import React from "react";
 import { styles } from "../../styles/Global/no_content_design";
 
-const NoContent = (search, data,render_location) => {
+const NoContent = (search, data, render_location) => {
   return (
     <View style={styles.no_content_con}>
       <Image

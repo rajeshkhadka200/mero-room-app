@@ -8,11 +8,11 @@ import {
   Pressable,
 } from "react-native";
 import call from "react-native-phone-call";
-import { styles } from "../../styles/details/Detail_Header_design.js"; //header css
+import { styles } from "../../styles/details/Detail_Header_design.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import Modal from "../../components/details/Model";
+// import Modal from "../../components/details/Model";
 import { ContexStore } from "../../context/Context.js";
 import Comment from "./Comment.js";
 import { Entypo } from "@expo/vector-icons";
@@ -38,13 +38,16 @@ const WhiteIcon = ({ text }) => {
   );
 };
 
-const Detail_header = ({ route }) => {
-  // const {room_id} = route.params
-  const room_id = 5;
+const Detail_header = ({ room_id }) => {
+  const { test } = useContext(ContexStore);
+  const [roomDetail, setroomDetail] = useState([]);
+  React.useEffect(() => {
+    const singleRoom = test.filter((data) => {
+      return data.oprn_id === room_id;
+    });
+    setroomDetail(singleRoom);
+  }, []);
   const navigation = useNavigation();
-  const {test} = useContext(ContexStore)
-
-  console.log(route);
   const makeCall = () => {
     const args = {
       number: "9854858548",
@@ -53,13 +56,8 @@ const Detail_header = ({ route }) => {
     // Make a call
     call(args).catch(console.error);
   };
+  const imgs = roomDetail[0]?.thumbnail;
 
-  const imgs = [
-    "https://thumbs.dreamstime.com/b/hotel-room-13225019.jpg",
-    "https://static.toiimg.com/thumb/msid-75589870,width-1200,height-900,resizemode-4/.jpg",
-    "https://cdn.loewshotels.com/loewshotels.com-2466770763/cms/cache/v2/5f5a6e0d12749.jpg/1920x1080/fit/80/86e685af18659ee9ecca35c465603812.jpg",
-    "https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1207490255-e1615485559611.jpg",
-  ];
   const renderImgs = (data) => {
     return (
       <Image
@@ -115,14 +113,14 @@ const Detail_header = ({ route }) => {
         <View style={styles.lower_wrapper}>
           <View style={styles.small_info_flex}>
             <View>
-              <Text style={styles.price}>Rs. 1850</Text>
-              <Text style={styles.address}>Butwal 13, Devinagar Rupandehi</Text>
+              <Text style={styles.price}>Rs. {roomDetail[0]?.rate}</Text>
+              <Text style={styles.address}>{roomDetail[0]?.address}</Text>
             </View>
             <View style={styles.small_right}>
               <Image
                 style={{ width: 35, height: 35, borderRadius: 500 }}
                 source={{
-                  uri: "https://cutt.ly/pGglXVL",
+                  uri: roomDetail[0]?.user_profile,
                 }}
               ></Image>
             </View>
@@ -139,15 +137,10 @@ const Detail_header = ({ route }) => {
           <View style={styles.header_con}>
             <View style={styles.desc_header}>
               <Text style={styles.header_text}>Description</Text>
-              <Text style={styles.header_status}>available</Text>
+              <Text style={styles.header_status}>{roomDetail[0]?.status}</Text>
             </View>
 
-            <Text style={styles.desc_para}>
-              A new and fresh room available at Butwal 13, kalikanagar. Room is
-              available at 4th floor of the house. Kitchen is also available
-              along with the room. The facility of water and sanitary is
-              amazing.
-            </Text>
+            <Text style={styles.desc_para}>{roomDetail[0]?.desc}</Text>
             {/* render map here */}
             <View style={styles.btn_wrapper}>
               <Pressable style={styles.btn_apply}>
@@ -160,7 +153,6 @@ const Detail_header = ({ route }) => {
                 >
                   Chat with Owner
                 </Text>
-                
               </Pressable>
               <TouchableOpacity onPress={makeCall} style={styles.btn_left}>
                 <Entypo name="phone" size={24} color="#5B628F" />
