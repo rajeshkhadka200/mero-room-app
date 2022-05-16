@@ -29,7 +29,6 @@ const Myroom = ({ route }) => {
   }, []);
 
   const renderRooms = ({ item }) => {
-    console.log(item);
     return (
       <>
         <RoomCard data={item} render_location="my_rooms" />

@@ -115,6 +115,7 @@ export default function Route() {
       iskitchen,
       isFlat,
       desc,
+      status: "available",
       thumbnail: [],
     });
     if (!docRef.id) {
