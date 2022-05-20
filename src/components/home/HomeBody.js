@@ -46,16 +46,6 @@ const HomeBody = () => {
         </View>
         <View>
           <Text style={styles.new_text}>Popular Rooms</Text>
-          <FlatList
-            legacyImplementation={false}
-            data={test}
-            ListEmptyComponent={<EmptyComp/>}
-            renderItem={renderCard}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            keyExtractor={(index) => index.id}
-            style={styles.card_wrapper}
-          />
         </View>
         <View
           style={{
