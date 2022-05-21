@@ -6,7 +6,7 @@ const NoContent = (search, data, render_location) => {
   return (
     <View style={styles.no_content_con}>
       <Image
-        source={require("../../../assets/img/nodata.jpg")}
+        source={require("../../../assets/img/nodata.png")}
         style={styles.img}
       />
       <Text style={styles.text1}>Nothing to find here!</Text>
