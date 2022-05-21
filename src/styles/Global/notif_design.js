@@ -1,23 +1,42 @@
 import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
-  single_notif_con: {
-    height: "auto",
-    width: "100%",
-    flexDirection: "row",
+  con: {
     flex: 1,
+    backgroundColor: "#fff",
+    paddingVertical: 25,
+    paddingHorizontal: 15,
+    height: "100%",
   },
-  left_side: {
-    width: "20%",
-    flex: 2,
+  notif_con: {
+    marginTop: 10,
+    borderRadius: 7,
+    borderLeftColor: "#5B628F",
+    borderLeftWidth: 5,
+    backgroundColor: "#efefef",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  text_con: {
+    flex: 1,
+    padding: 2,
   },
   img: {
-    height: 45,
-    width: 45,
-    borderRadius: 500,
+    alignSelf: "flex-start",
+    width: 35,
+    height: 35,
+    borderRadius: 17,
+    marginRight: 15,
   },
-  right_side: {
-    borderWidth: 1,
-    flex: 1,
-    paddingLeft: 10,
+  t1: {
+    fontFamily: "500",
+    fontSize: 13,
+    color: "grey",
+  },
+  t2: {
+    fontFamily: "400",
+    fontSize: 16,
   },
 });

@@ -1,66 +1,31 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import { ScrollView } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../config/firebase";
+import { styles } from "../styles/Global/notif_design";
+import SingleNotif from "../components/Global/SingleNotif";
 
 const Notif = () => {
-  return (
-    <View style={styles.con}>
-      <View style={styles.notif_con}>
-        <Image
-          source={{
-            uri: "https://media.istockphoto.com/vectors/chat-bot-ai-and-customer-service-support-concept-vector-flat-person-vector-id1221348467?k=20&m=1221348467&s=612x612&w=0&h=hp8h8MuGL7Ay-mxkmIKUsk3RY4O69MuiWjznS_7cCBw=",
-          }}
-          style={styles.img}
-        />
-        <View style={styles.text_con}>
-          <Text style={styles.t1}>5 May,2022</Text>
-          <Text style={styles.t2}>
-            Hello User, It's me 'Ego' AI of Mero-Room welcome you to explore your awesome app🔥.
+  const [notif, setnotif] = useState([]);
 
-          </Text>
-        </View>
-      </View>
-    </View>
+  useEffect(() => {
+    const colRef = collection(db, "notif");
+    onSnapshot(colRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        oprn_id: doc.id,
+      }));
+      setnotif(data);
+    });
+  }, []);
+
+  return (
+    <ScrollView style={styles.con}>
+      {notif.map((data) => {
+        return <SingleNotif key={data.createdAt} notif={data} />;
+      })}
+    </ScrollView>
   );
 };
-const styles = StyleSheet.create({
-  con: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingVertical: 25,
-    paddingHorizontal: 15,
-  },
-  notif_con: {
-    borderRadius: 7,
-    borderLeftColor: "#5B628F",
-    borderLeftWidth: 5,
-    backgroundColor: "#efefef",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    justifyContent:"space-evenly",
-    flexDirection:"row",
-    alignItems:"center"
-  },
-  text_con:{
-    flex:1,
-    padding:2,
-
-  },
-  img:{
-      alignSelf:"flex-start",
-      width:35,
-      height:35,
-      borderRadius:17,
-      marginRight:15
-  },
-  t1:{
-      fontFamily:"500",
-      fontSize:13,
-      color:"grey"
-  },
-  t2:{
-      fontFamily:"400",
-      fontSize:16,
-  }
-});
 
 export default Notif;

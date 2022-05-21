@@ -14,24 +14,20 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
-
-  const [inFav, setinFav] = useState();
+  const [inFav, setinFav] = useState(false);
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
   const { thumbnail } = data;
-  const changeClolor = () => {
-    const isAlreadyIn = user[0]?.fav.filter((data) => {
-      return oprn_id === data;
-    });
-    if (isAlreadyIn?.length > 0) {
-      setinFav(true);
-    }
-  };
-  React.useEffect(() => {
-    changeClolor();
-  }, []);
-
   const favOperation = async (room_id) => {
+    React.useEffect(() => {
+      console.log("hello");
+      for (let i = 0; i < user.fav?.length; i++) {
+        if (user.fav[i] === oprn_id) {
+          // setisNew(false);
+          console.log("in fav" + user.fav[i]);
+        }
+      }
+    }, []);
     let token = await AsyncStorage.getItem("auth_token");
     if (!token) {
       return alert("Please Login to add in Fav");
@@ -46,6 +42,7 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayUnion(room_id),
         });
+        setinFav(!inFav);
       } catch (error) {
         console.log("err whil aad", error);
       }
@@ -54,6 +51,7 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayRemove(room_id),
         });
+        setinFav(!inFav);
       } catch (error) {
         console.log("err whil del", error);
       }

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     fontFamily: "600",
     fontSize: 40,
     marginBottom: 25,
-    color:"#000"
+    color: "#000",
   },
   btn: {
     marginBottom: 15,
