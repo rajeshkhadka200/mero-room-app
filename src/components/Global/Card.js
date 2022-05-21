@@ -20,7 +20,6 @@ export default function Card({ data, check }) {
   const { thumbnail } = data;
   const favOperation = async (room_id) => {
     React.useEffect(() => {
-      console.log("hello");
       for (let i = 0; i < user.fav?.length; i++) {
         if (user.fav[i] === oprn_id) {
           // setisNew(false);
@@ -42,7 +41,7 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayUnion(room_id),
         });
-        setinFav(!inFav);
+        // setinFav(!inFav);
       } catch (error) {
         console.log("err whil aad", error);
       }
@@ -51,7 +50,7 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayRemove(room_id),
         });
-        setinFav(!inFav);
+        // setinFav(!inFav);
       } catch (error) {
         console.log("err whil del", error);
       }

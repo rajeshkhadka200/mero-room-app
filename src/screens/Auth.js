@@ -104,9 +104,9 @@ const Auth = () => {
         <View style={styles.brand_con}>
           <Image
             style={{
-              height: 100,
-              width: 100,
-              borderRadius: 500,
+              height: 120,
+              width: 120,
+              // borderRadius: 500,
               alignSelf: "center",
             }}
             source={require("../../assets/img/logo.png")}
