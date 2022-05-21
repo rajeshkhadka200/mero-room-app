@@ -15,22 +15,10 @@ import { db } from "../../../config/firebase";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
 
-  const [inFav, setinFav] = useState();
+  const [inFav, setinFav] = useState(false);
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
   const { thumbnail } = data;
-  const changeClolor = () => {
-    const isAlreadyIn = user[0]?.fav.filter((data) => {
-      return oprn_id === data;
-    });
-    if (isAlreadyIn?.length > 0) {
-      setinFav(true);
-    }
-  };
-  React.useEffect(() => {
-    changeClolor();
-  }, []);
-
   const favOperation = async (room_id) => {
     let token = await AsyncStorage.getItem("auth_token");
     if (!token) {

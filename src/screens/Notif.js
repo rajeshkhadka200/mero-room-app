@@ -15,7 +15,6 @@ const Notif = () => {
           <Text style={styles.t1}>5 May,2022</Text>
           <Text style={styles.t2}>
             Hello User, It's me 'Ego' AI of Mero-Room welcome you to explore your awesome app🔥.
-
           </Text>
         </View>
       </View>
