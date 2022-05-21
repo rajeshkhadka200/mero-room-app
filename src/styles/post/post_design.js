@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
   },
   post_input2_con: {
     flexDirection: "row",
-    marginVertical: 15,
+    marginBottom: 15,
     flex: 1,
     justifyContent: "space-between",
     fontFamily: "400",

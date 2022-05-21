@@ -51,7 +51,7 @@ const Detail_header = ({ room_id }) => {
   const navigation = useNavigation();
   const makeCall = () => {
     const args = {
-      number: "9854858548",
+      number: roomDetail[0]?.number,
       prompt: true,
     };
     // Make a call

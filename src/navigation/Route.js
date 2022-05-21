@@ -17,7 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 //importing screen
 import Detail from "../screens/Detail";
 LogBox.ignoreLogs(["Setting a timer"]);
-
+import moment from "moment";
 // imports fonts
 import {
   Poppins_200ExtraLight,
@@ -83,12 +83,24 @@ export default function Route() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
   const Stack = createNativeStackNavigator();
   //room upload function
+  const pushNotif = async (room_id, address) => {
+    await addDoc(collection(db, "notif"), {
+      room_id,
+      user_id: user[0]?.auth_token,
+      user_name: user[0]?.name,
+      user_profile: user[0]?.photoUrl,
+      address: address,
+      createdAt: moment().format("llll"),
+      seenBy: [],
+    });
+  };
   const upload = async (data, img) => {
     let images_to_push = [];
     let downloadLink = [];
-    const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
+    const { address, district, rate, rooms_count, iskitchen, isFlat, desc,number } =
       data;
     for (var key in img) {
       if (img[key] === "") {
@@ -116,6 +128,7 @@ export default function Route() {
       iskitchen,
       isFlat,
       desc,
+      number,
       status: "available",
       thumbnail: [],
     });
@@ -148,6 +161,7 @@ export default function Route() {
             thumbnail: downloadLink,
           });
           if (downloadLink.length === 4) {
+            // room uploaded
             setisRoomuploading(false);
             setData({
               address: "",
@@ -157,6 +171,7 @@ export default function Route() {
               iskitchen: false,
               isFlat: false,
               desc: "",
+              number:""
             });
             setimages({
               one: "",
@@ -164,6 +179,7 @@ export default function Route() {
               three: "",
               four: "",
             });
+            // push notif
           }
           blob.close();
         })
@@ -172,6 +188,7 @@ export default function Route() {
           console.log("err while upload", e);
         });
     });
+    pushNotif(docRef.id, data.address);
   };
   return (
     <>
@@ -183,7 +200,10 @@ export default function Route() {
             headerRight: () => (
               <>
                 <View style={header.wrapper}>
-                  <TouchableOpacity onPress={() => navigation.navigate("Notification")} style={header.headerIcon}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Notification")}
+                    style={header.headerIcon}
+                  >
                     <Ionicons
                       name="notifications-outline"
                       size={27}
@@ -345,12 +365,12 @@ export default function Route() {
           component={Detail}
         />
         <Stack.Screen
-              options={{
-                headerShown: true,
-              }}
-              name="Notification"
-              component={Notif}
-            />
+          options={{
+            headerShown: true,
+          }}
+          name="Notification"
+          component={Notif}
+        />
         <Stack.Screen
           name="Search"
           component={Search}

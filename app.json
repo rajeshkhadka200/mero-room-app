@@ -1,17 +1,24 @@
 {
   "expo": {
-    "name": "mobile_project",
-    "slug": "mobile_project",
+    "name": "mero room",
+    "slug": "mero_room",
+    "privacy": "public",
+    "description": "The application wich provides the connection between room owner and room seecker",
     "version": "1.0.0",
     "orientation": "default",
-
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-
+    "splash": {
+      "resizeMode": "cover",
+      "backgroundColor": "#fff"
+    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.rajeshkhadka200.mero_room"
     }
   }
 }

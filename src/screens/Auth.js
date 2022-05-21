@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
 import { FB_KEY, GOOGLE_KEY } from "@env";
@@ -15,13 +15,15 @@ import {
 import { db } from "../../config/firebase.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ContexStore } from "../context/Context";
+import Loading from "../components/Global/Loading";
 
 const Auth = () => {
+  const navigation = useNavigation();
   const { user, setUser } = React.useContext(ContexStore);
+  const [loading, setloading] = useState(false);
   if (user.length > 0) {
     return navigation.navigate("Mero Room");
   }
-  const navigation = useNavigation();
   const fetchUser = async () => {
     try {
       const token = await AsyncStorage.getItem("auth_token");
@@ -40,6 +42,7 @@ const Auth = () => {
   };
   const storeData = async ({ id, email, name, photoUrl }) => {
     try {
+      setloading(true);
       let existing = [];
       //check if user is new or not
       const q = query(collection(db, "users"), where("email", "==", email));
@@ -51,14 +54,8 @@ const Auth = () => {
         try {
           await AsyncStorage.setItem("auth_token", id);
           fetchUser();
-          alert("Loged in successfully");
-          navigation.navigate("Mero Room");
-          // navigation.dispatch(
-          //   CommonActions.replace({
-          //     name: "Mero Room",
-          //   })
-          // );
-          return;
+          setloading(false);
+          return navigation.navigate("Mero Room");
         } catch (err) {
           console.log("err while seting login ", err);
         }
@@ -73,14 +70,8 @@ const Auth = () => {
       try {
         await AsyncStorage.setItem("auth_token", id);
         fetchUser();
-        alert("sign up in successfully");
-        navigation.navigate("Mero Room");
-        // navigation.dispatch(
-        //   CommonActions.replace({
-        //     name: "Mero Room",
-        //   })
-        // );
-        return;
+        setloading(false);
+        return navigation.navigate("Mero Room");
       } catch (err) {
         console.log("err while seting reg", err);
       }
@@ -91,11 +82,15 @@ const Auth = () => {
 
   const googleLogin = async () => {
     try {
+      // setloading(true);
       const result = await Google.logInAsync({
         androidClientId: GOOGLE_KEY,
       });
       if (result.type == "success") {
         storeData(result.user);
+      }
+      if (result.type === "cancel") {
+        setloading(false);
       }
     } catch ({ message }) {
       alert("err from google" + message);
@@ -104,6 +99,7 @@ const Auth = () => {
 
   return (
     <>
+      {loading && <Loading />}
       <View style={styles.main_ontainer}>
         <View style={styles.brand_con}>
           <Image

@@ -72,6 +72,7 @@ const Post = ({ route }) => {
       iskitchen: select1,
       isFlat: select2,
       desc: "",
+      number:""
     });
   };
 
@@ -125,6 +126,16 @@ const Post = ({ route }) => {
             }}
             dropdownIconPosition={"right"}
           />
+          <TextInput
+            editable={!isRoomuploading}
+            value={data.number}
+            placeholder="Phone Number"
+            style={styles.post_input1}
+            onChangeText={(text) => {
+              handleChange("number", text);
+            }}
+          />
+          
           <View style={styles.post_input2_con}>
             <TextInput
               editable={!isRoomuploading}

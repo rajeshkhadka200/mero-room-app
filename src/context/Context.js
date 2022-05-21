@@ -37,6 +37,7 @@ const Context = ({ children }) => {
     iskitchen: false,
     isFlat: false,
     desc: "",
+    number:""
   });
   const [images, setimages] = useState({
     one: "",
