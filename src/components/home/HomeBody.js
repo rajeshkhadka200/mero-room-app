@@ -1,21 +1,10 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, FlatList } from "react-native";
 import { styles } from "../../styles/home/home_body_design";
-import {React,useContext} from "react";
+import { React, useContext } from "react";
 import { cardData } from "../../../config/api";
 import Card from "../Global/Card";
 import { ContexStore } from "../../context/Context";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-import EmptyComp from "../Global/Empty"
+import EmptyComp from "../Global/Empty";
 
 const HomeBody = () => {
   const { test } = useContext(ContexStore);
@@ -36,17 +25,15 @@ const HomeBody = () => {
           <FlatList
             legacyImplementation={false}
             data={test}
-            ListEmptyComponent={<EmptyComp/>}
+            ListEmptyComponent={<EmptyComp />}
             renderItem={renderCard}
             showsHorizontalScrollIndicator={false}
             horizontal
-            keyExtractor={(index) => index.id}
+            keyExtractor={(index) => index.oprn_id}
             style={styles.card_wrapper}
           />
         </View>
-        <View>
-          <Text style={styles.new_text}>Popular Rooms</Text>
-        </View>
+
         <View
           style={{
             marginTop: 20,
@@ -58,7 +45,7 @@ const HomeBody = () => {
             legacyImplementation={false}
             data={test}
             renderItem={renderCard}
-            ListEmptyComponent={<EmptyComp/>}
+            ListEmptyComponent={<EmptyComp />}
             showsHorizontalScrollIndicator={false}
             horizontal
             keyExtractor={(index) => index.id}

@@ -17,7 +17,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ContexStore } from "../context/Context";
 
 const Auth = () => {
-  const { setUser } = React.useContext(ContexStore);
+  const { user, setUser } = React.useContext(ContexStore);
+  if (user.length > 0) {
+    return navigation.navigate("Mero Room");
+  }
   const navigation = useNavigation();
   const fetchUser = async () => {
     try {
@@ -50,6 +53,11 @@ const Auth = () => {
           fetchUser();
           alert("Loged in successfully");
           navigation.navigate("Mero Room");
+          // navigation.dispatch(
+          //   CommonActions.replace({
+          //     name: "Mero Room",
+          //   })
+          // );
           return;
         } catch (err) {
           console.log("err while seting login ", err);
@@ -67,6 +75,11 @@ const Auth = () => {
         fetchUser();
         alert("sign up in successfully");
         navigation.navigate("Mero Room");
+        // navigation.dispatch(
+        //   CommonActions.replace({
+        //     name: "Mero Room",
+        //   })
+        // );
         return;
       } catch (err) {
         console.log("err while seting reg", err);

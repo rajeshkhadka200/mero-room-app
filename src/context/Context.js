@@ -4,6 +4,7 @@ import React, { useState, useEffect, createContext } from "react";
 import { db } from "../../config/firebase";
 export const ContexStore = createContext();
 const Context = ({ children }) => {
+  const [myRoomLength, setmyRoomLength] = useState(0);
   const [user, setUser] = useState([]); // setup the logedin user
   useEffect(() => {
     const fetchUser = async () => {

@@ -26,6 +26,7 @@ const Explore = ({ route }) => {
           }}
         >
           <FlatList
+            keyExtractor={(index) => index.oprn_id}
             data={test}
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}

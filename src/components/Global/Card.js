@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -20,7 +14,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
-  console.log("user", user[0]);
+
   const [inFav, setinFav] = useState();
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;

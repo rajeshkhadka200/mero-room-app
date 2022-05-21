@@ -8,7 +8,7 @@ import React from "react";
 import HomeHeader from "../components/home/HomeHeader";
 import HomeBody from "../components/home/HomeBody";
 import Nav from "../navigation/Nav";
-const Home = ({ navigation, route }) => {
+const Home = ({ route }) => {
   console.log(route);
   return (
     <>
@@ -29,6 +29,7 @@ const Home = ({ navigation, route }) => {
             {/* from notif to filter = Home Header */}
             <HomeHeader />
             {/* frombelow filter */}
+
             <HomeBody />
           </ScrollView>
           <Nav active={route.name} />

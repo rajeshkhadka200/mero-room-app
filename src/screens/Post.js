@@ -151,7 +151,7 @@ const Post = ({ route }) => {
             <View style={styles.post_input3}>
               <Text style={styles.text3}>Kitchen</Text>
               <Checkbox
-                customLabel={true}
+                // customLabel={true}
                 checked={data.iskitchen}
                 label=""
                 noFeedback={true}
@@ -173,7 +173,7 @@ const Post = ({ route }) => {
             <View style={styles.post_input3}>
               <Text style={styles.text3}>Flat</Text>
               <Checkbox
-                customLabel={true}
+                // customLabel={true}
                 label=""
                 noFeedback={true}
                 checked={data.isFlat}

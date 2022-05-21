@@ -3,6 +3,7 @@ export const styles = StyleSheet.create({
   headerWrapper: {
     paddingHorizontal: 20,
     paddingBottom: 20,
+    // marginTop: 5,
   },
   // headerCon: {
   //   flex: 1,
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
     fontSize: 15,
     fontFamily: "300",
-    color:"rgba(0, 0, 0, 1)"
+    color: "rgba(0, 0, 0, 1)",
   },
   searchBtn: {
     height: 50,
@@ -60,10 +61,9 @@ export const styles = StyleSheet.create({
   },
   filterCon: {
     marginTop: 25,
-    marginLeft: 3,
   },
   filterText: {
-    fontSize: 17,
+    fontSize: 18,
     fontFamily: "400",
     color: "rgba(0, 0, 0, 1)",
   },

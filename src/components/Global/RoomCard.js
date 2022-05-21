@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, Alert } from "react-native";
 import { styles } from "../../styles/myroom/my_room_card_design";
 import { AntDesign } from "@expo/vector-icons";
 //firebase
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
+import { useNavigation } from "@react-navigation/native";
+
 const RoomCard = ({ data, render_location }) => {
+  const navigation = useNavigation();
   const { address, rate, oprn_id } = data;
   console.log(oprn_id);
   const { thumbnail } = data;
@@ -25,13 +28,22 @@ const RoomCard = ({ data, render_location }) => {
       <View style={styles.container}>
         <View style={styles.card}>
           <View style={styles.left_side}>
-            <Image
-              style={styles.img}
-              source={{
-                uri: thumbnail && thumbnail[0],
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Detail", {
+                  room_id: oprn_id,
+                });
               }}
-            />
+            >
+              <Image
+                style={styles.img}
+                source={{
+                  uri: thumbnail && thumbnail[0],
+                }}
+              />
+            </Pressable>
           </View>
+
           <View style={styles.right_side}>
             <View style={styles.content}>
               <Text style={styles.address}>{address} </Text>
@@ -39,7 +51,15 @@ const RoomCard = ({ data, render_location }) => {
               <View style={styles.btn_grp}>
                 {render_location === "my_rooms" ? (
                   <>
-                    <Pressable style={styles.btn}>
+                    <Pressable
+                      onPress={() => {
+                        Alert.alert(
+                          "Sorry!",
+                          "This fearure is currently unavailable. Please delete this room and repost it again"
+                        );
+                      }}
+                      style={styles.btn}
+                    >
                       <Text style={styles.btn_text}>Edit Room</Text>
                     </Pressable>
                     <AntDesign

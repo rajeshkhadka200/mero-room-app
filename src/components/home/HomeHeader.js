@@ -3,23 +3,20 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  ScrollView,
-  AsyncStorage,
+  FlatList,
 } from "react-native";
 import React, { useState, useContext } from "react";
 import { styles } from "../../styles/home/home_header_design";
 import { Feather } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { District } from "../../../config/api.js";
 import { useNavigation } from "@react-navigation/native";
 import { ContexStore } from "../../context/Context";
 
 // from notif icons to filter
 const HomeHeader = () => {
-  const { user, setUser } = useContext(ContexStore);
+  const { test } = useContext(ContexStore);
   const [search, setSearch] = useState("");
   const navigation = useNavigation();
+  const uniqueDistrict = [...new Set(test?.map((item) => item.district))];
 
   const Search = () => {
     if (search === "") {
@@ -30,14 +27,29 @@ const HomeHeader = () => {
     });
     setSearch("");
   };
-
+  const renderDistrict = ({ item }) => {
+    return (
+      <>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Search", {
+              data: item,
+            });
+          }}
+          style={styles.district}
+        >
+          <Text style={styles.disText}>{item}</Text>
+        </TouchableOpacity>
+      </>
+    );
+  };
   return (
     <>
       <View style={styles.headerWrapper}>
         <View style={styles.searchCon}>
-          <Text style={styles.searchText}>
+          {/* <Text style={styles.searchText}>
             Hi, {user.length > 0 ? user[0]?.name : "User"}
-          </Text>
+          </Text> */}
           <View style={styles.searchWrapper}>
             <TextInput
               value={search}
@@ -53,27 +65,15 @@ const HomeHeader = () => {
         <View style={styles.filterCon}>
           <Text style={styles.filterText}>Filter by District</Text>
           <View style={styles.disWrapper}>
-            <ScrollView
+            <FlatList
+              data={uniqueDistrict}
+              pagingEnabled={true}
               horizontal
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
-            >
-              {District.slice(0, 10).map((data, i) => {
-                return (
-                  <TouchableOpacity
-                    key={i}
-                    onPress={() => {
-                      navigation.navigate("Search", {
-                        data,
-                      });
-                    }}
-                    style={styles.district}
-                  >
-                    <Text style={styles.disText}>{data}</Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </ScrollView>
+              renderItem={renderDistrict}
+              keyExtractor={(index) => index}
+            />
           </View>
         </View>
       </View>

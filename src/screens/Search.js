@@ -45,6 +45,7 @@ const Search = ({ route }) => {
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}
             style={styles.wrapper}
+            keyExtractor={(index) => index.oprn_id}
           />
         </View>
       </ScrollView>

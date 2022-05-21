@@ -19,7 +19,11 @@ import Nav from "../navigation/Nav.js";
 
 const Profile = ({ route }) => {
   const navigation = useNavigation();
-  const { user, setUser } = React.useContext(ContexStore);
+  const { user, setUser, test } = React.useContext(ContexStore);
+  const myRoomLen = test.filter((data) => {
+    return user[0]?.auth_token === data.token;
+  });
+
   const renderRooms = ({ item }) => {
     return (
       <>
@@ -63,12 +67,18 @@ const Profile = ({ route }) => {
               <Text style={styles.num}>{user[0]?.fav.length}</Text>
               <Text style={styles.label}>Favourite</Text>
             </View>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("MyRoom");
+              }}
+            >
+              <View style={styles.box}>
+                <Text style={styles.num}>{myRoomLen?.length}</Text>
+                <Text style={styles.label}>My uploads</Text>
+              </View>
+            </Pressable>
             <View style={styles.box}>
-              <Text style={styles.num}>10</Text>
-              <Text style={styles.label}>My uploads</Text>
-            </View>
-            <View style={styles.box}>
-              <Text style={styles.num}>45</Text>
+              <Text style={styles.num}>{test?.length}</Text>
               <Text style={styles.label}>Total Rooms</Text>
             </View>
           </View>

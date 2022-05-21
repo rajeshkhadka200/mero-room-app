@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   LogBox,
@@ -38,7 +37,7 @@ import AppLoading from "expo-app-loading";
 import Search from "../screens/Search";
 import Auth from "../screens/Auth";
 import Post from "../screens/Post";
-// import Notification from "./src/screens/Notification";
+import Notif from "../screens/Notif";
 import Home from "../screens/Home";
 import Explore from "../screens/Explore";
 import Myroom from "../screens/Myroom";
@@ -52,6 +51,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // storage
 import { addDoc, collection, updateDoc, doc } from "firebase/firestore"; // firestore
 
 export default function Route() {
+  const skeleton =
+    "https://scontent.fbwa3-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JnDLo_5PpjYAX8cG4vv&_nc_oc=AQmdU2hM-Q3jsox61SGyJovD3ROHCMzHtMpTPXZNREEXG3AwBGDk475naer2wpodQ1o&tn=jOFtfr9vq0GDmmko&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT-XDUZmFAck3kLBwdCWYvigPPD4PkhYN01zNexQ-Ca4uA&oe=62970D78";
   const navigation = useNavigation();
   const {
     user,
@@ -182,7 +183,7 @@ export default function Route() {
             headerRight: () => (
               <>
                 <View style={header.wrapper}>
-                  <TouchableOpacity style={header.headerIcon}>
+                  <TouchableOpacity onPress={() => navigation.navigate("Notification")} style={header.headerIcon}>
                     <Ionicons
                       name="notifications-outline"
                       size={27}
@@ -192,7 +193,11 @@ export default function Route() {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate("Auth");
+                      if (user?.length === 1) {
+                        navigation.navigate("Profile");
+                      } else {
+                        navigation.navigate("Auth");
+                      }
                     }}
                     style={header.headerImg}
                   >
@@ -207,7 +212,7 @@ export default function Route() {
                       <Image
                         style={header.avatar}
                         source={{
-                          uri: "https://scontent.fbwa3-1.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-5&_nc_sid=7206a8&_nc_ohc=JnDLo_5PpjYAX8cG4vv&_nc_oc=AQmdU2hM-Q3jsox61SGyJovD3ROHCMzHtMpTPXZNREEXG3AwBGDk475naer2wpodQ1o&tn=jOFtfr9vq0GDmmko&_nc_ht=scontent.fbwa3-1.fna&oh=00_AT-XDUZmFAck3kLBwdCWYvigPPD4PkhYN01zNexQ-Ca4uA&oe=62970D78",
+                          uri: skeleton,
                         }}
                       />
                     )}
@@ -339,13 +344,13 @@ export default function Route() {
           name="Detail"
           component={Detail}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
               options={{
                 headerShown: true,
               }}
-              name="Notif"
-              component={Notification}
-            /> */}
+              name="Notification"
+              component={Notif}
+            />
         <Stack.Screen
           name="Search"
           component={Search}
