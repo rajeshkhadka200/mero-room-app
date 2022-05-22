@@ -1,15 +1,14 @@
-import { ScrollView } from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { styles } from "../styles/Global/notif_design";
 import SingleNotif from "../components/Global/SingleNotif";
 
 const Notif = () => {
   const [notif, setnotif] = useState([]);
-
   useEffect(() => {
-    const colRef = collection(db, "notif");
+    const colRef = collection(db, "notif", orderBy("timestamp"));
     onSnapshot(colRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -20,10 +19,12 @@ const Notif = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.con}>
-      {notif.map((data,i) => {
-        return <SingleNotif key={i} notif={data} />;
-      })}
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <SafeAreaView style={styles.con}>
+        {notif.map((data, i) => {
+          return <SingleNotif key={i} notif={data} />;
+        })}
+      </SafeAreaView>
     </ScrollView>
   );
 };
