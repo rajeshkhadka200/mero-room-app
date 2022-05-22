@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Image, Pressable, Alert } from "react-native";
 import { styles } from "../../styles/myroom/my_room_card_design";
 import { AntDesign } from "@expo/vector-icons";
 //firebase
-import { deleteDoc, doc } from "firebase/firestore";
+import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import { useNavigation } from "@react-navigation/native";
+import { ContexStore } from "../../context/Context";
 
 const RoomCard = ({ data, render_location }) => {
+  const { user } = React.useContext(ContexStore);
   const navigation = useNavigation();
   const { address, rate, oprn_id } = data;
-  console.log(oprn_id);
   const { thumbnail } = data;
-
   const deleteRoom = async (doc_id) => {
     try {
       const docRef = doc(db, "rooms", doc_id);
@@ -22,7 +22,16 @@ const RoomCard = ({ data, render_location }) => {
       console.log("error while", error);
     }
   };
-
+  const removeFav = async (room_id) => {
+    const docRef = doc(db, "users", user[0]?.oprn_id);
+    try {
+      await updateDoc(docRef, {
+        fav: arrayRemove(room_id),
+      });
+    } catch (error) {
+      console.log("err whil fav rem", error);
+    }
+  };
   return (
     <>
       <View style={styles.container}>
@@ -73,7 +82,12 @@ const RoomCard = ({ data, render_location }) => {
                     />
                   </>
                 ) : (
-                  <Pressable style={styles.btn}>
+                  <Pressable
+                    onPress={() => {
+                      removeFav(oprn_id);
+                    }}
+                    style={styles.btn}
+                  >
                     <Text style={styles.btn_text}>Remove From Fav</Text>
                   </Pressable>
                 )}
