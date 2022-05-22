@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, Pressable, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Pressable,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { styles } from "../../styles/myroom/my_room_card_design";
 import { AntDesign } from "@expo/vector-icons";
 //firebase
@@ -9,7 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ContexStore } from "../../context/Context";
 
 const RoomCard = ({ data, render_location }) => {
-  const { user } = React.useContext(ContexStore);
+  const { user, favState, setfavState } = React.useContext(ContexStore);
   const navigation = useNavigation();
   const { address, rate, oprn_id } = data;
   const { thumbnail } = data;
@@ -22,16 +29,26 @@ const RoomCard = ({ data, render_location }) => {
       console.log("error while", error);
     }
   };
+
+  const [isDeleting, setisDeleting] = useState(false);
   const removeFav = async (room_id) => {
+    setisDeleting(true);
     const docRef = doc(db, "users", user[0]?.oprn_id);
     try {
       await updateDoc(docRef, {
         fav: arrayRemove(room_id),
       });
+      const filtered = favState.filter((data) => {
+        return data.oprn_id !== room_id;
+      });
+      setfavState(filtered);
+      setisDeleting(false);
     } catch (error) {
+      setisDeleting(false);
       console.log("err whil fav rem", error);
     }
   };
+
   return (
     <>
       <View style={styles.container}>
@@ -83,12 +100,19 @@ const RoomCard = ({ data, render_location }) => {
                   </>
                 ) : (
                   <Pressable
+                    disabled={isDeleting}
                     onPress={() => {
                       removeFav(oprn_id);
                     }}
                     style={styles.btn}
                   >
-                    <Text style={styles.btn_text}>Remove From Fav</Text>
+                    <Text style={styles.btn_text}>
+                      {isDeleting ? (
+                        <ActivityIndicator size="small" color="#fff" />
+                      ) : (
+                        "Remove From Fav"
+                      )}
+                    </Text>
                   </Pressable>
                 )}
               </View>

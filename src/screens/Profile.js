@@ -19,13 +19,14 @@ import Nav from "../navigation/Nav.js";
 
 const Profile = ({ route }) => {
   const navigation = useNavigation();
-  const { user, setUser, test } = React.useContext(ContexStore);
+  const { user, setUser, test, favState, setfavState } =
+    React.useContext(ContexStore);
   const myRoomLen = test.filter((data) => {
     return user[0]?.auth_token === data.token;
   });
 
   let myFav = [];
-  const [favState, setfavState] = React.useState();
+  // const [favState, setfavState] = React.useState();
   for (let i = 0; i < test.length; i++) {
     for (let j = 0; j < user[0].fav.length; j++) {
       if (test[i].oprn_id === user[0].fav[j]) {
@@ -90,10 +91,16 @@ const Profile = ({ route }) => {
                 <Text style={styles.label}>My uploads</Text>
               </View>
             </Pressable>
-            <View style={styles.box}>
-              <Text style={styles.num}>{test?.length}</Text>
-              <Text style={styles.label}>Total Rooms</Text>
-            </View>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Explore");
+              }}
+            >
+              <View style={styles.box}>
+                <Text style={styles.num}>{test?.length}</Text>
+                <Text style={styles.label}>Total Rooms</Text>
+              </View>
+            </Pressable>
           </View>
           <View style={styles.btn_con}>
             <Pressable style={styles.btn1}>

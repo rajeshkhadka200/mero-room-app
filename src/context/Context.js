@@ -28,7 +28,8 @@ const Context = ({ children }) => {
 
   // state for the model
   const [isModel, setisModel] = useState(false);
-
+  // for fav
+  const [favState, setfavState] = React.useState();
   // state for the post
   const [data, setData] = useState({
     address: "",
@@ -78,6 +79,8 @@ const Context = ({ children }) => {
         isRoomuploading,
         setisRoomuploading,
         test,
+        favState,
+        setfavState,
       }}
     >
       {children}
