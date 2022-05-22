@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     zIndex: 100,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

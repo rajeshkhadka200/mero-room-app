@@ -15,7 +15,6 @@ const SingleNotif = ({ notif }) => {
     room_id,
     user_id,
     user_profile,
-    seenBy,
   } = notif;
   const makeSeen = async (user_id, room_id, oprn_id) => {
     try {

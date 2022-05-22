@@ -8,7 +8,6 @@ import {
   Pressable,
   Alert,
 } from "react-native";
-import call from "react-native-phone-call";
 import { styles } from "../../styles/details/Detail_Header_design.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -57,8 +56,8 @@ const Detail_header = ({ room_id }) => {
     // };
     // // Make a call
     // call(args).catch(console.error);
-    let phoneNumber = `tel:${roomDetail[0]?.number}`;
-    Linking.openURL(phoneNumber);
+    let number = `tel:${roomDetail[0]?.number}`;
+    Linking.openURL(number);
   };
   const imgs = roomDetail[0]?.thumbnail;
 

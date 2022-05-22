@@ -8,7 +8,7 @@ import SingleNotif from "../components/Global/SingleNotif";
 const Notif = () => {
   const [notif, setnotif] = useState([]);
   useEffect(() => {
-    const colRef = collection(db, "notif", orderBy("timestamp"));
+    const colRef = collection(db, "notif");
     onSnapshot(colRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         ...doc.data(),
