@@ -104,8 +104,8 @@ const Auth = () => {
         <View style={styles.brand_con}>
           <Image
             style={{
-              height: 120,
-              width: 120,
+              height: 160,
+              width: 160,
               // borderRadius: 500,
               alignSelf: "center",
             }}

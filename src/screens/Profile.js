@@ -37,7 +37,6 @@ const Profile = ({ route }) => {
   React.useEffect(() => {
     setfavState(myFav);
   }, []);
-
   const renderRooms = ({ item }) => {
     return (
       <>
@@ -140,7 +139,7 @@ const Profile = ({ route }) => {
               keyExtractor={(i) => {
                 i.index;
               }}
-            />
+            /> 
           </View>
         </View>
       </ScrollView>
