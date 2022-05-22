@@ -21,8 +21,8 @@ const Notif = () => {
 
   return (
     <ScrollView style={styles.con}>
-      {notif.map((data) => {
-        return <SingleNotif key={data.createdAt} notif={data} />;
+      {notif.map((data,i) => {
+        return <SingleNotif key={i} notif={data} />;
       })}
     </ScrollView>
   );

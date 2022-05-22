@@ -28,6 +28,7 @@ const Context = ({ children }) => {
 
   // state for the model
   const [isModel, setisModel] = useState(false);
+
   // state for the post
   const [data, setData] = useState({
     address: "",
@@ -37,6 +38,7 @@ const Context = ({ children }) => {
     iskitchen: false,
     isFlat: false,
     desc: "",
+    number: "",
   });
   const [images, setimages] = useState({
     one: "",

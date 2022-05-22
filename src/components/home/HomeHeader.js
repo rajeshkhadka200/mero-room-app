@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState, useContext } from "react";
 import { styles } from "../../styles/home/home_header_design";
@@ -45,38 +46,43 @@ const HomeHeader = () => {
   };
   return (
     <>
-      <View style={styles.headerWrapper}>
-        <View style={styles.searchCon}>
-          {/* <Text style={styles.searchText}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={styles.headerWrapper}>
+          <View style={styles.searchCon}>
+            {/* <Text style={styles.searchText}>
             Hi, {user.length > 0 ? user[0]?.name : "User"}
           </Text> */}
-          <View style={styles.searchWrapper}>
-            <TextInput
-              value={search}
-              style={styles.searchBar}
-              onChangeText={(text) => setSearch(text)}
-              placeholder="Start entering the address"
-            />
-            <TouchableOpacity style={styles.searchBtn} onPress={Search}>
-              <Feather name="search" size={30} color="white" />
-            </TouchableOpacity>
+            <View style={styles.searchWrapper}>
+              <TextInput
+                value={search}
+                style={styles.searchBar}
+                onChangeText={(text) => setSearch(text)}
+                placeholder="Start entering the address"
+              />
+              <TouchableOpacity style={styles.searchBtn} onPress={Search}>
+                <Feather name="search" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.filterCon}>
+            <Text style={styles.filterText}>Filter by District</Text>
+            <View style={styles.disWrapper}>
+              <FlatList
+                data={uniqueDistrict}
+                pagingEnabled={true}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                renderItem={renderDistrict}
+                keyExtractor={(index) => index}
+              />
+            </View>
           </View>
         </View>
-        <View style={styles.filterCon}>
-          <Text style={styles.filterText}>Filter by District</Text>
-          <View style={styles.disWrapper}>
-            <FlatList
-              data={uniqueDistrict}
-              pagingEnabled={true}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              renderItem={renderDistrict}
-              keyExtractor={(index) => index}
-            />
-          </View>
-        </View>
-      </View>
+      </KeyboardAvoidingView>
     </>
   );
 };

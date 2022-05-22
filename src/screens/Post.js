@@ -22,15 +22,10 @@ import * as ImagePicker from "expo-image-picker";
 import { ContexStore } from "../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Nav from "../navigation/Nav";
+import Loading from "../components/Global/Loading";
 const Post = ({ route }) => {
-  const {
-    data,
-    setData,
-    images,
-    setimages,
-    isRoomuploading,
-    setisRoomuploading,
-  } = React.useContext(ContexStore);
+  const { data, setData, images, setimages, isRoomuploading } =
+    React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`
   }. Kitchen is ${
@@ -72,6 +67,7 @@ const Post = ({ route }) => {
       iskitchen: select1,
       isFlat: select2,
       desc: "",
+      number: "",
     });
   };
 
@@ -83,6 +79,7 @@ const Post = ({ route }) => {
           <RefreshControl refreshing={false} onRefresh={handleRefresh} />
         }
       >
+        {isRoomuploading && <Loading data="Uploading..." />}
         <View style={styles.post_con}>
           <Text style={styles.post_text}>
             Note: Please fill the form with correct details
@@ -125,6 +122,16 @@ const Post = ({ route }) => {
             }}
             dropdownIconPosition={"right"}
           />
+          <TextInput
+            editable={!isRoomuploading}
+            value={data.number}
+            placeholder="Phone Number"
+            style={styles.post_input1}
+            onChangeText={(text) => {
+              handleChange("number", text);
+            }}
+          />
+
           <View style={styles.post_input2_con}>
             <TextInput
               editable={!isRoomuploading}

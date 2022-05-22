@@ -62,6 +62,7 @@ export default function Route() {
     setimages,
     isRoomuploading,
     setisRoomuploading,
+    setloading,
   } = React.useContext(ContexStore);
 
   const notif = true;
@@ -100,8 +101,16 @@ export default function Route() {
   const upload = async (data, img) => {
     let images_to_push = [];
     let downloadLink = [];
-    const { address, district, rate, rooms_count, iskitchen, isFlat, desc } =
-      data;
+    const {
+      address,
+      district,
+      rate,
+      rooms_count,
+      iskitchen,
+      isFlat,
+      desc,
+      number,
+    } = data;
     for (var key in img) {
       if (img[key] === "") {
         return alert("Please select an images !");
@@ -117,6 +126,7 @@ export default function Route() {
     }
 
     setisRoomuploading(true);
+
     // await addDoc(collection(db, "users"), {
     const docRef = await addDoc(collection(db, "rooms"), {
       token: user[0]?.auth_token,
@@ -128,11 +138,13 @@ export default function Route() {
       iskitchen,
       isFlat,
       desc,
+      number,
       status: "available",
       thumbnail: [],
     });
     if (!docRef.id) {
       setisRoomuploading(false);
+
       return alert("Error while uploading");
     }
     const metadata = {
@@ -162,6 +174,7 @@ export default function Route() {
           if (downloadLink.length === 4) {
             // room uploaded
             setisRoomuploading(false);
+
             setData({
               address: "",
               district: "",
@@ -170,6 +183,7 @@ export default function Route() {
               iskitchen: false,
               isFlat: false,
               desc: "",
+              number: "",
             });
             setimages({
               one: "",
@@ -292,13 +306,12 @@ export default function Route() {
                 onPress={() => upload(data, images)}
               >
                 <Text style={header.btn_post}>
-                  {isRoomuploading ? (
-                    <>
-                      <ActivityIndicator size="small" color="#fff" />
-                    </>
-                  ) : (
-                    "Post"
-                  )}
+                  {isRoomuploading
+                    ? // <>
+                      //   <ActivityIndicator size="small" color="#fff" />
+                      // </>
+                      "Posting"
+                    : "Post"}
                 </Text>
               </Pressable>
             ),

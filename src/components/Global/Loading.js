@@ -1,7 +1,7 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Loading = () => {
+const Loading = ({data}) => {
   return (
     <>
       <View style={styles.wrapper}>
@@ -10,7 +10,7 @@ const Loading = () => {
             <ActivityIndicator size="large" color="#5B628F" />
           </View>
           <View style={styles.right_side}>
-            <Text style={styles.text}>Please wait</Text>
+            <Text style={styles.text}>{data}</Text>
           </View>
         </View>
       </View>

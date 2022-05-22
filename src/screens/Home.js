@@ -20,6 +20,7 @@ const Home = ({ route }) => {
         <SafeAreaView
           style={{
             backgroundColor: "#fff",
+            flex: 1
           }}
         >
           <ScrollView
