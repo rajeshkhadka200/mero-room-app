@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, Linking } from "react";
 import {
   View,
   Text,
@@ -51,12 +51,14 @@ const Detail_header = ({ room_id }) => {
   }, []);
   const navigation = useNavigation();
   const makeCall = () => {
-    const args = {
-      number: roomDetail[0]?.number.toString(),
-      prompt: false,
-    };
-    // Make a call
-    call(args).catch(console.error);
+    // const args = {
+    //   number: roomDetail[0]?.number.toString(),
+    //   prompt: false,
+    // };
+    // // Make a call
+    // call(args).catch(console.error);
+    let phoneNumber = `tel:${roomDetail[0]?.number}`;
+    Linking.openURL(phoneNumber);
   };
   const imgs = roomDetail[0]?.thumbnail;
 
@@ -78,13 +80,9 @@ const Detail_header = ({ room_id }) => {
   return (
     <>
       <View>
-          <Pressable onPress={() => navigation.goBack()} style={styles.arrow}>
-            <AntDesign
-              name="arrowleft"
-              size={24}
-              color="white"
-            />
-          </Pressable>
+        <Pressable onPress={() => navigation.goBack()} style={styles.arrow}>
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </Pressable>
         {roomDetail.length === 0 ? (
           <View
             style={{
