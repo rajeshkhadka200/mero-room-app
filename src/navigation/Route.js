@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
+  ToastAndroid,
   LogBox,
   StatusBar,
   Text,
@@ -145,7 +146,6 @@ export default function Route() {
     });
     if (!docRef.id) {
       setisRoomuploading(false);
-
       return alert("Error while uploading");
     }
     const metadata = {
@@ -174,8 +174,14 @@ export default function Route() {
           });
           if (downloadLink.length === 4) {
             // room uploaded
+            ToastAndroid.showWithGravityAndOffset(
+              `${user[0]?.name}, You posted a room!`,
+              ToastAndroid.SHORT,
+              ToastAndroid.BOTTOM,
+              20,
+              50
+            );
             setisRoomuploading(false);
-
             setData({
               address: "",
               district: "",
@@ -192,7 +198,6 @@ export default function Route() {
               three: "",
               four: "",
             });
-            // push notif
           }
           blob.close();
         })
@@ -201,6 +206,7 @@ export default function Route() {
           console.log("err while upload", e);
         });
     });
+    // push notif
     pushNotif(docRef.id, data.address);
   };
   return (
@@ -307,12 +313,13 @@ export default function Route() {
                 onPress={() => upload(data, images)}
               >
                 <Text style={header.btn_post}>
-                  {isRoomuploading
-                    ? // <>
-                      //   <ActivityIndicator size="small" color="#fff" />
-                      // </>
-                      "Posting"
-                    : "Post"}
+                  {isRoomuploading ? (
+                    <>
+                      <ActivityIndicator size="small" color="#fff" />
+                    </>
+                  ) : (
+                    "Post"
+                  )}
                 </Text>
               </Pressable>
             ),

@@ -3,9 +3,10 @@
     "name": "mero room",
     "slug": "mero_room",
     "privacy": "public",
-    "description": "The application wich provides the connection between room owner and room seecker",
+    "description": "The application which makes the connection between room owner and room seecker. The main motive of the app is to solve the problem of layman people who suffers while searching for the room. 😂\n -Let's  Find the best room for next migration !!",
     "version": "1.0.0",
     "orientation": "default",
+    "icon": "./assets/img/logo.png",
     "updates": {
       "fallbackToCacheTimeout": 0
     },

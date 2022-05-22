@@ -24,13 +24,13 @@ import {
 } from "react-native-responsive-screen";
 import NoContent from "../Global/NoContent.js";
 
-const WhiteIcon = ({ text }) => {
+const WhiteIcon = ({ text, icon }) => {
   return (
     <>
       <View style={styles.icon_single}>
         <View style={styles.actual_icon}>
           <MaterialCommunityIcons
-            name="bed"
+            name={icon}
             size={24}
             color="rgba(0, 0, 0, 0.58)"
           />
@@ -123,10 +123,19 @@ const Detail_header = ({ room_id }) => {
 
               {/* icons info  */}
               <View style={styles.icon_wrapper}>
-                <WhiteIcon text="5 rooms" />
-                <WhiteIcon text="No" />
-                <WhiteIcon text="lacking" />
-                <WhiteIcon text="available" />
+                <WhiteIcon
+                  text={`${roomDetail[0]?.rooms_count} rooms`}
+                  icon={"bed"}
+                />
+                <WhiteIcon
+                  text={roomDetail[0]?.isFlat ? "Yes" : "No"}
+                  icon={"office-building"}
+                />
+                <WhiteIcon
+                  text={roomDetail[0]?.iskitchen ? "Yes" : "No"}
+                  icon={"silverware-fork-knife"}
+                />
+                <WhiteIcon text="available" icon={"toilet"} />
               </View>
               {/* description */}
               <View style={styles.header_con}>
