@@ -119,13 +119,13 @@ const Profile = ({ route }) => {
               {/* <View style={styles.line}></View> */}
             </View>
             {/* actual data */}
-            <FlatList
+            {/* <FlatList
               data={my_fav}
               renderItem={renderRooms}
               keyExtractor={(i) => {
                 i.index;
               }}
-            />
+            /> */}
           </View>
         </View>
       </ScrollView>
