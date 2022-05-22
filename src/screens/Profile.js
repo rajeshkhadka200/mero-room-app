@@ -28,8 +28,8 @@ const Profile = ({ route }) => {
   let myFav = [];
   // const [favState, setfavState] = React.useState();
   for (let i = 0; i < test.length; i++) {
-    for (let j = 0; j < user[0].fav.length; j++) {
-      if (test[i].oprn_id === user[0].fav[j]) {
+    for (let j = 0; j < user[0]?.fav.length; j++) {
+      if (test[i].oprn_id === user[0]?.fav[j]) {
         myFav.push(test[i]);
       }
     }
@@ -139,7 +139,7 @@ const Profile = ({ route }) => {
               keyExtractor={(i) => {
                 i.index;
               }}
-            /> 
+            />
           </View>
         </View>
       </ScrollView>

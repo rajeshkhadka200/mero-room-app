@@ -287,7 +287,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
-            animation: "none",
+            animation: "slide_from_bottom",
             headerShown: true,
             headerStyle: {
               elevation: 0,
@@ -363,7 +363,7 @@ export default function Route() {
           component={Profile}
         />
         <Stack.Screen
-          options={{ headerShown: false, animation: "none" }}
+          options={{ headerShown: false, animation: "slide_from_bottom" }}
           name="Auth"
           component={Auth}
         />
@@ -371,6 +371,7 @@ export default function Route() {
         <Stack.Screen
           options={{
             headerShown: false,
+            animation: "slide_from_right",
           }}
           name="Detail"
           component={Detail}
@@ -386,7 +387,7 @@ export default function Route() {
           name="Search"
           component={Search}
           options={{
-            animation: "none",
+            animation: "slide_from_right",
             headerStyle: {
               elevation: 0,
               borderColor: "dfdfdf",
