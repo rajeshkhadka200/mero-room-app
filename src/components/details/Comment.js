@@ -61,7 +61,7 @@ const Comment = ({ room_id }) => {
           disabled={isLoading}
         >
           {isLoading ? (
-            <ActivityIndicator color="#fff" size="large" />
+            <ActivityIndicator color="#fff" size="small" />
           ) : (
             <Feather
               style={styles.send_btn}

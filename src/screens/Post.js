@@ -123,6 +123,7 @@ const Post = ({ route }) => {
             dropdownIconPosition={"right"}
           />
           <TextInput
+            keyboardType="number-pad"
             editable={!isRoomuploading}
             value={data.number}
             placeholder="Phone Number"
