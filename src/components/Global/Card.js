@@ -1,9 +1,5 @@
 import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-
+import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import React, { useContext, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "../../styles/Global/card_design";
@@ -14,10 +10,12 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
-  const [inFav, setinFav] = useState(false);
+  const [inFav] = useState(false);
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
   const { thumbnail } = data;
+
+  // React.useEffect(() => {}, []);
 
   const favOperation = async (room_id) => {
     let token = await AsyncStorage.getItem("auth_token");

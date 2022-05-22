@@ -31,13 +31,13 @@ const SingleNotif = ({ notif }) => {
     }
   };
   const [isNew, setisNew] = useState(true);
-  React.useEffect(() => {
-    for (let i = 0; i < seenBy.length; i++) {
-      if (seenBy[i] === user[0].auth_token) {
-        setisNew(false);
-      }
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   for (let i = 0; i < seenBy.length; i++) {
+  //     if (seenBy[i] === user[0].auth_token) {
+  //       setisNew(false);
+  //     }
+  //   }
+  // }, []);
 
   return (
     <Pressable
@@ -53,16 +53,7 @@ const SingleNotif = ({ notif }) => {
           style={styles.img}
         />
         <View style={styles.text_con}>
-          <Text style={styles.t1}>
-            {createdAt} &nbsp;&nbsp;
-            <Text
-              style={{
-                color: isNew ? "#2374E1" : "grey",
-              }}
-            >
-              {isNew ? "UnSeen" : "seen"}
-            </Text>
-          </Text>
+          <Text style={styles.t1}>{createdAt} &nbsp;&nbsp;</Text>
           <Text style={styles.t2}>New room is available at {address} </Text>
         </View>
       </View>

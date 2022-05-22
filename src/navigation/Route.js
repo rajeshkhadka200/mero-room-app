@@ -95,7 +95,7 @@ export default function Route() {
       user_profile: user[0]?.photoUrl,
       address: address,
       createdAt: moment().format("llll"),
-      seenBy: [],
+      timestamp: Date.now(),
     });
   };
   const upload = async (data, img) => {
@@ -207,7 +207,7 @@ export default function Route() {
       <Stack.Navigator>
         <Stack.Screen
           options={{
-            animation: "none",
+            animation: "fade",
             headerShown: true,
             headerRight: () => (
               <>
@@ -270,7 +270,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
-            animation: "none",
+            animation: "fade",
             headerShadowVisible: false,
             headerShown: true,
             headerStyle: {
@@ -321,7 +321,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
-            animation: "none",
+            animation: "fade",
             headerShadowVisible: true,
             headerShown: true,
             headerStyle: {
@@ -340,7 +340,7 @@ export default function Route() {
         />
         <Stack.Screen
           options={{
-            animation: "none",
+            animation: "fade",
             headerShown: true,
             headerStyle: {
               elevation: 0,
