@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext,ToastAndroid } from "react";
 import { View, Text, Image, Pressable, FlatList, Alert } from "react-native";
 import { db } from "../../../config/firebase";
 import { styles } from "../../styles/details/single_comment";
@@ -52,7 +52,13 @@ const SingleComment = ({ room_id }) => {
             // delete a comment
             const docRef = doc(db, "comments", id);
             deleteDoc(docRef).then(() => {
-              console.warn("deleted");
+              ToastAndroid.showWithGravityAndOffset(
+                "Deleted",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM,
+                20,
+                40
+              );
             });
           },
         },

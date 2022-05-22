@@ -6,6 +6,7 @@ import {
   Pressable,
   Alert,
   ActivityIndicator,
+  ToastAndroid,
 } from "react-native";
 import { styles } from "../../styles/myroom/my_room_card_design";
 import { AntDesign } from "@expo/vector-icons";
@@ -24,7 +25,13 @@ const RoomCard = ({ data, render_location }) => {
     try {
       const docRef = doc(db, "rooms", doc_id);
       await deleteDoc(docRef);
-      console.log("deleted ");
+      ToastAndroid.showWithGravityAndOffset(
+        "Deleted",
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+        15,
+        40
+      );
     } catch (error) {
       console.log("error while", error);
     }
@@ -42,6 +49,13 @@ const RoomCard = ({ data, render_location }) => {
         return data.oprn_id !== room_id;
       });
       setfavState(filtered);
+      ToastAndroid.showWithGravityAndOffset(
+        "Deleted",
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+        25,
+        50
+      );
       setisDeleting(false);
     } catch (error) {
       setisDeleting(false);

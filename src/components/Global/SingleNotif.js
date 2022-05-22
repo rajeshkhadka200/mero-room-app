@@ -18,7 +18,6 @@ const SingleNotif = ({ notif }) => {
     seenBy,
   } = notif;
   const makeSeen = async (user_id, room_id, oprn_id) => {
-    alert(oprn_id);
     try {
       await updateDoc(doc(db, "notif", oprn_id), {
         seenBy: arrayUnion(user_id),

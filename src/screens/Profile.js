@@ -53,6 +53,15 @@ const Profile = ({ route }) => {
       console.log("err in logout", error);
     }
   };
+  const Empty = () =>{
+    return (
+      <>
+      <View style={{backgroundColor:"#EFF2F7",flex:1,height:100,borderRadius:15,alignItems:"center",justifyContent:"center"}}>
+        <Text style={{fontFamily:"500",fontSize:17}}>No Favourite yet</Text>
+      </View>
+      </>
+    )
+  }
   return (
     <>
       <ScrollView
@@ -134,6 +143,7 @@ const Profile = ({ route }) => {
             </View>
             {/* actual data */}
             <FlatList
+              ListEmptyComponent={<Empty/>}
               data={favState}
               renderItem={renderRooms}
               keyExtractor={(i) => {

@@ -4,6 +4,7 @@ import {
   TextInput,
   ActivityIndicator,
   TouchableOpacity,
+  ToastAndroid
 } from "react-native";
 import moment from 'moment'
 import React, { useState, useContext } from "react";
@@ -40,6 +41,13 @@ const Comment = ({ room_id }) => {
         createdAt: moment().format('lll'),
       });
       setisLoading(false);
+      ToastAndroid.showWithGravityAndOffset(
+        "Commented",
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+        20,
+        50
+      );
     } catch (e) {
       setisLoading(false);
       console.error("Error adding document: ", e);
