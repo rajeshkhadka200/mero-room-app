@@ -23,7 +23,11 @@ const Profile = ({ route }) => {
   const myRoomLen = test.filter((data) => {
     return user[0]?.auth_token === data.token;
   });
+    const my_fav = test.filter((data) =>{
+      return user[0]?.fav === data.oprn_id
+    })
 
+     
   const renderRooms = ({ item }) => {
     return (
       <>
@@ -114,13 +118,13 @@ const Profile = ({ route }) => {
               {/* <View style={styles.line}></View> */}
             </View>
             {/* actual data */}
-            {/* <FlatList
+            <FlatList
               data={my_fav}
               renderItem={renderRooms}
               keyExtractor={(i) => {
                 i.index;
               }}
-            /> */}
+            />
           </View>
         </View>
       </ScrollView>

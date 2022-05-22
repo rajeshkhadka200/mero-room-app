@@ -18,16 +18,8 @@ export default function Card({ data, check }) {
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
   const { thumbnail } = data;
+
   const favOperation = async (room_id) => {
-    React.useEffect(() => {
-      console.log("hello");
-      for (let i = 0; i < user.fav?.length; i++) {
-        if (user.fav[i] === oprn_id) {
-          // setisNew(false);
-          console.log("in fav" + user.fav[i]);
-        }
-      }
-    }, []);
     let token = await AsyncStorage.getItem("auth_token");
     if (!token) {
       return alert("Please Login to add in Fav");
@@ -42,7 +34,6 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayUnion(room_id),
         });
-        setinFav(!inFav);
       } catch (error) {
         console.log("err whil aad", error);
       }
@@ -51,7 +42,6 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayRemove(room_id),
         });
-        setinFav(!inFav);
       } catch (error) {
         console.log("err whil del", error);
       }
