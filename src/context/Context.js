@@ -28,6 +28,10 @@ const Context = ({ children }) => {
 
   // state for the model
   const [isModel, setisModel] = useState(false);
+
+  //state for loading
+  const [loading, setloading] = useState(false);
+
   // state for the post
   const [data, setData] = useState({
     address: "",
@@ -77,6 +81,8 @@ const Context = ({ children }) => {
         isRoomuploading,
         setisRoomuploading,
         test,
+        loading,
+        setloading
       }}
     >
       {children}

@@ -19,8 +19,7 @@ import Loading from "../components/Global/Loading";
 
 const Auth = () => {
   const navigation = useNavigation();
-  const { user, setUser } = React.useContext(ContexStore);
-  const [loading, setloading] = useState(false);
+  const { user, setUser,loading,setloading} = React.useContext(ContexStore);
   if (user.length > 0) {
     return navigation.navigate("Mero Room");
   }
@@ -99,7 +98,7 @@ const Auth = () => {
 
   return (
     <>
-      {loading && <Loading />}
+      {loading && <Loading data="Please Wait"/>}
       <View style={styles.main_ontainer}>
         <View style={styles.brand_con}>
           <Image

@@ -22,6 +22,7 @@ import * as ImagePicker from "expo-image-picker";
 import { ContexStore } from "../context/Context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Nav from "../navigation/Nav";
+import Loading from "../components/Global/Loading";
 const Post = ({ route }) => {
   const {
     data,
@@ -30,6 +31,8 @@ const Post = ({ route }) => {
     setimages,
     isRoomuploading,
     setisRoomuploading,
+    loading,
+    setloading
   } = React.useContext(ContexStore);
   let detail = `A new and fresh room available at ${
     data.address ? data.address : `<address>`
@@ -84,6 +87,7 @@ const Post = ({ route }) => {
           <RefreshControl refreshing={false} onRefresh={handleRefresh} />
         }
       >
+        {loading && <Loading data="Uploading..."/>}
         <View style={styles.post_con}>
           <Text style={styles.post_text}>
             Note: Please fill the form with correct details

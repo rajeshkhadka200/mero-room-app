@@ -62,6 +62,7 @@ export default function Route() {
     setimages,
     isRoomuploading,
     setisRoomuploading,
+    setloading
   } = React.useContext(ContexStore);
 
   const notif = true;
@@ -117,6 +118,7 @@ export default function Route() {
     }
 
     setisRoomuploading(true);
+    setloading(true)
     // await addDoc(collection(db, "users"), {
     const docRef = await addDoc(collection(db, "rooms"), {
       token: user[0]?.auth_token,
@@ -134,6 +136,7 @@ export default function Route() {
     });
     if (!docRef.id) {
       setisRoomuploading(false);
+      setloading(false)
       return alert("Error while uploading");
     }
     const metadata = {
@@ -163,6 +166,7 @@ export default function Route() {
           if (downloadLink.length === 4) {
             // room uploaded
             setisRoomuploading(false);
+            setloading(false)
             setData({
               address: "",
               district: "",
@@ -295,9 +299,10 @@ export default function Route() {
               >
                 <Text style={header.btn_post}>
                   {isRoomuploading ? (
-                    <>
-                      <ActivityIndicator size="small" color="#fff" />
-                    </>
+                    // <>
+                    //   <ActivityIndicator size="small" color="#fff" />
+                    // </>
+                    "Posting"
                   ) : (
                     "Post"
                   )}
