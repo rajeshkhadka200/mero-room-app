@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
     zIndex: 100,
     backgroundColor: "rgba(0, 0, 0, 0.52)",
     borderRadius: 500,
-    textAlign: "center",
-    lineHeight: 35,
+    justifyContent:"center",
+    alignItems:"center"
   },
   indi_wrapper: {
     backgroundColor: "rgba(0, 0, 0, 0.52)",

@@ -21,6 +21,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import NoContent from "../Global/NoContent.js";
 
 const WhiteIcon = ({ text }) => {
   return (
@@ -77,99 +78,103 @@ const Detail_header = ({ room_id }) => {
   return (
     <>
       <View>
-        <Text style={styles.arrow}>
-          <AntDesign
-            onPress={() => navigation.goBack()}
-            name="arrowleft"
-            size={24}
-            color="white"
-          />
-        </Text>
-        {/* <View style={styles.indi_wrapper}>
-          {imgs.map((itm, i) => {
-            return (
-              <View
-                style={{
-                  backgroundColor: i == index ? "#1394e8" : "#eeeeee",
-                  ...styles.indicator,
-                }}
-              ></View>
-            );
-          })}
-        </View> */}
-        <FlatList
-          nestedScrollEnabled={true}
-          // viewabilityConfig={viewabilityConfig.current}
-          onViewableItemsChanged={onViewableItemsChanged.current}
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          horizontal
-          data={imgs}
-          renderItem={renderImgs}
-          keyExtractor={(i) => {
-            i.index;
-          }}
-        />
-
-        <View style={styles.lower_wrapper}>
-          <View style={styles.small_info_flex}>
-            <View>
-              <Text style={styles.price}>Rs. {roomDetail[0]?.rate}</Text>
-              <Text style={styles.address}>{roomDetail[0]?.address}</Text>
-            </View>
-            <View style={styles.small_right}>
-              <Image
-                style={{ width: 35, height: 35, borderRadius: 500 }}
-                source={{
-                  uri: roomDetail[0]?.user_profile,
-                }}
-              ></Image>
-            </View>
+          <Pressable onPress={() => navigation.goBack()} style={styles.arrow}>
+            <AntDesign
+              name="arrowleft"
+              size={24}
+              color="white"
+            />
+          </Pressable>
+        {roomDetail.length === 0 ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 100,
+            }}
+          >
+            {NoContent("", "", "Sorry🙂, The Room is Unavailable")}
           </View>
+        ) : (
+          <>
+            <FlatList
+              nestedScrollEnabled={true}
+              // viewabilityConfig={viewabilityConfig.current}
+              onViewableItemsChanged={onViewableItemsChanged.current}
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled
+              horizontal
+              data={imgs}
+              renderItem={renderImgs}
+              keyExtractor={(i) => {
+                i.index;
+              }}
+            />
 
-          {/* icons info  */}
-          <View style={styles.icon_wrapper}>
-            <WhiteIcon text="5 rooms" />
-            <WhiteIcon text="No" />
-            <WhiteIcon text="lacking" />
-            <WhiteIcon text="available" />
-          </View>
-          {/* description */}
-          <View style={styles.header_con}>
-            <View style={styles.desc_header}>
-              <Text style={styles.header_text}>Description</Text>
-              <Text style={styles.header_status}>{roomDetail[0]?.status}</Text>
-            </View>
+            <View style={styles.lower_wrapper}>
+              <View style={styles.small_info_flex}>
+                <View>
+                  <Text style={styles.price}>Rs. {roomDetail[0]?.rate}</Text>
+                  <Text style={styles.address}>{roomDetail[0]?.address}</Text>
+                </View>
+                <View style={styles.small_right}>
+                  <Image
+                    style={{ width: 35, height: 35, borderRadius: 500 }}
+                    source={{
+                      uri: roomDetail[0]?.user_profile,
+                    }}
+                  ></Image>
+                </View>
+              </View>
 
-            <Text style={styles.desc_para}>{roomDetail[0]?.desc}</Text>
-            {/* render map here */}
-            <View style={styles.btn_wrapper}>
-              <Pressable
-                onPress={() => {
-                  Alert.alert(
-                    "Sorry!",
-                    "This fearure is currently unavailable."
-                  );
-                }}
-                style={styles.btn_apply}
-              >
-                <Text
-                  style={{
-                    color: "#fff",
-                    fontSize: 15,
-                    fontFamily: "500",
-                  }}
-                >
-                  Chat with Owner
-                </Text>
-              </Pressable>
-              <TouchableOpacity onPress={makeCall} style={styles.btn_left}>
-                <Entypo name="phone" size={24} color="#5B628F" />
-              </TouchableOpacity>
+              {/* icons info  */}
+              <View style={styles.icon_wrapper}>
+                <WhiteIcon text="5 rooms" />
+                <WhiteIcon text="No" />
+                <WhiteIcon text="lacking" />
+                <WhiteIcon text="available" />
+              </View>
+              {/* description */}
+              <View style={styles.header_con}>
+                <View style={styles.desc_header}>
+                  <Text style={styles.header_text}>Description</Text>
+                  <Text style={styles.header_status}>
+                    {roomDetail[0]?.status}
+                  </Text>
+                </View>
+
+                <Text style={styles.desc_para}>{roomDetail[0]?.desc}</Text>
+                {/* render map here */}
+                <View style={styles.btn_wrapper}>
+                  <Pressable
+                    onPress={() => {
+                      Alert.alert(
+                        "Sorry!",
+                        "This fearure is currently unavailable."
+                      );
+                    }}
+                    style={styles.btn_apply}
+                  >
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 15,
+                        fontFamily: "500",
+                      }}
+                    >
+                      Chat with Owner
+                    </Text>
+                  </Pressable>
+                  <TouchableOpacity onPress={makeCall} style={styles.btn_left}>
+                    <Entypo name="phone" size={24} color="#5B628F" />
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-        <Comment room_id={room_id} />
+            <Comment room_id={room_id} />
+          </>
+        )}
       </View>
     </>
   );
