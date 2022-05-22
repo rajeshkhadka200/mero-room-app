@@ -13,6 +13,10 @@ const HomeBody = () => {
     return <Card data={item} />;
   };
 
+  const leatestRoom = test.slice(0, 5).sort((a, b) => {
+    return a.timestamp - b.timestamp;
+  });
+
   return (
     <>
       <View style={styles.body_wrapper}>
@@ -24,7 +28,7 @@ const HomeBody = () => {
           <Text style={styles.new_text}>New Room</Text>
           <FlatList
             legacyImplementation={false}
-            data={test}
+            data={leatestRoom}
             ListEmptyComponent={<EmptyComp />}
             renderItem={renderCard}
             showsHorizontalScrollIndicator={false}

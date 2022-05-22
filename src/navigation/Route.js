@@ -141,6 +141,7 @@ export default function Route() {
       number,
       status: "available",
       thumbnail: [],
+      timestamp: Date.now(),
     });
     if (!docRef.id) {
       setisRoomuploading(false);

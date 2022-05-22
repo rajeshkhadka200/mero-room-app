@@ -7,6 +7,7 @@ import {
   FlatList,
   Pressable,
   Alert,
+  Linking,
 } from "react-native";
 import call from "react-native-phone-call";
 import { styles } from "../../styles/details/Detail_Header_design.js";
@@ -51,12 +52,8 @@ const Detail_header = ({ room_id }) => {
   }, []);
   const navigation = useNavigation();
   const makeCall = () => {
-    const args = {
-      number: roomDetail[0]?.number.toString(),
-      prompt: false,
-    };
-    // Make a call
-    call(args).catch(console.error);
+    let number = `tel:${roomDetail[0]?.number}`;
+    Linking.openURL(number);
   };
   const imgs = roomDetail[0]?.thumbnail;
 
@@ -78,13 +75,9 @@ const Detail_header = ({ room_id }) => {
   return (
     <>
       <View>
-          <Pressable onPress={() => navigation.goBack()} style={styles.arrow}>
-            <AntDesign
-              name="arrowleft"
-              size={24}
-              color="white"
-            />
-          </Pressable>
+        <Pressable onPress={() => navigation.goBack()} style={styles.arrow}>
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </Pressable>
         {roomDetail.length === 0 ? (
           <View
             style={{

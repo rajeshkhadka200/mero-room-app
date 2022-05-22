@@ -10,7 +10,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 export default function Card({ data, check }) {
   const { user } = useContext(ContexStore);
-  const [inFav] = useState(false);
+  const [inFav, setinFav] = useState(false);
   const navigation = useNavigation();
   const { address, rate, user_profile, oprn_id } = data;
   const { thumbnail } = data;
@@ -32,6 +32,7 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayUnion(room_id),
         });
+        setinFav(true);
       } catch (error) {
         console.log("err whil aad", error);
       }
@@ -40,6 +41,7 @@ export default function Card({ data, check }) {
         await updateDoc(docRef, {
           fav: arrayRemove(room_id),
         });
+        setinFav(false);
       } catch (error) {
         console.log("err whil del", error);
       }
@@ -92,7 +94,6 @@ export default function Card({ data, check }) {
             name={inFav ? "heart" : "hearto"}
             size={30}
             color={inFav ? "#E35A5A" : "white"}
-            // color="#E35A5A"
           />
         </View>
       </View>

@@ -8,7 +8,7 @@ import SingleNotif from "../components/Global/SingleNotif";
 const Notif = () => {
   const [notif, setnotif] = useState([]);
   useEffect(() => {
-    const colRef = collection(db, "notif", orderBy("timestamp"));
+    const colRef = collection(db, "notif");
     onSnapshot(colRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -17,11 +17,13 @@ const Notif = () => {
       setnotif(data);
     });
   }, []);
-
+  const filteredNotif = notif.sort((a, b) => {
+    return b.timestamp - a.timestamp;
+  });
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <SafeAreaView style={styles.con}>
-        {notif.map((data, i) => {
+    <ScrollView style={styles.con} showsVerticalScrollIndicator={false}>
+      <SafeAreaView>
+        {filteredNotif.map((data, i) => {
           return <SingleNotif key={i} notif={data} />;
         })}
       </SafeAreaView>
