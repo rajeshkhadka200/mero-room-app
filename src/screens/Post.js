@@ -127,6 +127,7 @@ const Post = ({ route }) => {
             value={data.number}
             placeholder="Phone Number"
             style={styles.post_input1}
+            keyboardType="number-pad"
             onChangeText={(text) => {
               handleChange("number", text);
             }}

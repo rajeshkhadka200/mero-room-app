@@ -75,7 +75,10 @@ const SingleComment = ({ room_id }) => {
               justifyContent: "space-between",
             }}
           >
-            <Text style={styles.username}>{item.user_name}</Text>
+            <Text style={styles.username}>
+              {item.user_name}{" "}•{" "}
+              <Text style={styles.cmt_txt}>{item.createdAt}</Text>
+            </Text>
             {user[0]?.auth_token === item.user_id ? (
               <Entypo
                 onPress={() => {
