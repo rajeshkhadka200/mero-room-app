@@ -14,6 +14,9 @@ const HomeBody = () => {
   };
 
   const leatestRoom = test.slice(0, 5).sort((a, b) => {
+    return b.timestamp - a.timestamp;
+  });
+  const otherRoom = test.sort((a, b) => {
     return a.timestamp - b.timestamp;
   });
 
@@ -47,7 +50,7 @@ const HomeBody = () => {
           <Text style={styles.new_text}>Other Rooms</Text>
           <FlatList
             legacyImplementation={false}
-            data={test}
+            data={otherRoom}
             renderItem={renderCard}
             ListEmptyComponent={<EmptyComp />}
             showsHorizontalScrollIndicator={false}

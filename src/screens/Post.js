@@ -79,7 +79,6 @@ const Post = ({ route }) => {
           <RefreshControl refreshing={false} onRefresh={handleRefresh} />
         }
       >
-        {isRoomuploading && <Loading data="Uploading..." />}
         <View style={styles.post_con}>
           <Text style={styles.post_text}>
             Note: Please fill the form with correct details
