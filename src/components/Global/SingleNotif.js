@@ -8,14 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 const SingleNotif = ({ notif }) => {
   const navigation = useNavigation();
   const { user } = useContext(ContexStore);
-  const {
-    address,
-    createdAt,
-    oprn_id,
-    room_id,
-    user_id,
-    user_profile,
-  } = notif;
+  const { address, createdAt, oprn_id, room_id, user_id, user_profile } = notif;
   const makeSeen = async (user_id, room_id, oprn_id) => {
     try {
       await updateDoc(doc(db, "notif", oprn_id), {
@@ -28,15 +21,6 @@ const SingleNotif = ({ notif }) => {
       console.log("err while seen", error);
     }
   };
-  const [isNew, setisNew] = useState(true);
-  // React.useEffect(() => {
-  //   for (let i = 0; i < seenBy.length; i++) {
-  //     if (seenBy[i] === user[0].auth_token) {
-  //       setisNew(false);
-  //     }
-  //   }
-  // }, []);
-
   return (
     <Pressable
       onPress={() => {

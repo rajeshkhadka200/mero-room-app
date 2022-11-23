@@ -50,12 +50,6 @@ const Detail_header = ({ room_id }) => {
   }, []);
   const navigation = useNavigation();
   const makeCall = () => {
-    // const args = {
-    //   number: roomDetail[0]?.number.toString(),
-    //   prompt: false,
-    // };
-    // // Make a call
-    // call(args).catch(console.error);
     let number = `tel:${roomDetail[0]?.number}`;
     Linking.openURL(number);
   };

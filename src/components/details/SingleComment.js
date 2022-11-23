@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext,ToastAndroid } from "react";
+import React, { useEffect, useState, useContext, ToastAndroid } from "react";
 import { View, Text, Image, Pressable, FlatList, Alert } from "react-native";
 import { db } from "../../../config/firebase";
 import { styles } from "../../styles/details/single_comment";
@@ -16,7 +16,6 @@ import { Entypo } from "@expo/vector-icons";
 const SingleComment = ({ room_id }) => {
   const [comment, setcomment] = useState([]);
   const { user } = useContext(ContexStore);
-
   useEffect(() => {
     const colRef = collection(db, "comments");
     const q = query(
@@ -48,18 +47,15 @@ const SingleComment = ({ room_id }) => {
         },
         {
           text: "Delete",
-          onPress: () => {
+          onPress: async () => {
             // delete a comment
-            const docRef = doc(db, "comments", id);
-            deleteDoc(docRef).then(() => {
-              ToastAndroid.showWithGravityAndOffset(
-                "Deleted",
-                ToastAndroid.SHORT,
-                ToastAndroid.BOTTOM,
-                20,
-                40
-              );
-            });
+            try {
+              const docRef = doc(db, "comments", id);
+              const res = await deleteDoc(docRef);
+              alert("Deleted");
+            } catch (error) {
+              console.log("err while del cmt", error);
+            }
           },
         },
       ]
@@ -82,7 +78,7 @@ const SingleComment = ({ room_id }) => {
             }}
           >
             <Text style={styles.username}>
-              {item.user_name}{" "}•{" "}
+              {item.user_name} •{" "}
               <Text style={styles.cmt_txt}>{item.createdAt}</Text>
             </Text>
             {user[0]?.auth_token === item.user_id ? (

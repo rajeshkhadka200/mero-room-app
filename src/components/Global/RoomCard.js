@@ -86,7 +86,13 @@ const RoomCard = ({ data, render_location }) => {
 
           <View style={styles.right_side}>
             <View style={styles.content}>
-              <Text style={styles.address}>{address} </Text>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.address}
+              >
+                {address}
+              </Text>
               <Text style={styles.price}>R.s {rate}</Text>
               <View style={styles.btn_grp}>
                 {render_location === "my_rooms" ? (

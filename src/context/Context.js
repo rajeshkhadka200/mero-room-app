@@ -79,8 +79,8 @@ const Context = ({ children }) => {
         isRoomuploading,
         setisRoomuploading,
         test,
-        favState,
-        setfavState,
+        favState, // used in profile for rerender.. rerender
+        setfavState, // used in profile for rerender.. rerender
       }}
     >
       {children}
