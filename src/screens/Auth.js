@@ -1,7 +1,12 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styles } from "../styles/auth/auth_design";
 import * as Google from "expo-google-app-auth";
+import axios from "axios";
+// gogle login
+import * as WebBrowser from "expo-web-browser";
+import * as GoogleSingIn from "expo-auth-session/providers/google";
+
 import { FB_KEY, GOOGLE_KEY } from "@env";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -18,6 +23,7 @@ import { ContexStore } from "../context/Context";
 import Loading from "../components/Global/Loading";
 
 const Auth = () => {
+  console.log("FB_KEY", FB_KEY);
   const [loading, setloading] = useState(false);
   const navigation = useNavigation();
   const { user, setUser } = React.useContext(ContexStore);
@@ -40,7 +46,7 @@ const Auth = () => {
       console.log("err while geting data", error);
     }
   };
-  const storeData = async ({ id, email, name, photoUrl }) => {
+  const storeData = async ({ id, email, name, picture }) => {
     try {
       setloading(true);
       let existing = [];
@@ -64,14 +70,14 @@ const Auth = () => {
         auth_token: id,
         email,
         name,
-        photoUrl,
+        photoUrl: picture,
         fav: [],
       });
       try {
         await AsyncStorage.setItem("auth_token", id);
         fetchUser();
         setloading(false);
-        return navigation.navigate("Mero Room");
+        navigation.navigate("Mero Room");
       } catch (err) {
         console.log("err while seting reg", err);
       }
@@ -80,22 +86,34 @@ const Auth = () => {
     }
   };
 
-  const googleLogin = async () => {
-    try {
-      // setloading(true);
-      const result = await Google.logInAsync({
-        androidClientId: GOOGLE_KEY,
-      });
-      if (result.type == "success") {
-        storeData(result.user);
-      }
-      if (result.type === "cancel") {
-        setloading(false);
-      }
-    } catch ({ message }) {
-      alert("err from google" + message);
-    }
+  WebBrowser.maybeCompleteAuthSession();
+  const googleAuth = async () => {
+    // triggers google login
+    await promptAsync({});
   };
+  const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
+    expoClientId:
+      "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
+  });
+
+  useEffect(() => {
+    if (!response) return;
+    const { authentication } = response;
+    const accessToken = authentication?.accessToken;
+    axios
+      .get(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
+      )
+      .then((res) => {
+        const id = res?.data?.sub;
+        const data = res?.data;
+        data.id = id;
+        storeData(data);
+      })
+      .catch((e) => {
+        console.error("Google login error", e?.response?.message);
+      });
+  }, [response]);
 
   return (
     <>
@@ -114,7 +132,7 @@ const Auth = () => {
           <Text style={styles.brand_name}>Mero Room</Text>
         </View>
         <View style={styles.footer_con}>
-          <Pressable onPress={googleLogin} style={styles.btn}>
+          <Pressable onPress={googleAuth} style={styles.btn}>
             <Image
               style={styles.btn_img}
               source={require("../../assets/svg/google.png")}

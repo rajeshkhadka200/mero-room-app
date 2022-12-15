@@ -21,7 +21,13 @@ const Notif = () => {
     return b.timestamp - a.timestamp;
   });
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+      style={{
+        flex: 1,
+        backgroundColor: "#fff",
+      }}
+      showsVerticalScrollIndicator={false}
+    >
       <SafeAreaView style={styles.con}>
         {filteredNotif.map((data, i) => {
           return <SingleNotif key={i} notif={data} />;

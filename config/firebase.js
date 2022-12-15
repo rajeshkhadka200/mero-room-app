@@ -4,8 +4,8 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { API_KEY, AUTH_DOMAIN } from "@env";
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
+  apiKey: "AIzaSyBN-76_43D4NRSGwz24nUOBciBVTN3zIO4",
+  authDomain: "mero-room-f06e5.firebaseapp.com",
   projectId: "mero-room-f06e5",
   storageBucket: "mero-room-f06e5.appspot.com",
   messagingSenderId: "165027373516",
