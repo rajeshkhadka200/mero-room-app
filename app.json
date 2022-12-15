@@ -10,6 +10,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "scheme": "mero_room",
     "splash": {
       "image": "./assets/img/splash.png",
       "resizeMode": "cover",
