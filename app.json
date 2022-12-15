@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mero room",
-    "slug": "mero_room",
+    "slug": "meroroom",
     "privacy": "public",
     "description": "The application which makes the connection between room owner and room seecker. The main motive of the app is to solve the problem of layman people who suffers while searching for the room. 😂\n -Let's  Find the best room for next migration !!",
     "version": "1.0.0",
@@ -10,7 +10,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "scheme": "mero_room",
+    "scheme": "meroroom",
     "splash": {
       "image": "./assets/img/splash.png",
       "resizeMode": "cover",
@@ -21,7 +21,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.rajeshkhadka200.mero_room"
+      "package": "com.rajeshkhadka200.meroroom"
     }
   }
 }

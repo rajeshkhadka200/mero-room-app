@@ -21,9 +21,9 @@ import { db } from "../../config/firebase.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ContexStore } from "../context/Context";
 import Loading from "../components/Global/Loading";
+import { makeRedirectUri } from "expo-auth-session";
 
 const Auth = () => {
-  console.log("FB_KEY", FB_KEY);
   const [loading, setloading] = useState(false);
   const navigation = useNavigation();
   const { user, setUser } = React.useContext(ContexStore);
@@ -94,6 +94,10 @@ const Auth = () => {
   const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
     expoClientId:
       "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
+    redirectUri: makeRedirectUri({
+      useProxy: false,
+    }),
+
   });
 
   useEffect(() => {
