@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, Linking } from "react";
 import {
   View,
   Text,
@@ -7,9 +7,7 @@ import {
   FlatList,
   Pressable,
   Alert,
-  Linking,
 } from "react-native";
-import call from "react-native-phone-call";
 import { styles } from "../../styles/details/Detail_Header_design.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
