@@ -16,16 +16,18 @@
       "resizeMode": "cover",
       "backgroundColor": "#fff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "package": "com.rajeshkhadka200.meroroom"
+      "package": "com.meroroom.app"
     },
     "extra": {
       "eas": {
-        "projectId": "f5fcd4c9-ac91-48bb-ac68-b5b6e545a85c"
+        "projectId": "343c61ec-53f3-48df-a592-fa7f4cb397f5"
       }
     }
   }
