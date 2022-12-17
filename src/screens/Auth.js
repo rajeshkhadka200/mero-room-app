@@ -92,8 +92,12 @@ const Auth = () => {
     await promptAsync({});
   };
   const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
-    expoClientId:
-      "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
+    // expoClientId:
+    // "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
+    // expoClientId:
+    //   "165027373516-re7prd6p44gcqap0smkr41ogoordqioq.apps.googleusercontent.com",
+    androidClientId:
+      "165027373516-re7prd6p44gcqap0smkr41ogoordqioq.apps.googleusercontent.com",
   });
 
   useEffect(() => {
