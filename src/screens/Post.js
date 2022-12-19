@@ -137,7 +137,7 @@ const Post = ({ route }) => {
               editable={!isRoomuploading}
               value={data.rate}
               keyboardType="number-pad"
-              placeholder="Rate"
+              placeholder="Total Rate"
               style={styles.post_input2}
               onChangeText={(text) => {
                 handleChange("rate", text);
