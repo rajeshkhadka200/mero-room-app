@@ -121,7 +121,7 @@ const Post = ({ route }) => {
             }}
             dropdownIconPosition={"right"}
           />
-          <GooglePlacesAutocomplete
+          {/* <GooglePlacesAutocomplete
             placeholder="Enter the Address"
             fetchDetails={true}
             debounce={500}
@@ -136,7 +136,7 @@ const Post = ({ route }) => {
               key: "AIzaSyCpA8VFasBJWjMdh5UH5Y-SIZhnIg9_Gl0",
               language: "en",
             }}
-          />
+          /> */}
           <TextInput
             keyboardType="number-pad"
             editable={!isRoomuploading}

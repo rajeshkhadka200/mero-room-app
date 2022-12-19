@@ -92,11 +92,10 @@ const Auth = () => {
     await promptAsync({});
   };
   const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
-    // androidClientId:
-    //   "165027373516-re7prd6p44gcqap0smkr41ogoordqioq.apps.googleusercontent.com",
-
-    expoClientId:
-      "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
+    androidClientId:
+      "165027373516-re7prd6p44gcqap0smkr41ogoordqioq.apps.googleusercontent.com",
+    // expoClientId:
+    //   "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
   });
 
   useEffect(() => {
@@ -117,7 +116,9 @@ const Auth = () => {
         console.error("Google login error", e?.response?.message);
       });
   }, [response]);
-
+  const fbAuth = () => {
+    alert("This feature is not available");
+  };
   return (
     <>
       {loading && <Loading data="Please Wait" />}
@@ -142,7 +143,7 @@ const Auth = () => {
             />
             <Text style={styles.login_text}>Continue with Google</Text>
           </Pressable>
-          <Pressable style={styles.btn}>
+          <Pressable style={styles.btn} onPress={fbAuth}>
             <Image
               style={styles.btn_img}
               source={require("../../assets/svg/fb.png")}
