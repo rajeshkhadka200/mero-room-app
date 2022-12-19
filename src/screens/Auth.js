@@ -94,7 +94,6 @@ const Auth = () => {
   const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
     // androidClientId:
     //   "165027373516-re7prd6p44gcqap0smkr41ogoordqioq.apps.googleusercontent.com",
-
     clientId:
       "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
   });
@@ -150,7 +149,7 @@ const Auth = () => {
             <Text style={styles.login_text}>Continue with Facebook</Text>
           </Pressable>
           <View style={styles.terms}>
-            <Text>By continuing you aggree our</Text>
+            <Text>By continuing you agree our</Text>
             <Text Text style={styles.contitions_link}>
               Terms and condition
             </Text>
