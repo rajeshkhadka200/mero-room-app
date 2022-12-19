@@ -7,7 +7,7 @@ import {
   FlatList,
   Pressable,
   Alert,
-  Linking
+  Linking,
 } from "react-native";
 import { styles } from "../../styles/details/Detail_Header_design.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

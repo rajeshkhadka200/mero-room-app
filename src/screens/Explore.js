@@ -12,6 +12,11 @@ const Explore = ({ route }) => {
     return <Card data={item} check="yes" />;
   };
 
+  // only available filter
+  const availableRoom = test.filter((item) => {
+    return item.isAvailable === true;
+  });
+
   return (
     <>
       <ScrollView
@@ -27,7 +32,7 @@ const Explore = ({ route }) => {
         >
           <FlatList
             keyExtractor={(index) => index.oprn_id}
-            data={test}
+            data={availableRoom}
             renderItem={renderCard}
             showsVerticalScrollIndicator={false}
             ListEmptyComponent={<EmptyComp check="yes" />}

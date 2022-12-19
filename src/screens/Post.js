@@ -81,7 +81,7 @@ const Post = ({ route }) => {
       >
         <View style={styles.post_con}>
           <Text style={styles.post_text}>
-            Note: Please fill the form with correct details
+            Note: Please fill the form with correct details.
           </Text>
           <TextInput
             editable={!isRoomuploading}
@@ -92,7 +92,7 @@ const Post = ({ route }) => {
               handleChange("address", text);
             }}
           />
-          {/* <SelectDropdown
+          <SelectDropdown
             defaultValue={"Choose a District"}
             data={District}
             buttonStyle={styles.dropdown1BtnStyle}
@@ -120,7 +120,7 @@ const Post = ({ route }) => {
               );
             }}
             dropdownIconPosition={"right"}
-          /> */}
+          />
           <GooglePlacesAutocomplete
             placeholder="Enter the Address"
             fetchDetails={true}
@@ -153,7 +153,7 @@ const Post = ({ route }) => {
               editable={!isRoomuploading}
               value={data.rate}
               keyboardType="number-pad"
-              placeholder="Rate"
+              placeholder="Total Rate"
               style={styles.post_input2}
               onChangeText={(text) => {
                 handleChange("rate", text);

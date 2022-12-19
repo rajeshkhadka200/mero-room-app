@@ -94,7 +94,8 @@ const Auth = () => {
   const [request, response, promptAsync] = GoogleSingIn.useAuthRequest({
     // androidClientId:
     //   "165027373516-re7prd6p44gcqap0smkr41ogoordqioq.apps.googleusercontent.com",
-    clientId:
+
+    expoClientId:
       "165027373516-fbfhj9skjbfdvrmfbr0au60qb54rku52.apps.googleusercontent.com",
   });
 

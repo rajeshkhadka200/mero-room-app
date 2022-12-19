@@ -40,6 +40,7 @@ const Context = ({ children }) => {
     isFlat: false,
     desc: "",
     number: "",
+    isAvailable: true,
   });
   const [images, setimages] = useState({
     one: "",
@@ -53,7 +54,9 @@ const Context = ({ children }) => {
 
   useEffect(() => {
     const getRooms = async () => {
-      onSnapshot(collection(db, "rooms"), (snapshot) => {
+      // make a query to get all the rooms
+      const q = query(collection(db, "rooms"));
+      onSnapshot(q, (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           ...doc.data(),
           oprn_id: doc.id,

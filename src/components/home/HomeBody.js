@@ -8,15 +8,19 @@ import EmptyComp from "../Global/Empty";
 
 const HomeBody = () => {
   const { test } = useContext(ContexStore);
+  // only available filter
+  const availableRoom = test.filter((item) => {
+    return item.isAvailable === true;
+  });
   const renderCard = ({ item }) => {
     //for the new rooms
     return <Card data={item} />;
   };
 
-  const leatestRoom = test.slice(0, 5).sort((a, b) => {
+  const leatestRoom = availableRoom.slice(0, 5).sort((a, b) => {
     return b.timestamp - a.timestamp;
   });
-  const otherRoom = test.sort((a, b) => {
+  const otherRoom = availableRoom.sort((a, b) => {
     return a.timestamp - b.timestamp;
   });
 
