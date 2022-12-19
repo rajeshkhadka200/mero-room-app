@@ -150,7 +150,7 @@ const Auth = () => {
             <Text style={styles.login_text}>Continue with Facebook</Text>
           </Pressable>
           <View style={styles.terms}>
-            <Text>By continuing you aggree our</Text>
+            <Text>By continuing you agree our</Text>
             <Text Text style={styles.contitions_link}>
               Terms and condition
             </Text>

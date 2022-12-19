@@ -14,13 +14,14 @@ export const styles = StyleSheet.create({
   post_text: {
     fontFamily: "300",
     fontSize: 15,
+    marginBottom:15
   },
   post_input1: {
     paddingHorizontal: 15,
     paddingVertical: 12,
     backgroundColor: "#EFEFEF",
     borderRadius: 10,
-    marginVertical: 15,
+    marginBottom: 15,
     fontSize: 15,
     color: "#000",
     fontFamily: "400",

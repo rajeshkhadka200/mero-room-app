@@ -20,9 +20,9 @@ import Checkbox from "react-native-modest-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { ContexStore } from "../context/Context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Nav from "../navigation/Nav";
-import Loading from "../components/Global/Loading";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
 const Post = ({ route }) => {
   const { data, setData, images, setimages, isRoomuploading } =
     React.useContext(ContexStore);
@@ -81,7 +81,7 @@ const Post = ({ route }) => {
       >
         <View style={styles.post_con}>
           <Text style={styles.post_text}>
-            Note: Please fill the form with correct details
+            Note: Please fill the form with correct details.
           </Text>
           <TextInput
             editable={!isRoomuploading}
@@ -120,6 +120,22 @@ const Post = ({ route }) => {
               );
             }}
             dropdownIconPosition={"right"}
+          />
+          <GooglePlacesAutocomplete
+            placeholder="Enter the Address"
+            fetchDetails={true}
+            debounce={500}
+            enablePoweredByContainer={false}
+            styles={styles.post_input1}
+            nearbyPlacesAPI={"GooglePlacesSearch"}
+            onPress={(data, details = null) => {
+              // 'details' is provided when fetchDetails = true
+              console.log(data, details);
+            }}
+            query={{
+              key: "AIzaSyCpA8VFasBJWjMdh5UH5Y-SIZhnIg9_Gl0",
+              language: "en",
+            }}
           />
           <TextInput
             keyboardType="number-pad"
