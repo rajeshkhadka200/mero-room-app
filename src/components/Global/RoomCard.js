@@ -22,19 +22,36 @@ const RoomCard = ({ data, render_location }) => {
   const { address, rate, oprn_id } = data;
   const { thumbnail } = data;
   const deleteRoom = async (doc_id) => {
-    try {
-      const docRef = doc(db, "rooms", doc_id);
-      await deleteDoc(docRef);
-      ToastAndroid.showWithGravityAndOffset(
-        "Deleted",
-        ToastAndroid.SHORT,
-        ToastAndroid.BOTTOM,
-        15,
-        40
-      );
-    } catch (error) {
-      console.log("error while", error);
-    }
+    Alert.alert(
+      "Are you sure ?",
+      "After deleting this room, you won't be able to recover it !!",
+      [
+        {
+          text: "Cancel",
+
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            // delete a comment
+            try {
+              const docRef = doc(db, "rooms", doc_id);
+              await deleteDoc(docRef);
+              ToastAndroid.showWithGravityAndOffset(
+                "Deleted",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM,
+                15,
+                40
+              );
+            } catch (error) {
+              console.log("error while deleting room", error);
+            }
+          },
+        },
+      ]
+    );
   };
 
   const [isDeleting, setisDeleting] = useState(false);
@@ -63,6 +80,80 @@ const RoomCard = ({ data, render_location }) => {
     }
   };
 
+  const [status, setStatus] = useState(false);
+
+  const unlistRoom = async (doc_id) => {
+    Alert.alert(
+      "Are you sure ?",
+      "After unlisting this room, we will understand that room is already rented.",
+      [
+        {
+          text: "Cancel",
+
+          style: "cancel",
+        },
+        {
+          text: "List",
+          onPress: async () => {
+            // delete a comment
+            try {
+              setStatus(true);
+              const docRef = doc(db, "rooms", doc_id);
+              await updateDoc(docRef, {
+                isAvailable: false,
+              });
+
+              setStatus(false);
+              ToastAndroid.showWithGravityAndOffset(
+                "Unlisted, You can't see this room in search",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM,
+                25,
+                50
+              );
+            } catch (error) {
+              console.log("error while unlisting room", error);
+            }
+          },
+        },
+      ]
+    );
+  };
+  const listRoom = async (doc_id) => {
+    Alert.alert(
+      "Are you sure ?",
+      "After listing this room, we will understand that room is still available for rent.",
+      [
+        {
+          text: "Cancel",
+
+          style: "cancel",
+        },
+        {
+          text: "Unlist",
+          onPress: async () => {
+            try {
+              setStatus(true);
+              const docRef = doc(db, "rooms", doc_id);
+              await updateDoc(docRef, {
+                isAvailable: true,
+              });
+              setStatus(false);
+              ToastAndroid.showWithGravityAndOffset(
+                "Listed, Now you can see this room in search",
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM,
+                25,
+                50
+              );
+            } catch (error) {
+              console.log("error while unlisting room", error);
+            }
+          },
+        },
+      ]
+    );
+  };
   return (
     <>
       <View style={styles.container}>
@@ -97,17 +188,35 @@ const RoomCard = ({ data, render_location }) => {
               <View style={styles.btn_grp}>
                 {render_location === "my_rooms" ? (
                   <>
-                    <Pressable
-                      onPress={() => {
-                        Alert.alert(
-                          "Sorry!",
-                          "This fearure is currently unavailable. Please delete this room and repost it again"
-                        );
-                      }}
-                      style={styles.btn}
-                    >
-                      <Text style={styles.btn_text}>Edit Room</Text>
-                    </Pressable>
+                    {data.isAvailable === true ? (
+                      <Pressable
+                        onPress={() => {
+                          unlistRoom(oprn_id);
+                        }}
+                        style={{ ...styles.btn, backgroundColor: "red" }}
+                      >
+                        <Text style={styles.btn_text}>
+                          {(status && (
+                            <ActivityIndicator size={"small"} color="#fff" />
+                          )) ||
+                            "Unlist Room"}
+                        </Text>
+                      </Pressable>
+                    ) : (
+                      <Pressable
+                        onPress={() => {
+                          listRoom(oprn_id);
+                        }}
+                        style={styles.btn}
+                      >
+                        <Text style={styles.btn_text}>
+                          {(status && (
+                            <ActivityIndicator size={"small"} color="#fff" />
+                          )) ||
+                            "List Room"}
+                        </Text>
+                      </Pressable>
+                    )}
                     <AntDesign
                       onPress={() => {
                         deleteRoom(oprn_id);

@@ -41,7 +41,7 @@ const SingleComment = ({ room_id }) => {
       "After delating, you won't be able to recover it !!",
       [
         {
-          text: "NO",
+          text: "Cancel",
 
           style: "cancel",
         },
